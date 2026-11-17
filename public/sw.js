@@ -1,10 +1,13 @@
 // Network-first service worker: always try for the latest deploy, and fall back
 // to the last cached copy when offline so the installed app still opens.
-const CACHE = "zodle-v1";
+const CACHE = "zodle-v2";
 const SHELL = [
   "./", "index.html", "style.css", "signs.js", "sky.js", "daily.js", "game.js",
-  "install.js", "favicon.svg", "manifest.webmanifest", "icon-192.png",
+  "install.js", "about.js", "favicon.svg", "manifest.webmanifest", "icon-192.png",
 ];
+// Files for crawlers and link previews. The worker leaves these to the network, so
+// they're never answered from a stale cache or with the index.html offline fallback.
+const BYPASS = ["/robots.txt", "/sitemap.xml", "/og-image.png"];
 
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
@@ -20,7 +23,9 @@ self.addEventListener("activate", event => {
 
 self.addEventListener("fetch", event => {
   const { request } = event;
-  if (request.method !== "GET" || new URL(request.url).origin !== location.origin) return;
+  const url = new URL(request.url);
+  if (request.method !== "GET" || url.origin !== location.origin) return;
+  if (BYPASS.includes(url.pathname)) return;
   event.respondWith(
     fetch(request)
       .then(res => {

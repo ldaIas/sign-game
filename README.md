@@ -10,6 +10,10 @@ Behind the game is a twinkling starfield (`public/sky.js`). Stars near the mouse
 
 Zodle can be installed as an app (PWA). `public/manifest.webmanifest` describes it and `public/sw.js` is a network-first service worker, so a new deploy is used whenever there's a connection and the last copy still opens offline. `public/install.js` shows an **Install** button in Chrome and Edge, and a short "Share → Add to Home Screen" hint on iPhone and iPad, since iOS has no install prompt. The hint stays hidden once it's dismissed or the app is running installed. To change the icon, edit `favicon.svg` and regenerate the PNGs (`icon-192.png`, `icon-512.png`, `icon-maskable.png`, `apple-touch-icon.png`).
 
+### Search and link previews
+
+`public/index.html` carries the crawlable text as plain HTML: an About card under the title (hidden for good once dismissed; `public/about.js`) and one description per mode, shown by the mode switch. The `<head>` has a canonical URL, Open Graph and Twitter card tags, and JSON-LD (`VideoGame`). `public/robots.txt` and `public/sitemap.xml` point crawlers at `https://signs.idalas.com/`; bump the sitemap's `lastmod` when the page changes meaningfully. `public/og-image.png` (1200×630) is the link-preview image. The service worker leaves those three files to the network.
+
 There's no build step. The site lives in `public/`: open `public/index.html` in a browser.
 
 Sign boundaries use the common tropical-zodiac dates; birthdays that fall on a cusp follow those fixed dates.
