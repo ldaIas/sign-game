@@ -1,5 +1,5 @@
 // "Add to home screen" support: registers the service worker and shows an
-// install button (Chromium browsers) or a how-to hint (iOS Safari).
+// install button (Chromium browsers) or a how-to hint (iOS, Firefox for Android).
 (() => {
   const DISMISS_KEY = "sign-game:install-dismissed";
 
@@ -50,6 +50,13 @@
     text.innerHTML = 'Add Zodle to your home screen: tap <span class="share" aria-label="Share">' +
       '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3v12M7 8l5-5 5 5M5 12v8h14v-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
       '</span> then <b>Add to Home Screen</b>.';
+    box.hidden = false;
+  }
+
+  // Firefox for Android has no install prompt either; point to its menu item.
+  if (/Android/.test(ua) && /Firefox\//.test(ua)) {
+    text.innerHTML = 'Add Zodle to your home screen: open the <b>⋮</b> menu, then ' +
+      '<b>More</b> → <b>Add app to Home screen</b>.';
     box.hidden = false;
   }
 })();
