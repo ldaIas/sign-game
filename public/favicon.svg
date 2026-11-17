@@ -1,4 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#0b0d1a"/>
-  <path d="M32 10l5.6 15.4L53 32l-15.4 5.6L32 54l-5.6-16.4L11 32l15.4-6.6z" fill="#f3d27a"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="75%">
+      <stop offset="0" stop-color="#1c2f6b"/><stop offset="1" stop-color="#0c1638"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe08a"/><stop offset="1" stop-color="#e9b949"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <g>
+    <path d="M150 140H362V192L222 320H362V372H150V320L290 192H150Z" fill="url(#gold)"/>
+    <path d="M92 132Q96.83 173.17 138 178Q96.83 182.83 92 224Q87.17 182.83 46 178Q87.17 173.17 92 132Z" fill="#f3d27a"/>
+    <path d="M420 288Q424.83 329.17 466 334Q424.83 338.83 420 380Q415.17 338.83 374 334Q415.17 329.17 420 288Z" fill="#f3d27a"/>
+  </g>
 </svg>
