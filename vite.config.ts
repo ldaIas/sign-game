@@ -1,6 +1,7 @@
 /// <reference types="vitest/config" />
 import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
+import { appendFileSync, readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { defineConfig, minifySync, transformWithOxc, type Plugin } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
 
@@ -28,9 +29,28 @@ function headScript(): Plugin {
   };
 }
 
+// PR preview builds (ZODLE_PREVIEW=1, set by .github/workflows/preview.yml) are
+// served on workers.dev; keep that copy of the site out of search results.
+function previewNoindex(): Plugin {
+  let headersFile = "";
+  return {
+    name: "zodle:preview-noindex",
+    apply: "build",
+    configResolved(config) {
+      headersFile = resolve(config.root, config.build.outDir, "_headers");
+    },
+    closeBundle() {
+      if (process.env.ZODLE_PREVIEW !== "1") return;
+      // Cloudflare combines every rule that matches a request, so a separate block is enough.
+      appendFileSync(headersFile, "\n/*\n  X-Robots-Tag: noindex\n");
+    },
+  };
+}
+
 export default defineConfig({
   plugins: [
     headScript(),
+    previewNoindex(),
     VitePWA({
       strategies: "injectManifest",
       srcDir: "src",

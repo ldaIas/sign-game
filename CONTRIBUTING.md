@@ -91,3 +91,9 @@ The site is served as static assets on Cloudflare Workers. `wrangler.jsonc` hold
 - `CLOUDFLARE_ACCOUNT_ID`: shown on the Workers & Pages overview page.
 
 Don't also connect the repo through Cloudflare's own Git integration (Workers Builds), or each push will deploy twice.
+
+### Previews for pull requests
+
+`.github/workflows/preview.yml` runs on every pull request. It runs the tests and the build. For a branch in this repository, it then uploads that build as a new Worker version with `wrangler versions upload --preview-alias pr-<number>` and comments its URL on the PR (`https://pr-<number>-sign-game.<subdomain>.workers.dev`). Uploading a version doesn't deploy it, so `signs.idalas.com` keeps serving `main`. Preview builds add `X-Robots-Tag: noindex` to `_headers` so search engines skip them.
+
+PRs from forks get the tests and build but no preview: GitHub gives their runs no secrets. Keep the trigger as `pull_request`; `pull_request_target` would run a fork's code with the Cloudflare token. Preview URLs are under `workers.dev`, so they add nothing to the `idalas.com` zone, and Cloudflare drops the least recently used aliases on its own past its limit.

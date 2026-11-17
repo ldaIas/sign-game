@@ -7,6 +7,9 @@
   "assets": {
     "directory": "./dist"
   },
+  // Lets `wrangler versions upload --preview-alias` give each PR its own workers.dev URL
+  // (.github/workflows/preview.yml).
+  "preview_urls": true,
   // Your subdomain. The domain must already be a zone on your Cloudflare account;
   // Cloudflare creates the DNS record and certificate on deploy.
   "routes": [

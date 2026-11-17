@@ -1,0 +1,81 @@
+name: PR checks and preview
+
+# `pull_request`, never `pull_request_target`: runs for PRs from forks get no
+# secrets, so a fork's code can never run with the Cloudflare token.
+on:
+  pull_request:
+
+# A new push to a PR cancels that PR's in-flight run.
+concurrency:
+  group: preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+
+  # Uploads a version of the Worker without deploying it, reachable at
+  # https://pr-<number>-sign-game.<subdomain>.workers.dev. Production is untouched.
+  preview:
+    needs: check
+    # Only branches in this repository; fork PRs have no secrets to upload with.
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    env:
+      # Makes the build add `X-Robots-Tag: noindex` (see vite.config.ts).
+      ZODLE_PREVIEW: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
+      - run: npm ci
+      # wrangler runs `npm run build` first (the "build" section of wrangler.jsonc).
+      - id: upload
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: "4.164.0"
+          command: versions upload --preview-alias pr-${{ github.event.pull_request.number }}
+      # Keeps one comment per PR, updated on each push.
+      - name: Comment the preview URL
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+          OUTPUT: ${{ steps.upload.outputs.command-output }}
+          SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          url=$(printf '%s\n' "$OUTPUT" | grep -oE "https://pr-${PR}-[a-z0-9.-]+\.workers\.dev" | head -n1)
+          if [ -z "$url" ]; then
+            echo "::error::No preview alias URL in the wrangler output"
+            exit 1
+          fi
+          marker="<!-- zodle-preview -->"
+          body="${marker}
+          **Preview:** ${url}
+
+          Built from ${SHA}. Search engines are told not to index it."
+          id=$(gh api "repos/${GITHUB_REPOSITORY}/issues/${PR}/comments" --paginate \
+            --jq ".[] | select(.body | startswith(\"${marker}\")) | .id" | head -n1)
+          if [ -n "$id" ]; then
+            gh api -X PATCH "repos/${GITHUB_REPOSITORY}/issues/comments/${id}" -f body="$body" >/dev/null
+          else
+            gh api -X POST "repos/${GITHUB_REPOSITORY}/issues/${PR}/comments" -f body="$body" >/dev/null
+          fi
+          echo "Preview: $url" >> "$GITHUB_STEP_SUMMARY"
