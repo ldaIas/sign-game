@@ -1,6 +1,3 @@
 # Every report goes through a form so it arrives with the details needed to act on it.
+# No security contact link: GitHub adds one itself while private vulnerability reporting is on.
 blank_issues_enabled: false
-contact_links:
-  - name: Report a security vulnerability
-    url: https://github.com/ldaIas/sign-game/security/advisories/new
-    about: Please report security issues privately, not as a public issue.
