@@ -1,0 +1,4112 @@
+{
+ "daily": [
+  {
+   "date": "2026-11-17",
+   "number": 1,
+   "birthday": {
+    "year": 1982,
+    "month": 4,
+    "day": 13
+   },
+   "sign": "Aries",
+   "answers": [
+    "Aries",
+    "Aries",
+    "Masculine",
+    "Fire",
+    "Libra"
+   ],
+   "options": [
+    [
+     {
+      "value": "Aries",
+      "html": "Aries"
+     },
+     {
+      "value": "Taurus",
+      "html": "Taurus"
+     },
+     {
+      "value": "Gemini",
+      "html": "Gemini"
+     },
+     {
+      "value": "Cancer",
+      "html": "Cancer"
+     },
+     {
+      "value": "Leo",
+      "html": "Leo"
+     },
+     {
+      "value": "Virgo",
+      "html": "Virgo"
+     },
+     {
+      "value": "Libra",
+      "html": "Libra"
+     },
+     {
+      "value": "Scorpio",
+      "html": "Scorpio"
+     },
+     {
+      "value": "Sagittarius",
+      "html": "Sagittarius"
+     },
+     {
+      "value": "Capricorn",
+      "html": "Capricorn"
+     },
+     {
+      "value": "Aquarius",
+      "html": "Aquarius"
+     },
+     {
+      "value": "Pisces",
+      "html": "Pisces"
+     }
+    ],
+    [
+     {
+      "value": "Capricorn",
+      "html": "<span class=\"glyph\">♑︎</span>",
+      "label": "Symbol of Capricorn"
+     },
+     {
+      "value": "Gemini",
+      "html": "<span class=\"glyph\">♊︎</span>",
+      "label": "Symbol of Gemini"
+     },
+     {
+      "value": "Libra",
+      "html": "<span class=\"glyph\">♎︎</span>",
+      "label": "Symbol of Libra"
+     },
+     {
+      "value": "Taurus",
+      "html": "<span class=\"glyph\">♉︎</span>",
+      "label": "Symbol of Taurus"
+     },
+     {
+      "value": "Sagittarius",
+      "html": "<span class=\"glyph\">♐︎</span>",
+      "label": "Symbol of Sagittarius"
+     },
+     {
+      "value": "Scorpio",
+      "html": "<span class=\"glyph\">♏︎</span>",
+      "label": "Symbol of Scorpio"
+     },
+     {
+      "value": "Leo",
+      "html": "<span class=\"glyph\">♌︎</span>",
+      "label": "Symbol of Leo"
+     },
+     {
+      "value": "Aquarius",
+      "html": "<span class=\"glyph\">♒︎</span>",
+      "label": "Symbol of Aquarius"
+     },
+     {
+      "value": "Cancer",
+      "html": "<span class=\"glyph\">♋︎</span>",
+      "label": "Symbol of Cancer"
+     },
+     {
+      "value": "Aries",
+      "html": "<span class=\"glyph\">♈︎</span>",
+      "label": "Symbol of Aries"
+     },
+     {
+      "value": "Pisces",
+      "html": "<span class=\"glyph\">♓︎</span>",
+      "label": "Symbol of Pisces"
+     },
+     {
+      "value": "Virgo",
+      "html": "<span class=\"glyph\">♍︎</span>",
+      "label": "Symbol of Virgo"
+     }
+    ],
+    [
+     {
+      "value": "Masculine",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♂︎</span>Masculine"
+     },
+     {
+      "value": "Feminine",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♀︎</span>Feminine"
+     }
+    ],
+    [
+     {
+      "value": "Fire",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#ff7a59\">🜂</span>Fire"
+     },
+     {
+      "value": "Earth",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#8fbf6a\">🜃</span>Earth"
+     },
+     {
+      "value": "Air",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#9ecbff\">🜁</span>Air"
+     },
+     {
+      "value": "Water",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#6f8cff\">🜄</span>Water"
+     }
+    ],
+    [
+     {
+      "value": "Taurus",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♉︎</span>Taurus"
+     },
+     {
+      "value": "Libra",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♎︎</span>Libra"
+     },
+     {
+      "value": "Pisces",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♓︎</span>Pisces"
+     },
+     {
+      "value": "Gemini",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♊︎</span>Gemini"
+     },
+     {
+      "value": "Leo",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♌︎</span>Leo"
+     },
+     {
+      "value": "Virgo",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♍︎</span>Virgo"
+     },
+     {
+      "value": "Capricorn",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♑︎</span>Capricorn"
+     },
+     {
+      "value": "Aries",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♈︎</span>Aries"
+     },
+     {
+      "value": "Aquarius",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♒︎</span>Aquarius"
+     },
+     {
+      "value": "Sagittarius",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♐︎</span>Sagittarius"
+     },
+     {
+      "value": "Cancer",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♋︎</span>Cancer"
+     },
+     {
+      "value": "Scorpio",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♏︎</span>Scorpio"
+     }
+    ]
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "number": 2,
+   "birthday": {
+    "year": 1994,
+    "month": 10,
+    "day": 4
+   },
+   "sign": "Libra",
+   "answers": [
+    "Libra",
+    "Libra",
+    "Masculine",
+    "Air",
+    "Aries"
+   ],
+   "options": [
+    [
+     {
+      "value": "Aries",
+      "html": "Aries"
+     },
+     {
+      "value": "Taurus",
+      "html": "Taurus"
+     },
+     {
+      "value": "Gemini",
+      "html": "Gemini"
+     },
+     {
+      "value": "Cancer",
+      "html": "Cancer"
+     },
+     {
+      "value": "Leo",
+      "html": "Leo"
+     },
+     {
+      "value": "Virgo",
+      "html": "Virgo"
+     },
+     {
+      "value": "Libra",
+      "html": "Libra"
+     },
+     {
+      "value": "Scorpio",
+      "html": "Scorpio"
+     },
+     {
+      "value": "Sagittarius",
+      "html": "Sagittarius"
+     },
+     {
+      "value": "Capricorn",
+      "html": "Capricorn"
+     },
+     {
+      "value": "Aquarius",
+      "html": "Aquarius"
+     },
+     {
+      "value": "Pisces",
+      "html": "Pisces"
+     }
+    ],
+    [
+     {
+      "value": "Cancer",
+      "html": "<span class=\"glyph\">♋︎</span>",
+      "label": "Symbol of Cancer"
+     },
+     {
+      "value": "Leo",
+      "html": "<span class=\"glyph\">♌︎</span>",
+      "label": "Symbol of Leo"
+     },
+     {
+      "value": "Aquarius",
+      "html": "<span class=\"glyph\">♒︎</span>",
+      "label": "Symbol of Aquarius"
+     },
+     {
+      "value": "Taurus",
+      "html": "<span class=\"glyph\">♉︎</span>",
+      "label": "Symbol of Taurus"
+     },
+     {
+      "value": "Aries",
+      "html": "<span class=\"glyph\">♈︎</span>",
+      "label": "Symbol of Aries"
+     },
+     {
+      "value": "Virgo",
+      "html": "<span class=\"glyph\">♍︎</span>",
+      "label": "Symbol of Virgo"
+     },
+     {
+      "value": "Gemini",
+      "html": "<span class=\"glyph\">♊︎</span>",
+      "label": "Symbol of Gemini"
+     },
+     {
+      "value": "Sagittarius",
+      "html": "<span class=\"glyph\">♐︎</span>",
+      "label": "Symbol of Sagittarius"
+     },
+     {
+      "value": "Scorpio",
+      "html": "<span class=\"glyph\">♏︎</span>",
+      "label": "Symbol of Scorpio"
+     },
+     {
+      "value": "Libra",
+      "html": "<span class=\"glyph\">♎︎</span>",
+      "label": "Symbol of Libra"
+     },
+     {
+      "value": "Capricorn",
+      "html": "<span class=\"glyph\">♑︎</span>",
+      "label": "Symbol of Capricorn"
+     },
+     {
+      "value": "Pisces",
+      "html": "<span class=\"glyph\">♓︎</span>",
+      "label": "Symbol of Pisces"
+     }
+    ],
+    [
+     {
+      "value": "Masculine",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♂︎</span>Masculine"
+     },
+     {
+      "value": "Feminine",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♀︎</span>Feminine"
+     }
+    ],
+    [
+     {
+      "value": "Fire",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#ff7a59\">🜂</span>Fire"
+     },
+     {
+      "value": "Earth",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#8fbf6a\">🜃</span>Earth"
+     },
+     {
+      "value": "Air",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#9ecbff\">🜁</span>Air"
+     },
+     {
+      "value": "Water",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#6f8cff\">🜄</span>Water"
+     }
+    ],
+    [
+     {
+      "value": "Gemini",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♊︎</span>Gemini"
+     },
+     {
+      "value": "Sagittarius",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♐︎</span>Sagittarius"
+     },
+     {
+      "value": "Taurus",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♉︎</span>Taurus"
+     },
+     {
+      "value": "Pisces",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♓︎</span>Pisces"
+     },
+     {
+      "value": "Capricorn",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♑︎</span>Capricorn"
+     },
+     {
+      "value": "Virgo",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♍︎</span>Virgo"
+     },
+     {
+      "value": "Libra",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♎︎</span>Libra"
+     },
+     {
+      "value": "Aquarius",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♒︎</span>Aquarius"
+     },
+     {
+      "value": "Cancer",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♋︎</span>Cancer"
+     },
+     {
+      "value": "Leo",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♌︎</span>Leo"
+     },
+     {
+      "value": "Aries",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♈︎</span>Aries"
+     },
+     {
+      "value": "Scorpio",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♏︎</span>Scorpio"
+     }
+    ]
+   ]
+  },
+  {
+   "date": "2026-12-31",
+   "number": 45,
+   "birthday": {
+    "year": 1959,
+    "month": 7,
+    "day": 11
+   },
+   "sign": "Cancer",
+   "answers": [
+    "Cancer",
+    "Cancer",
+    "Feminine",
+    "Water",
+    "Capricorn"
+   ],
+   "options": [
+    [
+     {
+      "value": "Aries",
+      "html": "Aries"
+     },
+     {
+      "value": "Taurus",
+      "html": "Taurus"
+     },
+     {
+      "value": "Gemini",
+      "html": "Gemini"
+     },
+     {
+      "value": "Cancer",
+      "html": "Cancer"
+     },
+     {
+      "value": "Leo",
+      "html": "Leo"
+     },
+     {
+      "value": "Virgo",
+      "html": "Virgo"
+     },
+     {
+      "value": "Libra",
+      "html": "Libra"
+     },
+     {
+      "value": "Scorpio",
+      "html": "Scorpio"
+     },
+     {
+      "value": "Sagittarius",
+      "html": "Sagittarius"
+     },
+     {
+      "value": "Capricorn",
+      "html": "Capricorn"
+     },
+     {
+      "value": "Aquarius",
+      "html": "Aquarius"
+     },
+     {
+      "value": "Pisces",
+      "html": "Pisces"
+     }
+    ],
+    [
+     {
+      "value": "Cancer",
+      "html": "<span class=\"glyph\">♋︎</span>",
+      "label": "Symbol of Cancer"
+     },
+     {
+      "value": "Aquarius",
+      "html": "<span class=\"glyph\">♒︎</span>",
+      "label": "Symbol of Aquarius"
+     },
+     {
+      "value": "Sagittarius",
+      "html": "<span class=\"glyph\">♐︎</span>",
+      "label": "Symbol of Sagittarius"
+     },
+     {
+      "value": "Pisces",
+      "html": "<span class=\"glyph\">♓︎</span>",
+      "label": "Symbol of Pisces"
+     },
+     {
+      "value": "Gemini",
+      "html": "<span class=\"glyph\">♊︎</span>",
+      "label": "Symbol of Gemini"
+     },
+     {
+      "value": "Taurus",
+      "html": "<span class=\"glyph\">♉︎</span>",
+      "label": "Symbol of Taurus"
+     },
+     {
+      "value": "Virgo",
+      "html": "<span class=\"glyph\">♍︎</span>",
+      "label": "Symbol of Virgo"
+     },
+     {
+      "value": "Leo",
+      "html": "<span class=\"glyph\">♌︎</span>",
+      "label": "Symbol of Leo"
+     },
+     {
+      "value": "Libra",
+      "html": "<span class=\"glyph\">♎︎</span>",
+      "label": "Symbol of Libra"
+     },
+     {
+      "value": "Scorpio",
+      "html": "<span class=\"glyph\">♏︎</span>",
+      "label": "Symbol of Scorpio"
+     },
+     {
+      "value": "Capricorn",
+      "html": "<span class=\"glyph\">♑︎</span>",
+      "label": "Symbol of Capricorn"
+     },
+     {
+      "value": "Aries",
+      "html": "<span class=\"glyph\">♈︎</span>",
+      "label": "Symbol of Aries"
+     }
+    ],
+    [
+     {
+      "value": "Masculine",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♂︎</span>Masculine"
+     },
+     {
+      "value": "Feminine",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♀︎</span>Feminine"
+     }
+    ],
+    [
+     {
+      "value": "Fire",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#ff7a59\">🜂</span>Fire"
+     },
+     {
+      "value": "Earth",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#8fbf6a\">🜃</span>Earth"
+     },
+     {
+      "value": "Air",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#9ecbff\">🜁</span>Air"
+     },
+     {
+      "value": "Water",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#6f8cff\">🜄</span>Water"
+     }
+    ],
+    [
+     {
+      "value": "Capricorn",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♑︎</span>Capricorn"
+     },
+     {
+      "value": "Virgo",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♍︎</span>Virgo"
+     },
+     {
+      "value": "Scorpio",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♏︎</span>Scorpio"
+     },
+     {
+      "value": "Cancer",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♋︎</span>Cancer"
+     },
+     {
+      "value": "Gemini",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♊︎</span>Gemini"
+     },
+     {
+      "value": "Leo",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♌︎</span>Leo"
+     },
+     {
+      "value": "Sagittarius",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♐︎</span>Sagittarius"
+     },
+     {
+      "value": "Aries",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♈︎</span>Aries"
+     },
+     {
+      "value": "Aquarius",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♒︎</span>Aquarius"
+     },
+     {
+      "value": "Pisces",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♓︎</span>Pisces"
+     },
+     {
+      "value": "Taurus",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♉︎</span>Taurus"
+     },
+     {
+      "value": "Libra",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♎︎</span>Libra"
+     }
+    ]
+   ]
+  },
+  {
+   "date": "2027-01-01",
+   "number": 46,
+   "birthday": {
+    "year": 1983,
+    "month": 6,
+    "day": 10
+   },
+   "sign": "Gemini",
+   "answers": [
+    "Gemini",
+    "Gemini",
+    "Masculine",
+    "Air",
+    "Sagittarius"
+   ],
+   "options": [
+    [
+     {
+      "value": "Aries",
+      "html": "Aries"
+     },
+     {
+      "value": "Taurus",
+      "html": "Taurus"
+     },
+     {
+      "value": "Gemini",
+      "html": "Gemini"
+     },
+     {
+      "value": "Cancer",
+      "html": "Cancer"
+     },
+     {
+      "value": "Leo",
+      "html": "Leo"
+     },
+     {
+      "value": "Virgo",
+      "html": "Virgo"
+     },
+     {
+      "value": "Libra",
+      "html": "Libra"
+     },
+     {
+      "value": "Scorpio",
+      "html": "Scorpio"
+     },
+     {
+      "value": "Sagittarius",
+      "html": "Sagittarius"
+     },
+     {
+      "value": "Capricorn",
+      "html": "Capricorn"
+     },
+     {
+      "value": "Aquarius",
+      "html": "Aquarius"
+     },
+     {
+      "value": "Pisces",
+      "html": "Pisces"
+     }
+    ],
+    [
+     {
+      "value": "Virgo",
+      "html": "<span class=\"glyph\">♍︎</span>",
+      "label": "Symbol of Virgo"
+     },
+     {
+      "value": "Gemini",
+      "html": "<span class=\"glyph\">♊︎</span>",
+      "label": "Symbol of Gemini"
+     },
+     {
+      "value": "Aquarius",
+      "html": "<span class=\"glyph\">♒︎</span>",
+      "label": "Symbol of Aquarius"
+     },
+     {
+      "value": "Libra",
+      "html": "<span class=\"glyph\">♎︎</span>",
+      "label": "Symbol of Libra"
+     },
+     {
+      "value": "Sagittarius",
+      "html": "<span class=\"glyph\">♐︎</span>",
+      "label": "Symbol of Sagittarius"
+     },
+     {
+      "value": "Cancer",
+      "html": "<span class=\"glyph\">♋︎</span>",
+      "label": "Symbol of Cancer"
+     },
+     {
+      "value": "Pisces",
+      "html": "<span class=\"glyph\">♓︎</span>",
+      "label": "Symbol of Pisces"
+     },
+     {
+      "value": "Scorpio",
+      "html": "<span class=\"glyph\">♏︎</span>",
+      "label": "Symbol of Scorpio"
+     },
+     {
+      "value": "Taurus",
+      "html": "<span class=\"glyph\">♉︎</span>",
+      "label": "Symbol of Taurus"
+     },
+     {
+      "value": "Leo",
+      "html": "<span class=\"glyph\">♌︎</span>",
+      "label": "Symbol of Leo"
+     },
+     {
+      "value": "Capricorn",
+      "html": "<span class=\"glyph\">♑︎</span>",
+      "label": "Symbol of Capricorn"
+     },
+     {
+      "value": "Aries",
+      "html": "<span class=\"glyph\">♈︎</span>",
+      "label": "Symbol of Aries"
+     }
+    ],
+    [
+     {
+      "value": "Masculine",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♂︎</span>Masculine"
+     },
+     {
+      "value": "Feminine",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♀︎</span>Feminine"
+     }
+    ],
+    [
+     {
+      "value": "Fire",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#ff7a59\">🜂</span>Fire"
+     },
+     {
+      "value": "Earth",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#8fbf6a\">🜃</span>Earth"
+     },
+     {
+      "value": "Air",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#9ecbff\">🜁</span>Air"
+     },
+     {
+      "value": "Water",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#6f8cff\">🜄</span>Water"
+     }
+    ],
+    [
+     {
+      "value": "Scorpio",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♏︎</span>Scorpio"
+     },
+     {
+      "value": "Aries",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♈︎</span>Aries"
+     },
+     {
+      "value": "Aquarius",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♒︎</span>Aquarius"
+     },
+     {
+      "value": "Gemini",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♊︎</span>Gemini"
+     },
+     {
+      "value": "Sagittarius",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♐︎</span>Sagittarius"
+     },
+     {
+      "value": "Libra",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♎︎</span>Libra"
+     },
+     {
+      "value": "Pisces",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♓︎</span>Pisces"
+     },
+     {
+      "value": "Cancer",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♋︎</span>Cancer"
+     },
+     {
+      "value": "Virgo",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♍︎</span>Virgo"
+     },
+     {
+      "value": "Taurus",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♉︎</span>Taurus"
+     },
+     {
+      "value": "Leo",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♌︎</span>Leo"
+     },
+     {
+      "value": "Capricorn",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♑︎</span>Capricorn"
+     }
+    ]
+   ]
+  },
+  {
+   "date": "2027-02-28",
+   "number": 104,
+   "birthday": {
+    "year": 2002,
+    "month": 1,
+    "day": 4
+   },
+   "sign": "Capricorn",
+   "answers": [
+    "Capricorn",
+    "Capricorn",
+    "Feminine",
+    "Earth",
+    "Cancer"
+   ],
+   "options": [
+    [
+     {
+      "value": "Aries",
+      "html": "Aries"
+     },
+     {
+      "value": "Taurus",
+      "html": "Taurus"
+     },
+     {
+      "value": "Gemini",
+      "html": "Gemini"
+     },
+     {
+      "value": "Cancer",
+      "html": "Cancer"
+     },
+     {
+      "value": "Leo",
+      "html": "Leo"
+     },
+     {
+      "value": "Virgo",
+      "html": "Virgo"
+     },
+     {
+      "value": "Libra",
+      "html": "Libra"
+     },
+     {
+      "value": "Scorpio",
+      "html": "Scorpio"
+     },
+     {
+      "value": "Sagittarius",
+      "html": "Sagittarius"
+     },
+     {
+      "value": "Capricorn",
+      "html": "Capricorn"
+     },
+     {
+      "value": "Aquarius",
+      "html": "Aquarius"
+     },
+     {
+      "value": "Pisces",
+      "html": "Pisces"
+     }
+    ],
+    [
+     {
+      "value": "Taurus",
+      "html": "<span class=\"glyph\">♉︎</span>",
+      "label": "Symbol of Taurus"
+     },
+     {
+      "value": "Capricorn",
+      "html": "<span class=\"glyph\">♑︎</span>",
+      "label": "Symbol of Capricorn"
+     },
+     {
+      "value": "Leo",
+      "html": "<span class=\"glyph\">♌︎</span>",
+      "label": "Symbol of Leo"
+     },
+     {
+      "value": "Aries",
+      "html": "<span class=\"glyph\">♈︎</span>",
+      "label": "Symbol of Aries"
+     },
+     {
+      "value": "Scorpio",
+      "html": "<span class=\"glyph\">♏︎</span>",
+      "label": "Symbol of Scorpio"
+     },
+     {
+      "value": "Aquarius",
+      "html": "<span class=\"glyph\">♒︎</span>",
+      "label": "Symbol of Aquarius"
+     },
+     {
+      "value": "Virgo",
+      "html": "<span class=\"glyph\">♍︎</span>",
+      "label": "Symbol of Virgo"
+     },
+     {
+      "value": "Cancer",
+      "html": "<span class=\"glyph\">♋︎</span>",
+      "label": "Symbol of Cancer"
+     },
+     {
+      "value": "Sagittarius",
+      "html": "<span class=\"glyph\">♐︎</span>",
+      "label": "Symbol of Sagittarius"
+     },
+     {
+      "value": "Libra",
+      "html": "<span class=\"glyph\">♎︎</span>",
+      "label": "Symbol of Libra"
+     },
+     {
+      "value": "Gemini",
+      "html": "<span class=\"glyph\">♊︎</span>",
+      "label": "Symbol of Gemini"
+     },
+     {
+      "value": "Pisces",
+      "html": "<span class=\"glyph\">♓︎</span>",
+      "label": "Symbol of Pisces"
+     }
+    ],
+    [
+     {
+      "value": "Masculine",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♂︎</span>Masculine"
+     },
+     {
+      "value": "Feminine",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♀︎</span>Feminine"
+     }
+    ],
+    [
+     {
+      "value": "Fire",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#ff7a59\">🜂</span>Fire"
+     },
+     {
+      "value": "Earth",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#8fbf6a\">🜃</span>Earth"
+     },
+     {
+      "value": "Air",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#9ecbff\">🜁</span>Air"
+     },
+     {
+      "value": "Water",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#6f8cff\">🜄</span>Water"
+     }
+    ],
+    [
+     {
+      "value": "Aquarius",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♒︎</span>Aquarius"
+     },
+     {
+      "value": "Gemini",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♊︎</span>Gemini"
+     },
+     {
+      "value": "Sagittarius",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♐︎</span>Sagittarius"
+     },
+     {
+      "value": "Cancer",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♋︎</span>Cancer"
+     },
+     {
+      "value": "Libra",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♎︎</span>Libra"
+     },
+     {
+      "value": "Capricorn",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♑︎</span>Capricorn"
+     },
+     {
+      "value": "Virgo",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♍︎</span>Virgo"
+     },
+     {
+      "value": "Scorpio",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♏︎</span>Scorpio"
+     },
+     {
+      "value": "Taurus",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♉︎</span>Taurus"
+     },
+     {
+      "value": "Aries",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♈︎</span>Aries"
+     },
+     {
+      "value": "Pisces",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♓︎</span>Pisces"
+     },
+     {
+      "value": "Leo",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♌︎</span>Leo"
+     }
+    ]
+   ]
+  },
+  {
+   "date": "2028-02-29",
+   "number": 470,
+   "birthday": {
+    "year": 1980,
+    "month": 12,
+    "day": 6
+   },
+   "sign": "Sagittarius",
+   "answers": [
+    "Sagittarius",
+    "Sagittarius",
+    "Masculine",
+    "Fire",
+    "Gemini"
+   ],
+   "options": [
+    [
+     {
+      "value": "Aries",
+      "html": "Aries"
+     },
+     {
+      "value": "Taurus",
+      "html": "Taurus"
+     },
+     {
+      "value": "Gemini",
+      "html": "Gemini"
+     },
+     {
+      "value": "Cancer",
+      "html": "Cancer"
+     },
+     {
+      "value": "Leo",
+      "html": "Leo"
+     },
+     {
+      "value": "Virgo",
+      "html": "Virgo"
+     },
+     {
+      "value": "Libra",
+      "html": "Libra"
+     },
+     {
+      "value": "Scorpio",
+      "html": "Scorpio"
+     },
+     {
+      "value": "Sagittarius",
+      "html": "Sagittarius"
+     },
+     {
+      "value": "Capricorn",
+      "html": "Capricorn"
+     },
+     {
+      "value": "Aquarius",
+      "html": "Aquarius"
+     },
+     {
+      "value": "Pisces",
+      "html": "Pisces"
+     }
+    ],
+    [
+     {
+      "value": "Aquarius",
+      "html": "<span class=\"glyph\">♒︎</span>",
+      "label": "Symbol of Aquarius"
+     },
+     {
+      "value": "Gemini",
+      "html": "<span class=\"glyph\">♊︎</span>",
+      "label": "Symbol of Gemini"
+     },
+     {
+      "value": "Pisces",
+      "html": "<span class=\"glyph\">♓︎</span>",
+      "label": "Symbol of Pisces"
+     },
+     {
+      "value": "Taurus",
+      "html": "<span class=\"glyph\">♉︎</span>",
+      "label": "Symbol of Taurus"
+     },
+     {
+      "value": "Capricorn",
+      "html": "<span class=\"glyph\">♑︎</span>",
+      "label": "Symbol of Capricorn"
+     },
+     {
+      "value": "Cancer",
+      "html": "<span class=\"glyph\">♋︎</span>",
+      "label": "Symbol of Cancer"
+     },
+     {
+      "value": "Aries",
+      "html": "<span class=\"glyph\">♈︎</span>",
+      "label": "Symbol of Aries"
+     },
+     {
+      "value": "Sagittarius",
+      "html": "<span class=\"glyph\">♐︎</span>",
+      "label": "Symbol of Sagittarius"
+     },
+     {
+      "value": "Leo",
+      "html": "<span class=\"glyph\">♌︎</span>",
+      "label": "Symbol of Leo"
+     },
+     {
+      "value": "Libra",
+      "html": "<span class=\"glyph\">♎︎</span>",
+      "label": "Symbol of Libra"
+     },
+     {
+      "value": "Virgo",
+      "html": "<span class=\"glyph\">♍︎</span>",
+      "label": "Symbol of Virgo"
+     },
+     {
+      "value": "Scorpio",
+      "html": "<span class=\"glyph\">♏︎</span>",
+      "label": "Symbol of Scorpio"
+     }
+    ],
+    [
+     {
+      "value": "Masculine",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♂︎</span>Masculine"
+     },
+     {
+      "value": "Feminine",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♀︎</span>Feminine"
+     }
+    ],
+    [
+     {
+      "value": "Fire",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#ff7a59\">🜂</span>Fire"
+     },
+     {
+      "value": "Earth",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#8fbf6a\">🜃</span>Earth"
+     },
+     {
+      "value": "Air",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#9ecbff\">🜁</span>Air"
+     },
+     {
+      "value": "Water",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#6f8cff\">🜄</span>Water"
+     }
+    ],
+    [
+     {
+      "value": "Cancer",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♋︎</span>Cancer"
+     },
+     {
+      "value": "Leo",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♌︎</span>Leo"
+     },
+     {
+      "value": "Capricorn",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♑︎</span>Capricorn"
+     },
+     {
+      "value": "Virgo",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♍︎</span>Virgo"
+     },
+     {
+      "value": "Pisces",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♓︎</span>Pisces"
+     },
+     {
+      "value": "Gemini",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♊︎</span>Gemini"
+     },
+     {
+      "value": "Aquarius",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♒︎</span>Aquarius"
+     },
+     {
+      "value": "Taurus",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♉︎</span>Taurus"
+     },
+     {
+      "value": "Libra",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♎︎</span>Libra"
+     },
+     {
+      "value": "Sagittarius",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♐︎</span>Sagittarius"
+     },
+     {
+      "value": "Aries",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♈︎</span>Aries"
+     },
+     {
+      "value": "Scorpio",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♏︎</span>Scorpio"
+     }
+    ]
+   ]
+  },
+  {
+   "date": "2028-03-01",
+   "number": 471,
+   "birthday": {
+    "year": 1980,
+    "month": 5,
+    "day": 11
+   },
+   "sign": "Taurus",
+   "answers": [
+    "Taurus",
+    "Taurus",
+    "Feminine",
+    "Earth",
+    "Scorpio"
+   ],
+   "options": [
+    [
+     {
+      "value": "Aries",
+      "html": "Aries"
+     },
+     {
+      "value": "Taurus",
+      "html": "Taurus"
+     },
+     {
+      "value": "Gemini",
+      "html": "Gemini"
+     },
+     {
+      "value": "Cancer",
+      "html": "Cancer"
+     },
+     {
+      "value": "Leo",
+      "html": "Leo"
+     },
+     {
+      "value": "Virgo",
+      "html": "Virgo"
+     },
+     {
+      "value": "Libra",
+      "html": "Libra"
+     },
+     {
+      "value": "Scorpio",
+      "html": "Scorpio"
+     },
+     {
+      "value": "Sagittarius",
+      "html": "Sagittarius"
+     },
+     {
+      "value": "Capricorn",
+      "html": "Capricorn"
+     },
+     {
+      "value": "Aquarius",
+      "html": "Aquarius"
+     },
+     {
+      "value": "Pisces",
+      "html": "Pisces"
+     }
+    ],
+    [
+     {
+      "value": "Aries",
+      "html": "<span class=\"glyph\">♈︎</span>",
+      "label": "Symbol of Aries"
+     },
+     {
+      "value": "Leo",
+      "html": "<span class=\"glyph\">♌︎</span>",
+      "label": "Symbol of Leo"
+     },
+     {
+      "value": "Libra",
+      "html": "<span class=\"glyph\">♎︎</span>",
+      "label": "Symbol of Libra"
+     },
+     {
+      "value": "Pisces",
+      "html": "<span class=\"glyph\">♓︎</span>",
+      "label": "Symbol of Pisces"
+     },
+     {
+      "value": "Gemini",
+      "html": "<span class=\"glyph\">♊︎</span>",
+      "label": "Symbol of Gemini"
+     },
+     {
+      "value": "Taurus",
+      "html": "<span class=\"glyph\">♉︎</span>",
+      "label": "Symbol of Taurus"
+     },
+     {
+      "value": "Virgo",
+      "html": "<span class=\"glyph\">♍︎</span>",
+      "label": "Symbol of Virgo"
+     },
+     {
+      "value": "Aquarius",
+      "html": "<span class=\"glyph\">♒︎</span>",
+      "label": "Symbol of Aquarius"
+     },
+     {
+      "value": "Cancer",
+      "html": "<span class=\"glyph\">♋︎</span>",
+      "label": "Symbol of Cancer"
+     },
+     {
+      "value": "Capricorn",
+      "html": "<span class=\"glyph\">♑︎</span>",
+      "label": "Symbol of Capricorn"
+     },
+     {
+      "value": "Sagittarius",
+      "html": "<span class=\"glyph\">♐︎</span>",
+      "label": "Symbol of Sagittarius"
+     },
+     {
+      "value": "Scorpio",
+      "html": "<span class=\"glyph\">♏︎</span>",
+      "label": "Symbol of Scorpio"
+     }
+    ],
+    [
+     {
+      "value": "Masculine",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♂︎</span>Masculine"
+     },
+     {
+      "value": "Feminine",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♀︎</span>Feminine"
+     }
+    ],
+    [
+     {
+      "value": "Fire",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#ff7a59\">🜂</span>Fire"
+     },
+     {
+      "value": "Earth",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#8fbf6a\">🜃</span>Earth"
+     },
+     {
+      "value": "Air",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#9ecbff\">🜁</span>Air"
+     },
+     {
+      "value": "Water",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#6f8cff\">🜄</span>Water"
+     }
+    ],
+    [
+     {
+      "value": "Aries",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♈︎</span>Aries"
+     },
+     {
+      "value": "Gemini",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♊︎</span>Gemini"
+     },
+     {
+      "value": "Scorpio",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♏︎</span>Scorpio"
+     },
+     {
+      "value": "Libra",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♎︎</span>Libra"
+     },
+     {
+      "value": "Cancer",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♋︎</span>Cancer"
+     },
+     {
+      "value": "Sagittarius",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♐︎</span>Sagittarius"
+     },
+     {
+      "value": "Pisces",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♓︎</span>Pisces"
+     },
+     {
+      "value": "Taurus",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♉︎</span>Taurus"
+     },
+     {
+      "value": "Aquarius",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♒︎</span>Aquarius"
+     },
+     {
+      "value": "Capricorn",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♑︎</span>Capricorn"
+     },
+     {
+      "value": "Virgo",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♍︎</span>Virgo"
+     },
+     {
+      "value": "Leo",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♌︎</span>Leo"
+     }
+    ]
+   ]
+  },
+  {
+   "date": "2026-01-01",
+   "number": -319,
+   "birthday": {
+    "year": 1955,
+    "month": 9,
+    "day": 26
+   },
+   "sign": "Libra",
+   "answers": [
+    "Libra",
+    "Libra",
+    "Masculine",
+    "Air",
+    "Aries"
+   ],
+   "options": [
+    [
+     {
+      "value": "Aries",
+      "html": "Aries"
+     },
+     {
+      "value": "Taurus",
+      "html": "Taurus"
+     },
+     {
+      "value": "Gemini",
+      "html": "Gemini"
+     },
+     {
+      "value": "Cancer",
+      "html": "Cancer"
+     },
+     {
+      "value": "Leo",
+      "html": "Leo"
+     },
+     {
+      "value": "Virgo",
+      "html": "Virgo"
+     },
+     {
+      "value": "Libra",
+      "html": "Libra"
+     },
+     {
+      "value": "Scorpio",
+      "html": "Scorpio"
+     },
+     {
+      "value": "Sagittarius",
+      "html": "Sagittarius"
+     },
+     {
+      "value": "Capricorn",
+      "html": "Capricorn"
+     },
+     {
+      "value": "Aquarius",
+      "html": "Aquarius"
+     },
+     {
+      "value": "Pisces",
+      "html": "Pisces"
+     }
+    ],
+    [
+     {
+      "value": "Aries",
+      "html": "<span class=\"glyph\">♈︎</span>",
+      "label": "Symbol of Aries"
+     },
+     {
+      "value": "Gemini",
+      "html": "<span class=\"glyph\">♊︎</span>",
+      "label": "Symbol of Gemini"
+     },
+     {
+      "value": "Libra",
+      "html": "<span class=\"glyph\">♎︎</span>",
+      "label": "Symbol of Libra"
+     },
+     {
+      "value": "Virgo",
+      "html": "<span class=\"glyph\">♍︎</span>",
+      "label": "Symbol of Virgo"
+     },
+     {
+      "value": "Scorpio",
+      "html": "<span class=\"glyph\">♏︎</span>",
+      "label": "Symbol of Scorpio"
+     },
+     {
+      "value": "Cancer",
+      "html": "<span class=\"glyph\">♋︎</span>",
+      "label": "Symbol of Cancer"
+     },
+     {
+      "value": "Aquarius",
+      "html": "<span class=\"glyph\">♒︎</span>",
+      "label": "Symbol of Aquarius"
+     },
+     {
+      "value": "Sagittarius",
+      "html": "<span class=\"glyph\">♐︎</span>",
+      "label": "Symbol of Sagittarius"
+     },
+     {
+      "value": "Pisces",
+      "html": "<span class=\"glyph\">♓︎</span>",
+      "label": "Symbol of Pisces"
+     },
+     {
+      "value": "Capricorn",
+      "html": "<span class=\"glyph\">♑︎</span>",
+      "label": "Symbol of Capricorn"
+     },
+     {
+      "value": "Taurus",
+      "html": "<span class=\"glyph\">♉︎</span>",
+      "label": "Symbol of Taurus"
+     },
+     {
+      "value": "Leo",
+      "html": "<span class=\"glyph\">♌︎</span>",
+      "label": "Symbol of Leo"
+     }
+    ],
+    [
+     {
+      "value": "Masculine",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♂︎</span>Masculine"
+     },
+     {
+      "value": "Feminine",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♀︎</span>Feminine"
+     }
+    ],
+    [
+     {
+      "value": "Fire",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#ff7a59\">🜂</span>Fire"
+     },
+     {
+      "value": "Earth",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#8fbf6a\">🜃</span>Earth"
+     },
+     {
+      "value": "Air",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#9ecbff\">🜁</span>Air"
+     },
+     {
+      "value": "Water",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#6f8cff\">🜄</span>Water"
+     }
+    ],
+    [
+     {
+      "value": "Virgo",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♍︎</span>Virgo"
+     },
+     {
+      "value": "Cancer",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♋︎</span>Cancer"
+     },
+     {
+      "value": "Scorpio",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♏︎</span>Scorpio"
+     },
+     {
+      "value": "Gemini",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♊︎</span>Gemini"
+     },
+     {
+      "value": "Aquarius",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♒︎</span>Aquarius"
+     },
+     {
+      "value": "Leo",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♌︎</span>Leo"
+     },
+     {
+      "value": "Capricorn",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♑︎</span>Capricorn"
+     },
+     {
+      "value": "Pisces",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♓︎</span>Pisces"
+     },
+     {
+      "value": "Aries",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♈︎</span>Aries"
+     },
+     {
+      "value": "Sagittarius",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♐︎</span>Sagittarius"
+     },
+     {
+      "value": "Taurus",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♉︎</span>Taurus"
+     },
+     {
+      "value": "Libra",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♎︎</span>Libra"
+     }
+    ]
+   ]
+  },
+  {
+   "date": "2030-06-15",
+   "number": 1307,
+   "birthday": {
+    "year": 2000,
+    "month": 10,
+    "day": 3
+   },
+   "sign": "Libra",
+   "answers": [
+    "Libra",
+    "Libra",
+    "Masculine",
+    "Air",
+    "Aries"
+   ],
+   "options": [
+    [
+     {
+      "value": "Aries",
+      "html": "Aries"
+     },
+     {
+      "value": "Taurus",
+      "html": "Taurus"
+     },
+     {
+      "value": "Gemini",
+      "html": "Gemini"
+     },
+     {
+      "value": "Cancer",
+      "html": "Cancer"
+     },
+     {
+      "value": "Leo",
+      "html": "Leo"
+     },
+     {
+      "value": "Virgo",
+      "html": "Virgo"
+     },
+     {
+      "value": "Libra",
+      "html": "Libra"
+     },
+     {
+      "value": "Scorpio",
+      "html": "Scorpio"
+     },
+     {
+      "value": "Sagittarius",
+      "html": "Sagittarius"
+     },
+     {
+      "value": "Capricorn",
+      "html": "Capricorn"
+     },
+     {
+      "value": "Aquarius",
+      "html": "Aquarius"
+     },
+     {
+      "value": "Pisces",
+      "html": "Pisces"
+     }
+    ],
+    [
+     {
+      "value": "Virgo",
+      "html": "<span class=\"glyph\">♍︎</span>",
+      "label": "Symbol of Virgo"
+     },
+     {
+      "value": "Pisces",
+      "html": "<span class=\"glyph\">♓︎</span>",
+      "label": "Symbol of Pisces"
+     },
+     {
+      "value": "Cancer",
+      "html": "<span class=\"glyph\">♋︎</span>",
+      "label": "Symbol of Cancer"
+     },
+     {
+      "value": "Aquarius",
+      "html": "<span class=\"glyph\">♒︎</span>",
+      "label": "Symbol of Aquarius"
+     },
+     {
+      "value": "Aries",
+      "html": "<span class=\"glyph\">♈︎</span>",
+      "label": "Symbol of Aries"
+     },
+     {
+      "value": "Sagittarius",
+      "html": "<span class=\"glyph\">♐︎</span>",
+      "label": "Symbol of Sagittarius"
+     },
+     {
+      "value": "Capricorn",
+      "html": "<span class=\"glyph\">♑︎</span>",
+      "label": "Symbol of Capricorn"
+     },
+     {
+      "value": "Gemini",
+      "html": "<span class=\"glyph\">♊︎</span>",
+      "label": "Symbol of Gemini"
+     },
+     {
+      "value": "Libra",
+      "html": "<span class=\"glyph\">♎︎</span>",
+      "label": "Symbol of Libra"
+     },
+     {
+      "value": "Scorpio",
+      "html": "<span class=\"glyph\">♏︎</span>",
+      "label": "Symbol of Scorpio"
+     },
+     {
+      "value": "Leo",
+      "html": "<span class=\"glyph\">♌︎</span>",
+      "label": "Symbol of Leo"
+     },
+     {
+      "value": "Taurus",
+      "html": "<span class=\"glyph\">♉︎</span>",
+      "label": "Symbol of Taurus"
+     }
+    ],
+    [
+     {
+      "value": "Masculine",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♂︎</span>Masculine"
+     },
+     {
+      "value": "Feminine",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♀︎</span>Feminine"
+     }
+    ],
+    [
+     {
+      "value": "Fire",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#ff7a59\">🜂</span>Fire"
+     },
+     {
+      "value": "Earth",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#8fbf6a\">🜃</span>Earth"
+     },
+     {
+      "value": "Air",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#9ecbff\">🜁</span>Air"
+     },
+     {
+      "value": "Water",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#6f8cff\">🜄</span>Water"
+     }
+    ],
+    [
+     {
+      "value": "Sagittarius",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♐︎</span>Sagittarius"
+     },
+     {
+      "value": "Cancer",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♋︎</span>Cancer"
+     },
+     {
+      "value": "Aquarius",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♒︎</span>Aquarius"
+     },
+     {
+      "value": "Capricorn",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♑︎</span>Capricorn"
+     },
+     {
+      "value": "Taurus",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♉︎</span>Taurus"
+     },
+     {
+      "value": "Leo",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♌︎</span>Leo"
+     },
+     {
+      "value": "Virgo",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♍︎</span>Virgo"
+     },
+     {
+      "value": "Aries",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♈︎</span>Aries"
+     },
+     {
+      "value": "Libra",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♎︎</span>Libra"
+     },
+     {
+      "value": "Scorpio",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♏︎</span>Scorpio"
+     },
+     {
+      "value": "Pisces",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♓︎</span>Pisces"
+     },
+     {
+      "value": "Gemini",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♊︎</span>Gemini"
+     }
+    ]
+   ]
+  },
+  {
+   "date": "2099-12-31",
+   "number": 26708,
+   "birthday": {
+    "year": 1998,
+    "month": 10,
+    "day": 5
+   },
+   "sign": "Libra",
+   "answers": [
+    "Libra",
+    "Libra",
+    "Masculine",
+    "Air",
+    "Aries"
+   ],
+   "options": [
+    [
+     {
+      "value": "Aries",
+      "html": "Aries"
+     },
+     {
+      "value": "Taurus",
+      "html": "Taurus"
+     },
+     {
+      "value": "Gemini",
+      "html": "Gemini"
+     },
+     {
+      "value": "Cancer",
+      "html": "Cancer"
+     },
+     {
+      "value": "Leo",
+      "html": "Leo"
+     },
+     {
+      "value": "Virgo",
+      "html": "Virgo"
+     },
+     {
+      "value": "Libra",
+      "html": "Libra"
+     },
+     {
+      "value": "Scorpio",
+      "html": "Scorpio"
+     },
+     {
+      "value": "Sagittarius",
+      "html": "Sagittarius"
+     },
+     {
+      "value": "Capricorn",
+      "html": "Capricorn"
+     },
+     {
+      "value": "Aquarius",
+      "html": "Aquarius"
+     },
+     {
+      "value": "Pisces",
+      "html": "Pisces"
+     }
+    ],
+    [
+     {
+      "value": "Gemini",
+      "html": "<span class=\"glyph\">♊︎</span>",
+      "label": "Symbol of Gemini"
+     },
+     {
+      "value": "Leo",
+      "html": "<span class=\"glyph\">♌︎</span>",
+      "label": "Symbol of Leo"
+     },
+     {
+      "value": "Aquarius",
+      "html": "<span class=\"glyph\">♒︎</span>",
+      "label": "Symbol of Aquarius"
+     },
+     {
+      "value": "Cancer",
+      "html": "<span class=\"glyph\">♋︎</span>",
+      "label": "Symbol of Cancer"
+     },
+     {
+      "value": "Virgo",
+      "html": "<span class=\"glyph\">♍︎</span>",
+      "label": "Symbol of Virgo"
+     },
+     {
+      "value": "Sagittarius",
+      "html": "<span class=\"glyph\">♐︎</span>",
+      "label": "Symbol of Sagittarius"
+     },
+     {
+      "value": "Aries",
+      "html": "<span class=\"glyph\">♈︎</span>",
+      "label": "Symbol of Aries"
+     },
+     {
+      "value": "Scorpio",
+      "html": "<span class=\"glyph\">♏︎</span>",
+      "label": "Symbol of Scorpio"
+     },
+     {
+      "value": "Taurus",
+      "html": "<span class=\"glyph\">♉︎</span>",
+      "label": "Symbol of Taurus"
+     },
+     {
+      "value": "Libra",
+      "html": "<span class=\"glyph\">♎︎</span>",
+      "label": "Symbol of Libra"
+     },
+     {
+      "value": "Capricorn",
+      "html": "<span class=\"glyph\">♑︎</span>",
+      "label": "Symbol of Capricorn"
+     },
+     {
+      "value": "Pisces",
+      "html": "<span class=\"glyph\">♓︎</span>",
+      "label": "Symbol of Pisces"
+     }
+    ],
+    [
+     {
+      "value": "Masculine",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♂︎</span>Masculine"
+     },
+     {
+      "value": "Feminine",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♀︎</span>Feminine"
+     }
+    ],
+    [
+     {
+      "value": "Fire",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#ff7a59\">🜂</span>Fire"
+     },
+     {
+      "value": "Earth",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#8fbf6a\">🜃</span>Earth"
+     },
+     {
+      "value": "Air",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#9ecbff\">🜁</span>Air"
+     },
+     {
+      "value": "Water",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\" style=\"color:#6f8cff\">🜄</span>Water"
+     }
+    ],
+    [
+     {
+      "value": "Scorpio",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♏︎</span>Scorpio"
+     },
+     {
+      "value": "Gemini",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♊︎</span>Gemini"
+     },
+     {
+      "value": "Pisces",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♓︎</span>Pisces"
+     },
+     {
+      "value": "Aries",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♈︎</span>Aries"
+     },
+     {
+      "value": "Libra",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♎︎</span>Libra"
+     },
+     {
+      "value": "Cancer",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♋︎</span>Cancer"
+     },
+     {
+      "value": "Capricorn",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♑︎</span>Capricorn"
+     },
+     {
+      "value": "Aquarius",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♒︎</span>Aquarius"
+     },
+     {
+      "value": "Sagittarius",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♐︎</span>Sagittarius"
+     },
+     {
+      "value": "Leo",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♌︎</span>Leo"
+     },
+     {
+      "value": "Taurus",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♉︎</span>Taurus"
+     },
+     {
+      "value": "Virgo",
+      "html": "<span class=\"glyph\" aria-hidden=\"true\">♍︎</span>Virgo"
+     }
+    ]
+   ]
+  }
+ ],
+ "cusps": [
+  {
+   "month": 12,
+   "day": 22,
+   "sign": "Capricorn"
+  },
+  {
+   "month": 1,
+   "day": 19,
+   "sign": "Capricorn"
+  },
+  {
+   "month": 12,
+   "day": 21,
+   "sign": "Sagittarius"
+  },
+  {
+   "month": 1,
+   "day": 20,
+   "sign": "Aquarius"
+  },
+  {
+   "month": 1,
+   "day": 20,
+   "sign": "Aquarius"
+  },
+  {
+   "month": 2,
+   "day": 18,
+   "sign": "Aquarius"
+  },
+  {
+   "month": 1,
+   "day": 19,
+   "sign": "Capricorn"
+  },
+  {
+   "month": 2,
+   "day": 19,
+   "sign": "Pisces"
+  },
+  {
+   "month": 2,
+   "day": 19,
+   "sign": "Pisces"
+  },
+  {
+   "month": 3,
+   "day": 20,
+   "sign": "Pisces"
+  },
+  {
+   "month": 2,
+   "day": 18,
+   "sign": "Aquarius"
+  },
+  {
+   "month": 3,
+   "day": 21,
+   "sign": "Aries"
+  },
+  {
+   "month": 3,
+   "day": 21,
+   "sign": "Aries"
+  },
+  {
+   "month": 4,
+   "day": 19,
+   "sign": "Aries"
+  },
+  {
+   "month": 3,
+   "day": 20,
+   "sign": "Pisces"
+  },
+  {
+   "month": 4,
+   "day": 20,
+   "sign": "Taurus"
+  },
+  {
+   "month": 4,
+   "day": 20,
+   "sign": "Taurus"
+  },
+  {
+   "month": 5,
+   "day": 20,
+   "sign": "Taurus"
+  },
+  {
+   "month": 4,
+   "day": 19,
+   "sign": "Aries"
+  },
+  {
+   "month": 5,
+   "day": 21,
+   "sign": "Gemini"
+  },
+  {
+   "month": 5,
+   "day": 21,
+   "sign": "Gemini"
+  },
+  {
+   "month": 6,
+   "day": 20,
+   "sign": "Gemini"
+  },
+  {
+   "month": 5,
+   "day": 20,
+   "sign": "Taurus"
+  },
+  {
+   "month": 6,
+   "day": 21,
+   "sign": "Cancer"
+  },
+  {
+   "month": 6,
+   "day": 21,
+   "sign": "Cancer"
+  },
+  {
+   "month": 7,
+   "day": 22,
+   "sign": "Cancer"
+  },
+  {
+   "month": 6,
+   "day": 20,
+   "sign": "Gemini"
+  },
+  {
+   "month": 7,
+   "day": 23,
+   "sign": "Leo"
+  },
+  {
+   "month": 7,
+   "day": 23,
+   "sign": "Leo"
+  },
+  {
+   "month": 8,
+   "day": 22,
+   "sign": "Leo"
+  },
+  {
+   "month": 7,
+   "day": 22,
+   "sign": "Cancer"
+  },
+  {
+   "month": 8,
+   "day": 23,
+   "sign": "Virgo"
+  },
+  {
+   "month": 8,
+   "day": 23,
+   "sign": "Virgo"
+  },
+  {
+   "month": 9,
+   "day": 22,
+   "sign": "Virgo"
+  },
+  {
+   "month": 8,
+   "day": 22,
+   "sign": "Leo"
+  },
+  {
+   "month": 9,
+   "day": 23,
+   "sign": "Libra"
+  },
+  {
+   "month": 9,
+   "day": 23,
+   "sign": "Libra"
+  },
+  {
+   "month": 10,
+   "day": 22,
+   "sign": "Libra"
+  },
+  {
+   "month": 9,
+   "day": 22,
+   "sign": "Virgo"
+  },
+  {
+   "month": 10,
+   "day": 23,
+   "sign": "Scorpio"
+  },
+  {
+   "month": 10,
+   "day": 23,
+   "sign": "Scorpio"
+  },
+  {
+   "month": 11,
+   "day": 21,
+   "sign": "Scorpio"
+  },
+  {
+   "month": 10,
+   "day": 22,
+   "sign": "Libra"
+  },
+  {
+   "month": 11,
+   "day": 22,
+   "sign": "Sagittarius"
+  },
+  {
+   "month": 11,
+   "day": 22,
+   "sign": "Sagittarius"
+  },
+  {
+   "month": 12,
+   "day": 21,
+   "sign": "Sagittarius"
+  },
+  {
+   "month": 11,
+   "day": 21,
+   "sign": "Scorpio"
+  },
+  {
+   "month": 12,
+   "day": 22,
+   "sign": "Capricorn"
+  },
+  {
+   "month": 2,
+   "day": 29,
+   "sign": "Pisces"
+  },
+  {
+   "month": 1,
+   "day": 1,
+   "sign": "Capricorn"
+  },
+  {
+   "month": 12,
+   "day": 31,
+   "sign": "Capricorn"
+  }
+ ],
+ "replays": [
+  {
+   "date": "2026-11-17",
+   "kind": "answers",
+   "guesses": [
+    [
+     0,
+     "Aries"
+    ],
+    [
+     1,
+     "Aries"
+    ],
+    [
+     2,
+     "Masculine"
+    ],
+    [
+     3,
+     "Fire"
+    ],
+    [
+     4,
+     "Libra"
+    ]
+   ],
+   "hints": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "final": {
+    "question": 5,
+    "missesLeft": 5,
+    "status": "won",
+    "results": [
+     {
+      "misses": [],
+      "revealed": false
+     },
+     {
+      "misses": [],
+      "revealed": false
+     },
+     {
+      "misses": [],
+      "revealed": false
+     },
+     {
+      "misses": [],
+      "revealed": false
+     },
+     {
+      "misses": [],
+      "revealed": false
+     }
+    ]
+   }
+  },
+  {
+   "date": "2026-11-17",
+   "kind": "allwrong",
+   "guesses": [
+    [
+     0,
+     "Taurus"
+    ],
+    [
+     0,
+     "Gemini"
+    ],
+    [
+     0,
+     "Cancer"
+    ],
+    [
+     0,
+     "Leo"
+    ],
+    [
+     0,
+     "Virgo"
+    ]
+   ],
+   "hints": [
+    {
+     "tag": "1 ahead",
+     "text": "Taurus is 1 sign ahead."
+    },
+    {
+     "tag": "2 ahead",
+     "text": "Gemini is 2 signs ahead."
+    },
+    {
+     "tag": "3 ahead",
+     "text": "Cancer is 3 signs ahead."
+    },
+    {
+     "tag": "4 ahead",
+     "text": "Leo is 4 signs ahead."
+    },
+    null
+   ],
+   "final": {
+    "question": 0,
+    "missesLeft": 0,
+    "status": "lost",
+    "results": [
+     {
+      "misses": [
+       "Taurus",
+       "Gemini",
+       "Cancer",
+       "Leo",
+       "Virgo"
+      ],
+      "revealed": true
+     },
+     {
+      "misses": [],
+      "revealed": true
+     },
+     {
+      "misses": [],
+      "revealed": true
+     },
+     {
+      "misses": [],
+      "revealed": true
+     },
+     {
+      "misses": [],
+      "revealed": true
+     }
+    ]
+   }
+  },
+  {
+   "date": "2028-02-29",
+   "kind": "mixed",
+   "guesses": [
+    [
+     0,
+     "Aries"
+    ],
+    [
+     0,
+     "Taurus"
+    ],
+    [
+     0,
+     "Sagittarius"
+    ],
+    [
+     1,
+     "Sagittarius"
+    ],
+    [
+     2,
+     "Masculine"
+    ],
+    [
+     3,
+     "Earth"
+    ],
+    [
+     3,
+     "Fire"
+    ],
+    [
+     4,
+     "Gemini"
+    ]
+   ],
+   "hints": [
+    {
+     "tag": "4 ahead",
+     "text": "Aries is 4 signs ahead."
+    },
+    {
+     "tag": "5 ahead",
+     "text": "Taurus is 5 signs ahead."
+    },
+    null,
+    null,
+    null,
+    {
+     "text": "Earth signs are Capricorn, Taurus and Virgo."
+    },
+    null,
+    null
+   ],
+   "final": {
+    "question": 5,
+    "missesLeft": 2,
+    "status": "won",
+    "results": [
+     {
+      "misses": [
+       "Aries",
+       "Taurus"
+      ],
+      "revealed": false
+     },
+     {
+      "misses": [],
+      "revealed": false
+     },
+     {
+      "misses": [],
+      "revealed": false
+     },
+     {
+      "misses": [
+       "Earth"
+      ],
+      "revealed": false
+     },
+     {
+      "misses": [],
+      "revealed": false
+     }
+    ]
+   }
+  },
+  {
+   "date": "2027-01-01",
+   "kind": "gender",
+   "guesses": [
+    [
+     0,
+     "Gemini"
+    ],
+    [
+     1,
+     "Gemini"
+    ],
+    [
+     2,
+     "Feminine"
+    ],
+    [
+     3,
+     "Air"
+    ],
+    [
+     4,
+     "Sagittarius"
+    ]
+   ],
+   "hints": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "final": {
+    "question": 5,
+    "missesLeft": 4,
+    "status": "won",
+    "results": [
+     {
+      "misses": [],
+      "revealed": false
+     },
+     {
+      "misses": [],
+      "revealed": false
+     },
+     {
+      "misses": [
+       "Feminine"
+      ],
+      "revealed": true
+     },
+     {
+      "misses": [],
+      "revealed": false
+     },
+     {
+      "misses": [],
+      "revealed": false
+     }
+    ]
+   }
+  }
+ ],
+ "streaks": [
+  {
+   "plays": [
+    [
+     "2026-11-17",
+     true
+    ],
+    [
+     "2026-11-18",
+     true
+    ],
+    [
+     "2026-11-19",
+     true
+    ]
+   ],
+   "after": [
+    {
+     "streak": 1,
+     "best": 1,
+     "lastWin": "2026-11-17"
+    },
+    {
+     "streak": 2,
+     "best": 2,
+     "lastWin": "2026-11-18"
+    },
+    {
+     "streak": 3,
+     "best": 3,
+     "lastWin": "2026-11-19"
+    }
+   ],
+   "view": [
+    "2026-11-19",
+    "2026-11-20",
+    "2026-11-21"
+   ],
+   "current": [
+    3,
+    3,
+    0
+   ]
+  },
+  {
+   "plays": [
+    [
+     "2026-11-17",
+     true
+    ],
+    [
+     "2026-11-19",
+     true
+    ]
+   ],
+   "after": [
+    {
+     "streak": 1,
+     "best": 1,
+     "lastWin": "2026-11-17"
+    },
+    {
+     "streak": 1,
+     "best": 1,
+     "lastWin": "2026-11-19"
+    }
+   ],
+   "view": [
+    "2026-11-19"
+   ],
+   "current": [
+    1
+   ]
+  },
+  {
+   "plays": [
+    [
+     "2026-12-30",
+     true
+    ],
+    [
+     "2026-12-31",
+     true
+    ],
+    [
+     "2027-01-01",
+     true
+    ]
+   ],
+   "after": [
+    {
+     "streak": 1,
+     "best": 1,
+     "lastWin": "2026-12-30"
+    },
+    {
+     "streak": 2,
+     "best": 2,
+     "lastWin": "2026-12-31"
+    },
+    {
+     "streak": 3,
+     "best": 3,
+     "lastWin": "2027-01-01"
+    }
+   ],
+   "view": [
+    "2027-01-01",
+    "2027-01-02",
+    "2027-01-03"
+   ],
+   "current": [
+    3,
+    3,
+    0
+   ]
+  },
+  {
+   "plays": [
+    [
+     "2027-01-31",
+     true
+    ],
+    [
+     "2027-02-01",
+     true
+    ]
+   ],
+   "after": [
+    {
+     "streak": 1,
+     "best": 1,
+     "lastWin": "2027-01-31"
+    },
+    {
+     "streak": 2,
+     "best": 2,
+     "lastWin": "2027-02-01"
+    }
+   ],
+   "view": [
+    "2027-02-01"
+   ],
+   "current": [
+    2
+   ]
+  },
+  {
+   "plays": [
+    [
+     "2028-02-28",
+     true
+    ],
+    [
+     "2028-02-29",
+     true
+    ],
+    [
+     "2028-03-01",
+     true
+    ]
+   ],
+   "after": [
+    {
+     "streak": 1,
+     "best": 1,
+     "lastWin": "2028-02-28"
+    },
+    {
+     "streak": 2,
+     "best": 2,
+     "lastWin": "2028-02-29"
+    },
+    {
+     "streak": 3,
+     "best": 3,
+     "lastWin": "2028-03-01"
+    }
+   ],
+   "view": [
+    "2028-03-01"
+   ],
+   "current": [
+    3
+   ]
+  },
+  {
+   "plays": [
+    [
+     "2026-11-17",
+     true
+    ],
+    [
+     "2026-11-18",
+     true
+    ],
+    [
+     "2026-11-19",
+     false
+    ]
+   ],
+   "after": [
+    {
+     "streak": 1,
+     "best": 1,
+     "lastWin": "2026-11-17"
+    },
+    {
+     "streak": 2,
+     "best": 2,
+     "lastWin": "2026-11-18"
+    },
+    {
+     "streak": 0,
+     "best": 2,
+     "lastWin": "2026-11-18"
+    }
+   ],
+   "view": [
+    "2026-11-19",
+    "2026-11-20"
+   ],
+   "current": [
+    0,
+    0
+   ]
+  },
+  {
+   "plays": [
+    [
+     "2026-11-17",
+     true
+    ],
+    [
+     "2026-11-18",
+     false
+    ],
+    [
+     "2026-11-19",
+     true
+    ]
+   ],
+   "after": [
+    {
+     "streak": 1,
+     "best": 1,
+     "lastWin": "2026-11-17"
+    },
+    {
+     "streak": 0,
+     "best": 1,
+     "lastWin": "2026-11-17"
+    },
+    {
+     "streak": 1,
+     "best": 1,
+     "lastWin": "2026-11-19"
+    }
+   ],
+   "view": [
+    "2026-11-19"
+   ],
+   "current": [
+    1
+   ]
+  },
+  {
+   "plays": [
+    [
+     "2026-11-17",
+     true
+    ],
+    [
+     "2026-11-18",
+     true
+    ],
+    [
+     "2026-11-19",
+     true
+    ],
+    [
+     "2026-11-25",
+     true
+    ]
+   ],
+   "after": [
+    {
+     "streak": 1,
+     "best": 1,
+     "lastWin": "2026-11-17"
+    },
+    {
+     "streak": 2,
+     "best": 2,
+     "lastWin": "2026-11-18"
+    },
+    {
+     "streak": 3,
+     "best": 3,
+     "lastWin": "2026-11-19"
+    },
+    {
+     "streak": 1,
+     "best": 3,
+     "lastWin": "2026-11-25"
+    }
+   ],
+   "view": [
+    "2026-11-25"
+   ],
+   "current": [
+    1
+   ]
+  }
+ ],
+ "hints": [
+  {
+   "guess": "Taurus",
+   "answer": "Aries",
+   "hint": {
+    "tag": "1 ahead",
+    "text": "Taurus is 1 sign ahead."
+   }
+  },
+  {
+   "guess": "Gemini",
+   "answer": "Aries",
+   "hint": {
+    "tag": "2 ahead",
+    "text": "Gemini is 2 signs ahead."
+   }
+  },
+  {
+   "guess": "Cancer",
+   "answer": "Aries",
+   "hint": {
+    "tag": "3 ahead",
+    "text": "Cancer is 3 signs ahead."
+   }
+  },
+  {
+   "guess": "Leo",
+   "answer": "Aries",
+   "hint": {
+    "tag": "4 ahead",
+    "text": "Leo is 4 signs ahead."
+   }
+  },
+  {
+   "guess": "Virgo",
+   "answer": "Aries",
+   "hint": {
+    "tag": "5 ahead",
+    "text": "Virgo is 5 signs ahead."
+   }
+  },
+  {
+   "guess": "Libra",
+   "answer": "Aries",
+   "hint": {
+    "tag": "6 away",
+    "text": "Libra is 6 signs away — straight across the wheel."
+   }
+  },
+  {
+   "guess": "Scorpio",
+   "answer": "Aries",
+   "hint": {
+    "tag": "5 behind",
+    "text": "Scorpio is 5 signs behind."
+   }
+  },
+  {
+   "guess": "Sagittarius",
+   "answer": "Aries",
+   "hint": {
+    "tag": "4 behind",
+    "text": "Sagittarius is 4 signs behind."
+   }
+  },
+  {
+   "guess": "Capricorn",
+   "answer": "Aries",
+   "hint": {
+    "tag": "3 behind",
+    "text": "Capricorn is 3 signs behind."
+   }
+  },
+  {
+   "guess": "Aquarius",
+   "answer": "Aries",
+   "hint": {
+    "tag": "2 behind",
+    "text": "Aquarius is 2 signs behind."
+   }
+  },
+  {
+   "guess": "Pisces",
+   "answer": "Aries",
+   "hint": {
+    "tag": "1 behind",
+    "text": "Pisces is 1 sign behind."
+   }
+  },
+  {
+   "guess": "Aries",
+   "answer": "Taurus",
+   "hint": {
+    "tag": "1 behind",
+    "text": "Aries is 1 sign behind."
+   }
+  },
+  {
+   "guess": "Gemini",
+   "answer": "Taurus",
+   "hint": {
+    "tag": "1 ahead",
+    "text": "Gemini is 1 sign ahead."
+   }
+  },
+  {
+   "guess": "Cancer",
+   "answer": "Taurus",
+   "hint": {
+    "tag": "2 ahead",
+    "text": "Cancer is 2 signs ahead."
+   }
+  },
+  {
+   "guess": "Leo",
+   "answer": "Taurus",
+   "hint": {
+    "tag": "3 ahead",
+    "text": "Leo is 3 signs ahead."
+   }
+  },
+  {
+   "guess": "Virgo",
+   "answer": "Taurus",
+   "hint": {
+    "tag": "4 ahead",
+    "text": "Virgo is 4 signs ahead."
+   }
+  },
+  {
+   "guess": "Libra",
+   "answer": "Taurus",
+   "hint": {
+    "tag": "5 ahead",
+    "text": "Libra is 5 signs ahead."
+   }
+  },
+  {
+   "guess": "Scorpio",
+   "answer": "Taurus",
+   "hint": {
+    "tag": "6 away",
+    "text": "Scorpio is 6 signs away — straight across the wheel."
+   }
+  },
+  {
+   "guess": "Sagittarius",
+   "answer": "Taurus",
+   "hint": {
+    "tag": "5 behind",
+    "text": "Sagittarius is 5 signs behind."
+   }
+  },
+  {
+   "guess": "Capricorn",
+   "answer": "Taurus",
+   "hint": {
+    "tag": "4 behind",
+    "text": "Capricorn is 4 signs behind."
+   }
+  },
+  {
+   "guess": "Aquarius",
+   "answer": "Taurus",
+   "hint": {
+    "tag": "3 behind",
+    "text": "Aquarius is 3 signs behind."
+   }
+  },
+  {
+   "guess": "Pisces",
+   "answer": "Taurus",
+   "hint": {
+    "tag": "2 behind",
+    "text": "Pisces is 2 signs behind."
+   }
+  },
+  {
+   "guess": "Aries",
+   "answer": "Gemini",
+   "hint": {
+    "tag": "2 behind",
+    "text": "Aries is 2 signs behind."
+   }
+  },
+  {
+   "guess": "Taurus",
+   "answer": "Gemini",
+   "hint": {
+    "tag": "1 behind",
+    "text": "Taurus is 1 sign behind."
+   }
+  },
+  {
+   "guess": "Cancer",
+   "answer": "Gemini",
+   "hint": {
+    "tag": "1 ahead",
+    "text": "Cancer is 1 sign ahead."
+   }
+  },
+  {
+   "guess": "Leo",
+   "answer": "Gemini",
+   "hint": {
+    "tag": "2 ahead",
+    "text": "Leo is 2 signs ahead."
+   }
+  },
+  {
+   "guess": "Virgo",
+   "answer": "Gemini",
+   "hint": {
+    "tag": "3 ahead",
+    "text": "Virgo is 3 signs ahead."
+   }
+  },
+  {
+   "guess": "Libra",
+   "answer": "Gemini",
+   "hint": {
+    "tag": "4 ahead",
+    "text": "Libra is 4 signs ahead."
+   }
+  },
+  {
+   "guess": "Scorpio",
+   "answer": "Gemini",
+   "hint": {
+    "tag": "5 ahead",
+    "text": "Scorpio is 5 signs ahead."
+   }
+  },
+  {
+   "guess": "Sagittarius",
+   "answer": "Gemini",
+   "hint": {
+    "tag": "6 away",
+    "text": "Sagittarius is 6 signs away — straight across the wheel."
+   }
+  },
+  {
+   "guess": "Capricorn",
+   "answer": "Gemini",
+   "hint": {
+    "tag": "5 behind",
+    "text": "Capricorn is 5 signs behind."
+   }
+  },
+  {
+   "guess": "Aquarius",
+   "answer": "Gemini",
+   "hint": {
+    "tag": "4 behind",
+    "text": "Aquarius is 4 signs behind."
+   }
+  },
+  {
+   "guess": "Pisces",
+   "answer": "Gemini",
+   "hint": {
+    "tag": "3 behind",
+    "text": "Pisces is 3 signs behind."
+   }
+  },
+  {
+   "guess": "Aries",
+   "answer": "Cancer",
+   "hint": {
+    "tag": "3 behind",
+    "text": "Aries is 3 signs behind."
+   }
+  },
+  {
+   "guess": "Taurus",
+   "answer": "Cancer",
+   "hint": {
+    "tag": "2 behind",
+    "text": "Taurus is 2 signs behind."
+   }
+  },
+  {
+   "guess": "Gemini",
+   "answer": "Cancer",
+   "hint": {
+    "tag": "1 behind",
+    "text": "Gemini is 1 sign behind."
+   }
+  },
+  {
+   "guess": "Leo",
+   "answer": "Cancer",
+   "hint": {
+    "tag": "1 ahead",
+    "text": "Leo is 1 sign ahead."
+   }
+  },
+  {
+   "guess": "Virgo",
+   "answer": "Cancer",
+   "hint": {
+    "tag": "2 ahead",
+    "text": "Virgo is 2 signs ahead."
+   }
+  },
+  {
+   "guess": "Libra",
+   "answer": "Cancer",
+   "hint": {
+    "tag": "3 ahead",
+    "text": "Libra is 3 signs ahead."
+   }
+  },
+  {
+   "guess": "Scorpio",
+   "answer": "Cancer",
+   "hint": {
+    "tag": "4 ahead",
+    "text": "Scorpio is 4 signs ahead."
+   }
+  },
+  {
+   "guess": "Sagittarius",
+   "answer": "Cancer",
+   "hint": {
+    "tag": "5 ahead",
+    "text": "Sagittarius is 5 signs ahead."
+   }
+  },
+  {
+   "guess": "Capricorn",
+   "answer": "Cancer",
+   "hint": {
+    "tag": "6 away",
+    "text": "Capricorn is 6 signs away — straight across the wheel."
+   }
+  },
+  {
+   "guess": "Aquarius",
+   "answer": "Cancer",
+   "hint": {
+    "tag": "5 behind",
+    "text": "Aquarius is 5 signs behind."
+   }
+  },
+  {
+   "guess": "Pisces",
+   "answer": "Cancer",
+   "hint": {
+    "tag": "4 behind",
+    "text": "Pisces is 4 signs behind."
+   }
+  },
+  {
+   "guess": "Aries",
+   "answer": "Leo",
+   "hint": {
+    "tag": "4 behind",
+    "text": "Aries is 4 signs behind."
+   }
+  },
+  {
+   "guess": "Taurus",
+   "answer": "Leo",
+   "hint": {
+    "tag": "3 behind",
+    "text": "Taurus is 3 signs behind."
+   }
+  },
+  {
+   "guess": "Gemini",
+   "answer": "Leo",
+   "hint": {
+    "tag": "2 behind",
+    "text": "Gemini is 2 signs behind."
+   }
+  },
+  {
+   "guess": "Cancer",
+   "answer": "Leo",
+   "hint": {
+    "tag": "1 behind",
+    "text": "Cancer is 1 sign behind."
+   }
+  },
+  {
+   "guess": "Virgo",
+   "answer": "Leo",
+   "hint": {
+    "tag": "1 ahead",
+    "text": "Virgo is 1 sign ahead."
+   }
+  },
+  {
+   "guess": "Libra",
+   "answer": "Leo",
+   "hint": {
+    "tag": "2 ahead",
+    "text": "Libra is 2 signs ahead."
+   }
+  },
+  {
+   "guess": "Scorpio",
+   "answer": "Leo",
+   "hint": {
+    "tag": "3 ahead",
+    "text": "Scorpio is 3 signs ahead."
+   }
+  },
+  {
+   "guess": "Sagittarius",
+   "answer": "Leo",
+   "hint": {
+    "tag": "4 ahead",
+    "text": "Sagittarius is 4 signs ahead."
+   }
+  },
+  {
+   "guess": "Capricorn",
+   "answer": "Leo",
+   "hint": {
+    "tag": "5 ahead",
+    "text": "Capricorn is 5 signs ahead."
+   }
+  },
+  {
+   "guess": "Aquarius",
+   "answer": "Leo",
+   "hint": {
+    "tag": "6 away",
+    "text": "Aquarius is 6 signs away — straight across the wheel."
+   }
+  },
+  {
+   "guess": "Pisces",
+   "answer": "Leo",
+   "hint": {
+    "tag": "5 behind",
+    "text": "Pisces is 5 signs behind."
+   }
+  },
+  {
+   "guess": "Aries",
+   "answer": "Virgo",
+   "hint": {
+    "tag": "5 behind",
+    "text": "Aries is 5 signs behind."
+   }
+  },
+  {
+   "guess": "Taurus",
+   "answer": "Virgo",
+   "hint": {
+    "tag": "4 behind",
+    "text": "Taurus is 4 signs behind."
+   }
+  },
+  {
+   "guess": "Gemini",
+   "answer": "Virgo",
+   "hint": {
+    "tag": "3 behind",
+    "text": "Gemini is 3 signs behind."
+   }
+  },
+  {
+   "guess": "Cancer",
+   "answer": "Virgo",
+   "hint": {
+    "tag": "2 behind",
+    "text": "Cancer is 2 signs behind."
+   }
+  },
+  {
+   "guess": "Leo",
+   "answer": "Virgo",
+   "hint": {
+    "tag": "1 behind",
+    "text": "Leo is 1 sign behind."
+   }
+  },
+  {
+   "guess": "Libra",
+   "answer": "Virgo",
+   "hint": {
+    "tag": "1 ahead",
+    "text": "Libra is 1 sign ahead."
+   }
+  },
+  {
+   "guess": "Scorpio",
+   "answer": "Virgo",
+   "hint": {
+    "tag": "2 ahead",
+    "text": "Scorpio is 2 signs ahead."
+   }
+  },
+  {
+   "guess": "Sagittarius",
+   "answer": "Virgo",
+   "hint": {
+    "tag": "3 ahead",
+    "text": "Sagittarius is 3 signs ahead."
+   }
+  },
+  {
+   "guess": "Capricorn",
+   "answer": "Virgo",
+   "hint": {
+    "tag": "4 ahead",
+    "text": "Capricorn is 4 signs ahead."
+   }
+  },
+  {
+   "guess": "Aquarius",
+   "answer": "Virgo",
+   "hint": {
+    "tag": "5 ahead",
+    "text": "Aquarius is 5 signs ahead."
+   }
+  },
+  {
+   "guess": "Pisces",
+   "answer": "Virgo",
+   "hint": {
+    "tag": "6 away",
+    "text": "Pisces is 6 signs away — straight across the wheel."
+   }
+  },
+  {
+   "guess": "Aries",
+   "answer": "Libra",
+   "hint": {
+    "tag": "6 away",
+    "text": "Aries is 6 signs away — straight across the wheel."
+   }
+  },
+  {
+   "guess": "Taurus",
+   "answer": "Libra",
+   "hint": {
+    "tag": "5 behind",
+    "text": "Taurus is 5 signs behind."
+   }
+  },
+  {
+   "guess": "Gemini",
+   "answer": "Libra",
+   "hint": {
+    "tag": "4 behind",
+    "text": "Gemini is 4 signs behind."
+   }
+  },
+  {
+   "guess": "Cancer",
+   "answer": "Libra",
+   "hint": {
+    "tag": "3 behind",
+    "text": "Cancer is 3 signs behind."
+   }
+  },
+  {
+   "guess": "Leo",
+   "answer": "Libra",
+   "hint": {
+    "tag": "2 behind",
+    "text": "Leo is 2 signs behind."
+   }
+  },
+  {
+   "guess": "Virgo",
+   "answer": "Libra",
+   "hint": {
+    "tag": "1 behind",
+    "text": "Virgo is 1 sign behind."
+   }
+  },
+  {
+   "guess": "Scorpio",
+   "answer": "Libra",
+   "hint": {
+    "tag": "1 ahead",
+    "text": "Scorpio is 1 sign ahead."
+   }
+  },
+  {
+   "guess": "Sagittarius",
+   "answer": "Libra",
+   "hint": {
+    "tag": "2 ahead",
+    "text": "Sagittarius is 2 signs ahead."
+   }
+  },
+  {
+   "guess": "Capricorn",
+   "answer": "Libra",
+   "hint": {
+    "tag": "3 ahead",
+    "text": "Capricorn is 3 signs ahead."
+   }
+  },
+  {
+   "guess": "Aquarius",
+   "answer": "Libra",
+   "hint": {
+    "tag": "4 ahead",
+    "text": "Aquarius is 4 signs ahead."
+   }
+  },
+  {
+   "guess": "Pisces",
+   "answer": "Libra",
+   "hint": {
+    "tag": "5 ahead",
+    "text": "Pisces is 5 signs ahead."
+   }
+  },
+  {
+   "guess": "Aries",
+   "answer": "Scorpio",
+   "hint": {
+    "tag": "5 ahead",
+    "text": "Aries is 5 signs ahead."
+   }
+  },
+  {
+   "guess": "Taurus",
+   "answer": "Scorpio",
+   "hint": {
+    "tag": "6 away",
+    "text": "Taurus is 6 signs away — straight across the wheel."
+   }
+  },
+  {
+   "guess": "Gemini",
+   "answer": "Scorpio",
+   "hint": {
+    "tag": "5 behind",
+    "text": "Gemini is 5 signs behind."
+   }
+  },
+  {
+   "guess": "Cancer",
+   "answer": "Scorpio",
+   "hint": {
+    "tag": "4 behind",
+    "text": "Cancer is 4 signs behind."
+   }
+  },
+  {
+   "guess": "Leo",
+   "answer": "Scorpio",
+   "hint": {
+    "tag": "3 behind",
+    "text": "Leo is 3 signs behind."
+   }
+  },
+  {
+   "guess": "Virgo",
+   "answer": "Scorpio",
+   "hint": {
+    "tag": "2 behind",
+    "text": "Virgo is 2 signs behind."
+   }
+  },
+  {
+   "guess": "Libra",
+   "answer": "Scorpio",
+   "hint": {
+    "tag": "1 behind",
+    "text": "Libra is 1 sign behind."
+   }
+  },
+  {
+   "guess": "Sagittarius",
+   "answer": "Scorpio",
+   "hint": {
+    "tag": "1 ahead",
+    "text": "Sagittarius is 1 sign ahead."
+   }
+  },
+  {
+   "guess": "Capricorn",
+   "answer": "Scorpio",
+   "hint": {
+    "tag": "2 ahead",
+    "text": "Capricorn is 2 signs ahead."
+   }
+  },
+  {
+   "guess": "Aquarius",
+   "answer": "Scorpio",
+   "hint": {
+    "tag": "3 ahead",
+    "text": "Aquarius is 3 signs ahead."
+   }
+  },
+  {
+   "guess": "Pisces",
+   "answer": "Scorpio",
+   "hint": {
+    "tag": "4 ahead",
+    "text": "Pisces is 4 signs ahead."
+   }
+  },
+  {
+   "guess": "Aries",
+   "answer": "Sagittarius",
+   "hint": {
+    "tag": "4 ahead",
+    "text": "Aries is 4 signs ahead."
+   }
+  },
+  {
+   "guess": "Taurus",
+   "answer": "Sagittarius",
+   "hint": {
+    "tag": "5 ahead",
+    "text": "Taurus is 5 signs ahead."
+   }
+  },
+  {
+   "guess": "Gemini",
+   "answer": "Sagittarius",
+   "hint": {
+    "tag": "6 away",
+    "text": "Gemini is 6 signs away — straight across the wheel."
+   }
+  },
+  {
+   "guess": "Cancer",
+   "answer": "Sagittarius",
+   "hint": {
+    "tag": "5 behind",
+    "text": "Cancer is 5 signs behind."
+   }
+  },
+  {
+   "guess": "Leo",
+   "answer": "Sagittarius",
+   "hint": {
+    "tag": "4 behind",
+    "text": "Leo is 4 signs behind."
+   }
+  },
+  {
+   "guess": "Virgo",
+   "answer": "Sagittarius",
+   "hint": {
+    "tag": "3 behind",
+    "text": "Virgo is 3 signs behind."
+   }
+  },
+  {
+   "guess": "Libra",
+   "answer": "Sagittarius",
+   "hint": {
+    "tag": "2 behind",
+    "text": "Libra is 2 signs behind."
+   }
+  },
+  {
+   "guess": "Scorpio",
+   "answer": "Sagittarius",
+   "hint": {
+    "tag": "1 behind",
+    "text": "Scorpio is 1 sign behind."
+   }
+  },
+  {
+   "guess": "Capricorn",
+   "answer": "Sagittarius",
+   "hint": {
+    "tag": "1 ahead",
+    "text": "Capricorn is 1 sign ahead."
+   }
+  },
+  {
+   "guess": "Aquarius",
+   "answer": "Sagittarius",
+   "hint": {
+    "tag": "2 ahead",
+    "text": "Aquarius is 2 signs ahead."
+   }
+  },
+  {
+   "guess": "Pisces",
+   "answer": "Sagittarius",
+   "hint": {
+    "tag": "3 ahead",
+    "text": "Pisces is 3 signs ahead."
+   }
+  },
+  {
+   "guess": "Aries",
+   "answer": "Capricorn",
+   "hint": {
+    "tag": "3 ahead",
+    "text": "Aries is 3 signs ahead."
+   }
+  },
+  {
+   "guess": "Taurus",
+   "answer": "Capricorn",
+   "hint": {
+    "tag": "4 ahead",
+    "text": "Taurus is 4 signs ahead."
+   }
+  },
+  {
+   "guess": "Gemini",
+   "answer": "Capricorn",
+   "hint": {
+    "tag": "5 ahead",
+    "text": "Gemini is 5 signs ahead."
+   }
+  },
+  {
+   "guess": "Cancer",
+   "answer": "Capricorn",
+   "hint": {
+    "tag": "6 away",
+    "text": "Cancer is 6 signs away — straight across the wheel."
+   }
+  },
+  {
+   "guess": "Leo",
+   "answer": "Capricorn",
+   "hint": {
+    "tag": "5 behind",
+    "text": "Leo is 5 signs behind."
+   }
+  },
+  {
+   "guess": "Virgo",
+   "answer": "Capricorn",
+   "hint": {
+    "tag": "4 behind",
+    "text": "Virgo is 4 signs behind."
+   }
+  },
+  {
+   "guess": "Libra",
+   "answer": "Capricorn",
+   "hint": {
+    "tag": "3 behind",
+    "text": "Libra is 3 signs behind."
+   }
+  },
+  {
+   "guess": "Scorpio",
+   "answer": "Capricorn",
+   "hint": {
+    "tag": "2 behind",
+    "text": "Scorpio is 2 signs behind."
+   }
+  },
+  {
+   "guess": "Sagittarius",
+   "answer": "Capricorn",
+   "hint": {
+    "tag": "1 behind",
+    "text": "Sagittarius is 1 sign behind."
+   }
+  },
+  {
+   "guess": "Aquarius",
+   "answer": "Capricorn",
+   "hint": {
+    "tag": "1 ahead",
+    "text": "Aquarius is 1 sign ahead."
+   }
+  },
+  {
+   "guess": "Pisces",
+   "answer": "Capricorn",
+   "hint": {
+    "tag": "2 ahead",
+    "text": "Pisces is 2 signs ahead."
+   }
+  },
+  {
+   "guess": "Aries",
+   "answer": "Aquarius",
+   "hint": {
+    "tag": "2 ahead",
+    "text": "Aries is 2 signs ahead."
+   }
+  },
+  {
+   "guess": "Taurus",
+   "answer": "Aquarius",
+   "hint": {
+    "tag": "3 ahead",
+    "text": "Taurus is 3 signs ahead."
+   }
+  },
+  {
+   "guess": "Gemini",
+   "answer": "Aquarius",
+   "hint": {
+    "tag": "4 ahead",
+    "text": "Gemini is 4 signs ahead."
+   }
+  },
+  {
+   "guess": "Cancer",
+   "answer": "Aquarius",
+   "hint": {
+    "tag": "5 ahead",
+    "text": "Cancer is 5 signs ahead."
+   }
+  },
+  {
+   "guess": "Leo",
+   "answer": "Aquarius",
+   "hint": {
+    "tag": "6 away",
+    "text": "Leo is 6 signs away — straight across the wheel."
+   }
+  },
+  {
+   "guess": "Virgo",
+   "answer": "Aquarius",
+   "hint": {
+    "tag": "5 behind",
+    "text": "Virgo is 5 signs behind."
+   }
+  },
+  {
+   "guess": "Libra",
+   "answer": "Aquarius",
+   "hint": {
+    "tag": "4 behind",
+    "text": "Libra is 4 signs behind."
+   }
+  },
+  {
+   "guess": "Scorpio",
+   "answer": "Aquarius",
+   "hint": {
+    "tag": "3 behind",
+    "text": "Scorpio is 3 signs behind."
+   }
+  },
+  {
+   "guess": "Sagittarius",
+   "answer": "Aquarius",
+   "hint": {
+    "tag": "2 behind",
+    "text": "Sagittarius is 2 signs behind."
+   }
+  },
+  {
+   "guess": "Capricorn",
+   "answer": "Aquarius",
+   "hint": {
+    "tag": "1 behind",
+    "text": "Capricorn is 1 sign behind."
+   }
+  },
+  {
+   "guess": "Pisces",
+   "answer": "Aquarius",
+   "hint": {
+    "tag": "1 ahead",
+    "text": "Pisces is 1 sign ahead."
+   }
+  },
+  {
+   "guess": "Aries",
+   "answer": "Pisces",
+   "hint": {
+    "tag": "1 ahead",
+    "text": "Aries is 1 sign ahead."
+   }
+  },
+  {
+   "guess": "Taurus",
+   "answer": "Pisces",
+   "hint": {
+    "tag": "2 ahead",
+    "text": "Taurus is 2 signs ahead."
+   }
+  },
+  {
+   "guess": "Gemini",
+   "answer": "Pisces",
+   "hint": {
+    "tag": "3 ahead",
+    "text": "Gemini is 3 signs ahead."
+   }
+  },
+  {
+   "guess": "Cancer",
+   "answer": "Pisces",
+   "hint": {
+    "tag": "4 ahead",
+    "text": "Cancer is 4 signs ahead."
+   }
+  },
+  {
+   "guess": "Leo",
+   "answer": "Pisces",
+   "hint": {
+    "tag": "5 ahead",
+    "text": "Leo is 5 signs ahead."
+   }
+  },
+  {
+   "guess": "Virgo",
+   "answer": "Pisces",
+   "hint": {
+    "tag": "6 away",
+    "text": "Virgo is 6 signs away — straight across the wheel."
+   }
+  },
+  {
+   "guess": "Libra",
+   "answer": "Pisces",
+   "hint": {
+    "tag": "5 behind",
+    "text": "Libra is 5 signs behind."
+   }
+  },
+  {
+   "guess": "Scorpio",
+   "answer": "Pisces",
+   "hint": {
+    "tag": "4 behind",
+    "text": "Scorpio is 4 signs behind."
+   }
+  },
+  {
+   "guess": "Sagittarius",
+   "answer": "Pisces",
+   "hint": {
+    "tag": "3 behind",
+    "text": "Sagittarius is 3 signs behind."
+   }
+  },
+  {
+   "guess": "Capricorn",
+   "answer": "Pisces",
+   "hint": {
+    "tag": "2 behind",
+    "text": "Capricorn is 2 signs behind."
+   }
+  },
+  {
+   "guess": "Aquarius",
+   "answer": "Pisces",
+   "hint": {
+    "tag": "1 behind",
+    "text": "Aquarius is 1 sign behind."
+   }
+  }
+ ],
+ "misc": {
+  "shiftDate": [
+   [
+    "2026-12-31",
+    1,
+    "2027-01-01"
+   ],
+   [
+    "2027-01-01",
+    -1,
+    "2026-12-31"
+   ],
+   [
+    "2028-03-01",
+    -1,
+    "2028-02-29"
+   ],
+   [
+    "2027-03-01",
+    -1,
+    "2027-02-28"
+   ]
+  ],
+  "signs": [
+   {
+    "name": "Capricorn",
+    "range": "Dec 22 – Jan 19",
+    "gender": "Feminine",
+    "opposite": "Cancer"
+   },
+   {
+    "name": "Aquarius",
+    "range": "Jan 20 – Feb 18",
+    "gender": "Masculine",
+    "opposite": "Leo"
+   },
+   {
+    "name": "Pisces",
+    "range": "Feb 19 – Mar 20",
+    "gender": "Feminine",
+    "opposite": "Virgo"
+   },
+   {
+    "name": "Aries",
+    "range": "Mar 21 – Apr 19",
+    "gender": "Masculine",
+    "opposite": "Libra"
+   },
+   {
+    "name": "Taurus",
+    "range": "Apr 20 – May 20",
+    "gender": "Feminine",
+    "opposite": "Scorpio"
+   },
+   {
+    "name": "Gemini",
+    "range": "May 21 – Jun 20",
+    "gender": "Masculine",
+    "opposite": "Sagittarius"
+   },
+   {
+    "name": "Cancer",
+    "range": "Jun 21 – Jul 22",
+    "gender": "Feminine",
+    "opposite": "Capricorn"
+   },
+   {
+    "name": "Leo",
+    "range": "Jul 23 – Aug 22",
+    "gender": "Masculine",
+    "opposite": "Aquarius"
+   },
+   {
+    "name": "Virgo",
+    "range": "Aug 23 – Sep 22",
+    "gender": "Feminine",
+    "opposite": "Pisces"
+   },
+   {
+    "name": "Libra",
+    "range": "Sep 23 – Oct 22",
+    "gender": "Masculine",
+    "opposite": "Aries"
+   },
+   {
+    "name": "Scorpio",
+    "range": "Oct 23 – Nov 21",
+    "gender": "Feminine",
+    "opposite": "Taurus"
+   },
+   {
+    "name": "Sagittarius",
+    "range": "Nov 22 – Dec 21",
+    "gender": "Masculine",
+    "opposite": "Gemini"
+   }
+  ]
+ }
+}

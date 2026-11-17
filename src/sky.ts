@@ -1,13 +1,20 @@
 // Background starfield drawn on a canvas.
 // - Stars twinkle faintly on their own.
 // - Outside the play area, stars near the pointer brighten, and fade back slowly.
-// - Sky.constellation(name) pulls the nearest stars into that sign's figure for a
+// - constellation(name) pulls the nearest stars into that sign's figure for a
 //   moment, then lets them drift home.
+
+type Point = [number, number];
+
+interface Shape {
+  points: Point[];
+  lines: [number, number][];
+}
 
 // Approximate stick figures. Points are [x, y] in a unit box (y grows downward);
 // lines are pairs of point indexes. Shapes follow the usual IAU-style figures
 // closely enough to be recognisable; they aren't star-chart accurate.
-const CONSTELLATIONS = {
+const CONSTELLATIONS: Record<string, Shape> = {
   Aries: {
     points: [[0, 0.35], [0.55, 0.45], [0.85, 0.65], [0.92, 0.82]],
     lines: [[0, 1], [1, 2], [2, 3]],
@@ -72,22 +79,53 @@ const CONSTELLATIONS = {
   },
 };
 
-const Sky = (() => {
+interface Star {
+  homeX: number; homeY: number;
+  x: number; y: number;
+  tx: number; ty: number;
+  size: number;
+  base: number;
+  phase: number;
+  speed: number;
+  tint: string;
+  glow: number;
+  lit: number; // extra brightness while part of a constellation
+}
+
+interface Figure {
+  stars: Star[];
+  lines: [number, number][];
+  label: string | null;
+  labelX: number;
+  labelY: number;
+  bold: boolean;
+  until: number;
+  released?: boolean;
+}
+
+let sky: { constellation: (name: string) => void } | null = null;
+
+/** Pulls stars into the named sign's figure. Does nothing before initSky() or under reduced motion. */
+export function constellation(name: string): void {
+  sky?.constellation(name);
+}
+
+export function initSky(): void {
   const canvas = document.createElement("canvas");
   canvas.id = "sky";
   canvas.setAttribute("aria-hidden", "true");
   document.body.prepend(canvas);
-  const ctx = canvas.getContext("2d");
+  const ctx = canvas.getContext("2d")!;
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
 
   const HOVER_RADIUS = 170;
   const FORM_MS = 1000;   // how long the constellation holds before scattering
   const TINTS = ["255,255,255", "207,212,255", "255,233,176"];
 
-  let stars = [];
+  let stars: Star[] = [];
   let width = 0, height = 0;
-  let pointer = null;      // {x, y} while the pointer is outside the play area
-  let figure = null;       // {stars, lines, label, x, y, until}
+  let pointer: { x: number; y: number } | null = null; // while the pointer is outside the play area
+  let figure: Figure | null = null;
   let figureFade = 0;      // 0..1, drives line and label opacity
   let last = performance.now();
 
@@ -111,22 +149,22 @@ const Sky = (() => {
         speed: 0.4 + Math.random() * 1.2,
         tint: TINTS[Math.random() < 0.7 ? 0 : 1 + (Math.random() < 0.5 ? 1 : 0)],
         glow: 0,
-        lit: 0,   // extra brightness while part of a constellation
+        lit: 0,
       };
     });
     figure = null;
     figureFade = 0;
-    if (reducedMotion.matches) draw(performance.now(), 0);
+    if (reducedMotion.matches) draw(performance.now());
   }
 
   // The play area is <main>'s content; the pointer only counts when it's outside it.
   function playArea() {
-    const main = document.querySelector("main");
+    const main = document.querySelector("main")!;
     const r = main.getBoundingClientRect();
     return { left: r.left + 8, right: r.right - 8, top: r.top, bottom: r.bottom };
   }
 
-  function onPointerMove(e) {
+  function onPointerMove(e: PointerEvent) {
     if (e.pointerType === "touch") return;
     const a = playArea();
     const inside = e.clientX > a.left && e.clientX < a.right && e.clientY > a.top && e.clientY < a.bottom;
@@ -134,7 +172,7 @@ const Sky = (() => {
   }
 
   // Where a figure fits: an empty side gutter on wide screens, otherwise centred.
-  function figureBox() {
+  function figureBox(): { cx: number; cy: number; size: number; behindCard?: boolean } {
     const a = playArea();
     const leftGap = a.left, rightGap = width - a.right;
     const gap = Math.max(leftGap, rightGap);
@@ -144,12 +182,12 @@ const Sky = (() => {
       return { cx, cy: height * 0.45, size };
     }
     // No room beside the game: draw it behind the (translucent) card instead.
-    const card = document.getElementById("card").getBoundingClientRect();
+    const card = document.getElementById("card")!.getBoundingClientRect();
     const size = Math.min(card.width * 0.8, card.height * 0.92);
     return { cx: card.left + card.width / 2, cy: card.top + card.height / 2, size, behindCard: true };
   }
 
-  function constellation(name) {
+  function constellation(name: string) {
     const shape = CONSTELLATIONS[name];
     if (!shape || reducedMotion.matches || !stars.length) return;
     release();
@@ -163,20 +201,21 @@ const Sky = (() => {
     const midY = (Math.max(...ys) + Math.min(...ys)) / 2;
 
     // Each point claims the nearest free star, so the gathering looks local.
-    const taken = new Set();
+    const taken = new Set<Star>();
     const chosen = shape.points.map(([px, py]) => {
       const tx = cx + (px - midX) * scale;
       const ty = cy + (py - midY) * scale;
-      let best = null, bestD = Infinity;
+      let best: Star | null = null, bestD = Infinity;
       for (const s of stars) {
         if (taken.has(s)) continue;
         const d = (s.homeX - tx) ** 2 + (s.homeY - ty) ** 2;
         if (d < bestD) { bestD = d; best = s; }
       }
-      taken.add(best);
-      best.tx = tx;
-      best.ty = ty;
-      return best;
+      const star = best!;
+      taken.add(star);
+      star.tx = tx;
+      star.ty = ty;
+      return star;
     });
 
     figure = {
@@ -198,7 +237,7 @@ const Sky = (() => {
     figure.released = true;
   }
 
-  function step(now) {
+  function step(now: number) {
     const dt = Math.min(64, now - last) / 1000;
     last = now;
     if (figure && !figure.released && now > figure.until) release();
@@ -222,10 +261,10 @@ const Sky = (() => {
       // Brighten quickly, fade slowly, so the light trails behind the pointer.
       s.glow += (target - s.glow) * (1 - Math.exp(-dt * (target > s.glow ? 10 : 1.6)));
     }
-    draw(now, dt);
+    draw(now);
   }
 
-  function draw(now) {
+  function draw(now: number) {
     ctx.clearRect(0, 0, width, height);
     const t = now / 1000;
     const still = reducedMotion.matches;
@@ -268,7 +307,7 @@ const Sky = (() => {
 
   // Animate continuously unless reduced motion is on; then draw once per change.
   let running = false;
-  function loop(now) {
+  function loop(now: number) {
     step(now);
     if (!reducedMotion.matches) requestAnimationFrame(loop);
     else running = false;
@@ -280,7 +319,7 @@ const Sky = (() => {
     requestAnimationFrame(loop);
   }
 
-  let resizeTimer = null;
+  let resizeTimer: ReturnType<typeof setTimeout> | undefined;
   window.addEventListener("resize", () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(resize, 150);
@@ -291,5 +330,5 @@ const Sky = (() => {
 
   resize();
   kick();
-  return { constellation };
-})();
+  sky = { constellation };
+}

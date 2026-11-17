@@ -241,7 +241,7 @@ h1 {
   cursor: pointer;
 }
 
-/* Starfield canvas, drawn by sky.js. */
+/* Starfield canvas, drawn by sky.ts. */
 #sky {
   position: fixed;
   inset: 0;
@@ -274,7 +274,7 @@ main { position: relative; }
   #elements, #choices[data-count="4"] { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* Install / add-to-home-screen hint, shown by install.js. */
+/* Install / add-to-home-screen hint, shown by install.ts. */
 #install {
   display: flex;
   align-items: center;
@@ -314,7 +314,7 @@ main { position: relative; }
 }
 #install-close:hover { color: var(--text); }
 
-/* About card under the title: static HTML, hidden for good once dismissed (about.js). */
+/* About card under the title: static HTML, hidden for good once dismissed (about.ts). */
 #about {
   position: relative;
   margin: -4px 0 14px;
