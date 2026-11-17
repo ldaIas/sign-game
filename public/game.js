@@ -8,7 +8,7 @@ const $ = id => document.getElementById(id);
 const $$ = sel => document.querySelectorAll(sel);
 
 const state = {
-  mode: "classic", // "classic" | "timed" | "daily"
+  mode: "daily", // "classic" | "timed" | "daily"
   sign: null,
   guessesLeft: SIGN_GUESSES,
   phase: "sign", // "idle" | "sign" | "element" | "done"
@@ -108,6 +108,7 @@ function onSignGuess(btn) {
     btn.classList.add("right");
     state.score += 1;
     state.streak += 1;
+    Sky.constellation(state.sign.name);
     revealSign();
     startElementBonus();
     return;
@@ -176,6 +177,7 @@ function onTimedGuess(btn) {
   if (right) {
     state.score += 1;
     btn.classList.add("right");
+    Sky.constellation(state.sign.name);
     setPrompt(`${state.sign.name}! +1`, "good");
   } else {
     btn.classList.add("wrong");
@@ -278,4 +280,4 @@ for (const btn of $$("#modes button")) {
 
 buildSignButtons();
 buildElementButtons();
-setMode("classic");
+setMode("daily");

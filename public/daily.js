@@ -168,6 +168,7 @@ function onDailyGuess(value) {
   if (daily.status !== "playing") return;
   const q = daily.question;
   const hint = applyGuess(value);
+  if (QUESTIONS[q].label === "Sign" && value === daily.sign.name) Sky.constellation(daily.sign.name);
   saveJSON(DAILY_KEY, { date: daily.date, guesses: daily.guesses });
 
   if (daily.status !== "playing") {
