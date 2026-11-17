@@ -35,7 +35,7 @@ const QUESTIONS = [
     answer: s => s.gender,
     options: () => Object.entries(GENDERS).map(([name, g]) => ({
       value: name,
-      html: `<span class="glyph">${g.glyph}${TEXT_STYLE}</span>${name}`,
+      html: `<span class="glyph" aria-hidden="true">${g.glyph}${TEXT_STYLE}</span>${name}`,
     })),
     show: name => name,
     hint: () => null,
@@ -46,7 +46,7 @@ const QUESTIONS = [
     answer: s => s.element,
     options: () => Object.entries(ELEMENTS).map(([name, el]) => ({
       value: name,
-      html: `<span class="glyph" style="color:${el.color}">${el.glyph}</span>${name}`,
+      html: `<span class="glyph" aria-hidden="true" style="color:${el.color}">${el.glyph}</span>${name}`,
     })),
     show: name => name,
     hint: guess => ({
@@ -60,7 +60,7 @@ const QUESTIONS = [
     // Shuffled too, or you could just count six buttons along from the sign.
     options: (s, rand) => shuffle(WHEEL_ORDER, rand).map(name => ({
       value: name,
-      html: `<span class="glyph">${signByName(name).glyph}${TEXT_STYLE}</span>${name}`,
+      html: `<span class="glyph" aria-hidden="true">${signByName(name).glyph}${TEXT_STYLE}</span>${name}`,
     })),
     show: name => name,
     hint: (guess, s) => distanceHint(guess, s.opposite),
@@ -170,22 +170,37 @@ function onDailyGuess(value) {
   const hint = applyGuess(value);
   if (QUESTIONS[q].label === "Sign" && value === daily.sign.name) Sky.constellation(daily.sign.name);
   saveJSON(DAILY_KEY, { date: daily.date, guesses: daily.guesses });
+  // The answer grid is rebuilt below, which drops keyboard focus; restore it after.
+  const hadFocus = $("choices").contains(document.activeElement);
 
   if (daily.status !== "playing") {
     recordStreak(daily.status === "won");
     renderDaily(value);
     showDailyEnd(true);
+    // Move focus to the full answer list so keyboard and screen reader users land on the result.
+    if (hadFocus) $("board").focus();
     return;
   }
 
   renderDaily(value);
+  const left = ` ${daily.missesLeft} miss${daily.missesLeft === 1 ? "" : "es"} left.`;
   if (daily.question !== q) {
     const r = daily.results[q];
     const answer = QUESTIONS[q].answer(daily.sign);
-    if (r.revealed) setPrompt(`Not quite — it's ${answer}. ${QUESTIONS[daily.question].ask}`, "bad");
-    else setPrompt(`Yes! ${QUESTIONS[daily.question].ask}`, "good");
+    const next = QUESTIONS[daily.question].ask;
+    if (r.revealed) setPrompt(`Not quite — it's ${answer}. ${next}`, "bad", `Wrong. It's ${answer}.${left} ${next}`);
+    else setPrompt(`Yes! ${next}`, "good", `Correct!${r.misses.length ? left : ""} ${next}`);
   } else if (hint) {
-    setPrompt(hint.text, "bad");
+    setPrompt(hint.text, "bad", `Wrong. ${hint.text}${left}`);
+  } else {
+    announce(`Wrong.${left}`);
+  }
+  if (hadFocus) {
+    const btns = [...$("choices").querySelectorAll("button")];
+    const same = btns.find(b => b.dataset.value === value);
+    // Stay on the same question's grid near where the player was; else start of the new grid.
+    const target = daily.question === q ? btns.find(b => !b.disabled && btns.indexOf(b) > btns.indexOf(same)) || btns.find(b => !b.disabled) : btns[0];
+    target?.focus();
   }
 }
 
@@ -206,12 +221,12 @@ function renderDaily(lastGuess) {
     if (!current) {
       if (r.revealed) mark = `<span class="mark bad">revealed</span>`;
       else if (r.misses.length) mark = `<span class="mark">${r.misses.length} miss${r.misses.length === 1 ? "" : "es"}</span>`;
-      else mark = `<span class="mark good">✓</span>`;
+      else mark = `<span class="mark good"><span aria-hidden="true">✓</span><span class="visually-hidden">correct</span></span>`;
     }
     li.className = current ? "current" : r.revealed ? "revealed" : "solved";
     if (i >= before) li.classList.add("fresh");
     li.innerHTML = `<span class="q">${q.label}</span>
-      <span class="a">${current ? "?" : q.show(q.answer(daily.sign))}</span>${mark}`;
+      <span class="a">${current ? `<span aria-hidden="true">?</span><span class="visually-hidden">not answered yet</span>` : q.show(q.answer(daily.sign))}</span>${mark}`;
     $("board").appendChild(li);
   }
 
@@ -222,8 +237,8 @@ function renderDaily(lastGuess) {
     const box = document.createElement("span");
     box.className = right ? "right" : "wrong";
     if (lastGuess !== undefined && i === daily.guesses.length - 1) box.classList.add("fresh");
-    box.textContent = right ? "✓" : "✗";
     box.title = `${QUESTIONS[q].label}: ${right ? "correct" : "miss"}`;
+    box.innerHTML = `<span aria-hidden="true">${right ? "✓" : "✗"}</span><span class="visually-hidden">${box.title}</span>`;
     $("tally").appendChild(box);
   });
 
@@ -237,6 +252,8 @@ function renderDaily(lastGuess) {
     grid.dataset.count = daily.options[q].length;
     for (const opt of daily.options[q]) {
       const btn = document.createElement("button");
+      btn.type = "button";
+      btn.dataset.value = opt.value;
       btn.innerHTML = opt.html;
       if (opt.label) btn.setAttribute("aria-label", opt.label);
       if (misses.includes(opt.value)) {
@@ -249,7 +266,10 @@ function renderDaily(lastGuess) {
       btn.addEventListener("click", () => onDailyGuess(opt.value));
       grid.appendChild(btn);
     }
-    if (lastGuess === undefined) setPrompt(QUESTIONS[q].ask);
+    if (lastGuess === undefined) {
+      const b = daily.birthday;
+      setPrompt(QUESTIONS[q].ask, "", `Daily #${daily.number}. Born on ${MONTHS[b.month - 1]} ${b.day}, ${b.year}. ${QUESTIONS[q].ask}`);
+    }
   }
 }
 
@@ -264,9 +284,11 @@ function showDailyEnd(justFinished) {
   const missed = DAILY_MISSES - daily.missesLeft;
   if (daily.status === "won") {
     const how = missed === 0 ? "a perfect run!" : `with ${missed} miss${missed === 1 ? "" : "es"}.`;
-    setPrompt(`${justFinished ? "Solved" : "You solved today's"} — ${how}`, "good");
+    const text = `${justFinished ? "Solved" : "You solved today's"} — ${how}`;
+    setPrompt(text, "good", `${text} It was ${s.name}. Day streak ${currentStreak()}.`);
   } else {
-    setPrompt("Out of guesses. Here's the full answer.", "bad");
+    const text = "Out of guesses. Here's the full answer.";
+    setPrompt(text, "bad", `${text} It was ${s.name}, ${s.element}.`);
   }
 
   const tick = () => { $("countdown").textContent = `Next date in ${timeUntilMidnight()}`; };

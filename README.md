@@ -14,7 +14,17 @@ Zodle can be installed as an app (PWA). `public/manifest.webmanifest` describes 
 
 `public/index.html` carries the crawlable text as plain HTML: an About card under the title (hidden for good once dismissed; `public/about.js`) and one description per mode, shown by the mode switch. The `<head>` has a canonical URL, Open Graph and Twitter card tags, and JSON-LD (`VideoGame`). `public/robots.txt` and `public/sitemap.xml` point crawlers at `https://signs.idalas.com/`; bump the sitemap's `lastmod` when the page changes meaningfully. `public/og-image.png` (1200×630) is the link-preview image. The service worker leaves those three files to the network.
 
-There's no build step. The site lives in `public/`: open `public/index.html` in a browser.
+### Footer, privacy and accessibility
+
+The footer is static HTML in `public/index.html`: an entertainment-only disclaimer, **Privacy** and **Accessibility** notices (`<details>` disclosures; `public/footer.js` makes them close on Escape or an outside click and opens one from a `#privacy` / `#accessibility` link), and a link to the GitHub issue forms. If the game starts storing anything new or adds a third-party request, update the Privacy text.
+
+The game is playable by keyboard alone. Focus moves to the next sensible button when a guessed button is disabled, right/wrong results and score changes are announced through a visually hidden `aria-live` region (`#announcer`, filled by `announce()` in `game.js`), and animations and the starfield stop moving under `prefers-reduced-motion`.
+
+### Issues and labels
+
+`.github/ISSUE_TEMPLATE/` has issue forms for bugs, accessibility problems, ideas and wrong zodiac data, and each one applies its labels. The labels themselves are defined in `.github/labels.yml`. `.github/workflows/labels.yml` creates or updates them when that file changes on `main` (or when run by hand) and never deletes other labels.
+
+There's no build step. The site lives in `public/`: open `public/index.html` in a browser. When you change files in `public/`, bump `CACHE` in `public/sw.js` so installed copies pick up the new files.
 
 Sign boundaries use the common tropical-zodiac dates; birthdays that fall on a cusp follow those fixed dates.
 

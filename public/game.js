@@ -17,6 +17,7 @@ const state = {
   timeLeft: TIMED_SECONDS,
   timer: null,
   best: loadBest(),
+  refocus: null, // timed mode: index of the sign button to refocus on the next birthday
 };
 
 function loadBest() {
@@ -33,7 +34,8 @@ function buildSignButtons() {
     const sign = signByName(name);
     const btn = document.createElement("button");
     btn.dataset.name = name;
-    btn.innerHTML = `<span class="glyph">${sign.glyph}${TEXT_STYLE}</span>${name}`;
+    btn.type = "button";
+    btn.innerHTML = `<span class="glyph" aria-hidden="true">${sign.glyph}${TEXT_STYLE}</span>${name}`;
     btn.addEventListener("click", () => onSignGuess(btn));
     $("signs").appendChild(btn);
   }
@@ -44,7 +46,8 @@ function buildElementButtons() {
   for (const [name, el] of Object.entries(ELEMENTS)) {
     const btn = document.createElement("button");
     btn.dataset.name = name;
-    btn.innerHTML = `<span class="glyph" style="color:${el.color}">${el.glyph}</span>${name}`;
+    btn.type = "button";
+    btn.innerHTML = `<span class="glyph" aria-hidden="true" style="color:${el.color}">${el.glyph}</span>${name}`;
     btn.addEventListener("click", () => onElementGuess(btn));
     $("elements").appendChild(btn);
   }
@@ -55,7 +58,10 @@ function setMode(mode) {
   state.mode = mode;
   state.score = 0;
   state.streak = 0;
-  for (const btn of $$("#modes button")) btn.classList.toggle("active", btn.dataset.mode === mode);
+  for (const btn of $$("#modes button")) {
+    btn.classList.toggle("active", btn.dataset.mode === mode);
+    btn.setAttribute("aria-pressed", String(btn.dataset.mode === mode));
+  }
   for (const el of $$("[data-only]")) el.hidden = !el.dataset.only.split(" ").includes(mode);
   stopDaily();
 
@@ -74,6 +80,8 @@ function newRound() {
   state.sign = signFor(b.month, b.day);
   state.guessesLeft = state.mode === "timed" ? 1 : SIGN_GUESSES;
   state.phase = "sign";
+  // "Next" and "Start" hide themselves here; keep keyboard focus in the game.
+  const buttonGone = [$("next"), $("start")].includes(document.activeElement);
 
   $("birthday").textContent = `${MONTHS[b.month - 1]} ${b.day}, ${b.year}`;
   $("reveal").hidden = true;
@@ -85,7 +93,15 @@ function newRound() {
     btn.disabled = false;
     btn.classList.remove("wrong", "right");
   }
-  setPrompt(guessesText());
+  setPrompt(guessesText(), "", `Born on ${$("birthday").textContent}. ${guessesText()}`);
+  // Timed mode disables the grid between birthdays, which drops keyboard focus;
+  // put it back on the same button so keyboard players can keep going.
+  if (state.refocus != null) {
+    $$("#signs button")[state.refocus]?.focus();
+    state.refocus = null;
+  } else if (buttonGone) {
+    focusFirstEnabled($("signs"));
+  }
 }
 
 function guessesText() {
@@ -94,9 +110,29 @@ function guessesText() {
   return `Which sign? ${n} guess${n === 1 ? "" : "es"} left`;
 }
 
-function setPrompt(text, tone = "") {
+// `spoken` is what screen readers hear (defaults to the visible text). Classic
+// and Timed append the score so score changes are announced too.
+function setPrompt(text, tone = "", spoken = text) {
   $("prompt").textContent = text;
   $("prompt").className = tone;
+  announce(spoken);
+}
+
+let announceToggle = false;
+function announce(text) {
+  // Alternate a trailing no-break space so a repeated message is still announced.
+  announceToggle = !announceToggle;
+  $("announcer").textContent = text + (announceToggle ? "\u00a0" : "");
+}
+
+function scoreText() {
+  return ` Score ${state.score}.`;
+}
+
+// After a button is disabled, move focus to a sensible neighbour instead of losing it.
+function focusFirstEnabled(container) {
+  const btn = container.querySelector("button:not(:disabled)");
+  if (btn) btn.focus();
 }
 
 function onSignGuess(btn) {
@@ -114,17 +150,19 @@ function onSignGuess(btn) {
     return;
   }
 
+  const hadFocus = btn === document.activeElement;
   btn.classList.add("wrong");
   state.guessesLeft -= 1;
   if (state.guessesLeft > 0) {
-    setPrompt(`Not ${btn.dataset.name}. ${guessesText()}`, "bad");
+    setPrompt(`Not ${btn.dataset.name}. ${guessesText()}`, "bad", `Wrong: not ${btn.dataset.name}. ${guessesText()}`);
+    if (hadFocus) focusFirstEnabled($("signs"));
     return;
   }
 
   state.streak = 0;
   markCorrectSign();
   revealSign();
-  finishRound(`Out of guesses — it was ${state.sign.name}.`, "bad");
+  finishRound(`Out of guesses — it was ${state.sign.name}.`, "bad", `Wrong. Out of guesses — it was ${state.sign.name}.`);
 }
 
 function markCorrectSign() {
@@ -139,8 +177,10 @@ function startElementBonus() {
   state.phase = "element";
   disableSigns();
   $("elements").hidden = false;
-  setPrompt(`${state.sign.name}! Bonus: which element? (1 guess)`, "good");
+  setPrompt(`${state.sign.name}! Bonus: which element? (1 guess)`, "good",
+    `Correct, ${state.sign.name}!${scoreText()} Bonus: which element? One guess.`);
   updateStats();
+  focusFirstEnabled($("elements"));
 }
 
 function onElementGuess(btn) {
@@ -152,18 +192,20 @@ function onElementGuess(btn) {
   $("elements").querySelector(`[data-name="${correct}"]`).classList.add("right");
   if (btn.dataset.name === correct) {
     state.score += 1;
-    finishRound(`Yes — ${state.sign.name} is ${article} ${correct} sign. +1 bonus`, "good");
+    finishRound(`Yes — ${state.sign.name} is ${article} ${correct} sign. +1 bonus`, "good",
+      `Correct — ${state.sign.name} is ${article} ${correct} sign. Plus 1 bonus.`);
   } else {
     btn.classList.add("wrong");
-    finishRound(`Close — ${state.sign.name} is ${article} ${correct} sign.`, "bad");
+    finishRound(`Close — ${state.sign.name} is ${article} ${correct} sign.`, "bad",
+      `Wrong — ${state.sign.name} is ${article} ${correct} sign.`);
   }
 }
 
-function finishRound(message, tone) {
+function finishRound(message, tone, spoken = message) {
   state.phase = "done";
   disableSigns();
   revealElement();
-  setPrompt(message, tone);
+  setPrompt(message, tone, spoken + scoreText());
   updateStats();
   $("next").hidden = false;
   $("next").focus();
@@ -172,23 +214,24 @@ function finishRound(message, tone) {
 // Timed mode: one guess per birthday, and the next one appears automatically.
 function onTimedGuess(btn) {
   state.phase = "done";
+  if (btn === document.activeElement) state.refocus = [...$$("#signs button")].indexOf(btn);
   disableSigns();
   const right = btn.dataset.name === state.sign.name;
   if (right) {
     state.score += 1;
     btn.classList.add("right");
     Sky.constellation(state.sign.name);
-    setPrompt(`${state.sign.name}! +1`, "good");
+    setPrompt(`${state.sign.name}! +1`, "good", `Correct, ${state.sign.name}!${scoreText()}`);
   } else {
     btn.classList.add("wrong");
     markCorrectSign();
-    setPrompt(`It was ${state.sign.name}.`, "bad");
+    setPrompt(`It was ${state.sign.name}.`, "bad", `Wrong, it was ${state.sign.name}.${scoreText()}`);
   }
   revealSign();
   revealElement();
   updateStats();
   // A miss lingers a little longer so the right answer can sink in.
-  setTimeout(() => { if (state.timer) newRound(); }, right ? 450 : 1000);
+  setTimeout(() => { if (state.timer) newRound(); else state.refocus = null; }, right ? 450 : 1000);
 }
 
 function showTimedIntro() {
@@ -217,6 +260,7 @@ function startTimed() {
 function tick() {
   state.timeLeft -= 1;
   renderTime();
+  if (state.timeLeft === 30 || state.timeLeft === 10) announce(`${state.timeLeft} seconds left.`);
   if (state.timeLeft <= 0) endTimed();
 }
 
@@ -236,7 +280,8 @@ function endTimed() {
   }
   $("birthday").textContent = `Time's up! ${state.score} point${state.score === 1 ? "" : "s"}`;
   $("reveal").hidden = true;
-  setPrompt(newBest ? "New best!" : `Best: ${state.best}`, newBest ? "good" : "");
+  setPrompt(newBest ? "New best!" : `Best: ${state.best}`, newBest ? "good" : "",
+    `Time's up! ${state.score} point${state.score === 1 ? "" : "s"}. ${newBest ? "New best!" : `Best: ${state.best}.`}`);
   $("start").textContent = "Play again";
   $("start").hidden = false;
   $("start").focus();

@@ -1,0 +1,43 @@
+name: Accessibility problem
+description: Something stops you playing with a keyboard, screen reader, zoom, or other assistive technology.
+title: "[Accessibility]: "
+labels: ["accessibility", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you. We want Zodle to be playable by everyone, and reports like this are the best way to find what we've missed.
+        Share only what you're comfortable with.
+  - type: input
+    id: assistive-tech
+    attributes:
+      label: Assistive technology used
+      description: For example "VoiceOver on iOS 18", "NVDA 2024.4 + Firefox", "keyboard only", "200% zoom", "Windows high contrast".
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device and browser
+      placeholder: e.g. Pixel 8, Chrome 131
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Mode
+      options:
+        - Daily
+        - Classic
+        - Timed
+        - Not mode-specific
+  - type: textarea
+    id: blocked
+    attributes:
+      label: What's blocked or hard to do?
+      description: What were you trying to do, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: What would help?
+      description: Optional. Any idea of what would work better for you.

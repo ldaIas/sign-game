@@ -1,9 +1,9 @@
 // Network-first service worker: always try for the latest deploy, and fall back
 // to the last cached copy when offline so the installed app still opens.
-const CACHE = "zodle-v2";
+const CACHE = "zodle-v3";
 const SHELL = [
   "./", "index.html", "style.css", "signs.js", "sky.js", "daily.js", "game.js",
-  "install.js", "about.js", "favicon.svg", "manifest.webmanifest", "icon-192.png",
+  "install.js", "about.js", "footer.js", "favicon.svg", "manifest.webmanifest", "icon-192.png",
 ];
 // Files for crawlers and link previews. The worker leaves these to the network, so
 // they're never answered from a stale cache or with the index.html offline fallback.

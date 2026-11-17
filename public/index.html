@@ -55,17 +55,17 @@
         <p><b>Zodle</b> is a free zodiac sign quiz: guess the star sign from a birthday, then test what else you know about it. A quick star sign game to play daily, at your own pace, or against the clock.</p>
         <button id="about-close" type="button" aria-label="Hide the About Zodle card">×</button>
       </aside>
-      <nav id="modes">
-        <button data-mode="daily" class="active">Daily</button>
-        <button data-mode="classic">Classic</button>
-        <button data-mode="timed">Timed · 60s</button>
+      <nav id="modes" aria-label="Game mode">
+        <button type="button" data-mode="daily" class="active" aria-pressed="true">Daily</button>
+        <button type="button" data-mode="classic" aria-pressed="false">Classic</button>
+        <button type="button" data-mode="timed" aria-pressed="false">Timed · 60s</button>
       </nav>
       <p class="mode-desc" data-only="daily">Today’s challenge: name the sun sign, symbol, gender, element and opposite sign of this birthday. You have 5 misses in total.</p>
       <p class="mode-desc" data-only="classic" hidden>3 guesses to name each birthday's sign. Get it right, then name its element in one try for a bonus point.</p>
       <p class="mode-desc" data-only="timed" hidden>Name as many signs as you can in 60 seconds. One guess per birthday, one point per right answer.</p>
     </header>
 
-    <section id="stats">
+    <section id="stats" aria-label="Stats">
       <div data-only="classic timed"><span class="label">Score</span><span id="score">0</span></div>
       <div data-only="classic"><span class="label">Streak</span><span id="streak">0</span></div>
       <div data-only="timed" hidden><span class="label">Time</span><span id="time">60</span></div>
@@ -73,43 +73,69 @@
       <div data-only="daily" hidden><span class="label">Misses left</span><span id="misses">5</span></div>
       <div data-only="daily" hidden><span class="label">Day streak</span><span id="day-streak">0</span></div>
     </section>
-    <div id="timebar" data-only="timed" hidden><div id="timebar-fill"></div></div>
+    <div id="timebar" data-only="timed" aria-hidden="true" hidden><div id="timebar-fill"></div></div>
 
-    <section id="card">
+    <section id="card" aria-label="Birthday">
       <p id="daily-tag" class="label" data-only="daily" hidden></p>
       <p class="label">Born on</p>
       <p id="birthday"></p>
       <div id="reveal" hidden>
-        <div id="reveal-glyph"></div>
+        <div id="reveal-glyph" aria-hidden="true"></div>
         <div id="reveal-name"></div>
         <div id="reveal-range"></div>
       </div>
     </section>
 
-    <ol id="board" data-only="daily" hidden></ol>
+    <ol id="board" data-only="daily" aria-label="Today’s answers" tabindex="-1" hidden></ol>
 
     <p id="prompt"></p>
+    <!-- Screen-reader announcements (right/wrong, score, time); filled by game.js. -->
+    <p id="announcer" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true"></p>
 
-    <section id="signs" class="grid"></section>
-    <section id="elements" class="grid" hidden></section>
-    <section id="choices" class="grid" data-only="daily" hidden></section>
+    <section id="signs" class="grid" aria-label="Signs"></section>
+    <section id="elements" class="grid" aria-label="Elements" hidden></section>
+    <section id="choices" class="grid" data-only="daily" aria-label="Answers" hidden></section>
     <p id="countdown" data-only="daily" hidden></p>
-    <div id="tally" data-only="daily" aria-label="Your guesses" hidden></div>
+    <div id="tally" data-only="daily" role="group" aria-label="Your guesses" hidden></div>
 
-    <button id="next" hidden>Next birthday →</button>
-    <button id="start" hidden>Start 60 seconds</button>
+    <button id="next" type="button" hidden>Next birthday →</button>
+    <button id="start" type="button" hidden>Start 60 seconds</button>
 
     <aside id="install" hidden>
       <span id="install-text"></span>
-      <button id="install-btn" hidden>Install</button>
-      <button id="install-close" aria-label="Dismiss">×</button>
+      <button id="install-btn" type="button" hidden>Install</button>
+      <button id="install-close" type="button" aria-label="Dismiss the install tip">×</button>
     </aside>
   </main>
+
+  <footer id="site-footer">
+    <p>For entertainment only. Provided as-is, without warranty.</p>
+    <div class="footer-links">
+      <details id="privacy" class="footer-pop">
+        <summary>Privacy</summary>
+        <div class="footer-panel">
+          <h2>Privacy</h2>
+          <p>Zodle doesn’t use cookies or analytics and doesn’t collect personal data. Your scores, daily progress and streaks, and whether you’ve hidden the About card or install tip, are saved only in your own browser’s local storage; clearing site data removes them. The site is hosted on Cloudflare, which processes standard request logs to serve and protect the site.</p>
+        </div>
+      </details>
+      <span aria-hidden="true">·</span>
+      <details id="accessibility" class="footer-pop">
+        <summary>Accessibility</summary>
+        <div class="footer-panel">
+          <h2>Accessibility</h2>
+          <p>We aim to make Zodle playable with a keyboard (Tab, Enter and Space) and with a screen reader, with readable colour contrast and less motion when your device asks for it. If something gets in your way, please let us know with the feedback link.</p>
+        </div>
+      </details>
+      <span aria-hidden="true">·</span>
+      <a href="https://github.com/ldaIas/sign-game/issues/new/choose" target="_blank" rel="noopener">Feedback / report an issue<span class="visually-hidden"> (opens in a new tab)</span></a>
+    </div>
+  </footer>
 
   <script src="signs.js"></script>
   <script src="sky.js"></script>
   <script src="daily.js"></script>
   <script src="game.js"></script>
   <script src="install.js"></script>
+  <script src="footer.js"></script>
 </body>
 </html>
