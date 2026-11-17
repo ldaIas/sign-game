@@ -6,7 +6,7 @@ A small browser quiz: you're shown a birthday and have to name its sun sign.
 - **Classic** — 3 guesses per birthday. Get it right and you earn a bonus question: name the sign's element (1 guess).
 - **Timed** — 60 seconds, 1 point per correct sign, one guess per birthday.
 
-Behind the game is a twinkling starfield (`public/sky.js`). Stars near the mouse brighten when it's outside the play area, and a correct sign in Classic or Timed briefly pulls nearby stars into that sign's constellation.
+Behind the game is a twinkling starfield (`public/sky.js`). Stars near the mouse brighten when it's outside the play area, and a correct sign in any mode briefly pulls nearby stars into that sign's constellation.
 
 There's no build step. The site lives in `public/`: open `public/index.html` in a browser.
 
