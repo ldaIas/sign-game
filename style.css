@@ -1,0 +1,122 @@
+:root {
+  --bg: #0b0d1a;
+  --panel: #151933;
+  --line: #2a3060;
+  --text: #e8e9f5;
+  --muted: #8b90b8;
+  --accent: #f3d27a;
+  --good: #7ee0a1;
+  --bad: #ff6b81;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  display: flex;
+  justify-content: center;
+}
+
+main {
+  width: 100%;
+  max-width: 560px;
+  padding: 24px 16px 48px;
+  text-align: center;
+}
+
+h1 {
+  margin: 0 0 16px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+
+.label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+#stats {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 16px;
+  font-size: 1.25rem;
+  font-variant-numeric: tabular-nums;
+}
+
+#card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px;
+  min-height: 120px;
+}
+
+#birthday {
+  margin: 4px 0 0;
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+#reveal { margin-top: 12px; }
+#reveal-glyph { font-size: 4rem; line-height: 1; color: var(--accent); }
+#reveal-name { font-size: 1.25rem; font-weight: 600; margin-top: 4px; }
+#reveal-range { color: var(--muted); font-size: 0.9rem; }
+
+#prompt {
+  min-height: 1.5em;
+  color: var(--muted);
+  margin: 16px 0;
+}
+#prompt.good { color: var(--good); }
+#prompt.bad { color: var(--bad); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+#elements { grid-template-columns: repeat(4, 1fr); }
+
+.grid button {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 4px;
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: border-color 0.15s, transform 0.1s;
+}
+.grid button .glyph { display: block; font-size: 1.4rem; margin-bottom: 2px; }
+.grid button:hover:not(:disabled) { border-color: var(--accent); }
+.grid button:active:not(:disabled) { transform: scale(0.96); }
+.grid button:disabled { cursor: default; opacity: 0.45; }
+.grid button.wrong { border-color: var(--bad); color: var(--bad); }
+.grid button.right { border-color: var(--good); color: var(--good); opacity: 1; }
+
+#next {
+  margin-top: 20px;
+  background: var(--accent);
+  color: var(--bg);
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 24px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media (max-width: 420px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+  #elements { grid-template-columns: repeat(2, 1fr); }
+}

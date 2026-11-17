@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Sign Game</h1>
+    </header>
+
+    <section id="stats">
+      <div><span class="label">Score</span><span id="score">0</span></div>
+      <div><span class="label">Streak</span><span id="streak">0</span></div>
+    </section>
+
+    <section id="card">
+      <p class="label">Born on</p>
+      <p id="birthday"></p>
+      <div id="reveal" hidden>
+        <div id="reveal-glyph"></div>
+        <div id="reveal-name"></div>
+        <div id="reveal-range"></div>
+      </div>
+    </section>
+
+    <p id="prompt"></p>
+
+    <section id="signs" class="grid"></section>
+    <section id="elements" class="grid" hidden></section>
+
+    <button id="next" hidden>Next birthday →</button>
+  </main>
+
+  <script src="signs.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
