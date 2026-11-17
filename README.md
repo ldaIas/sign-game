@@ -1,4 +1,4 @@
-# Sign Game
+# Zodle
 
 A small browser quiz: you're shown a birthday and have to name its sun sign.
 
