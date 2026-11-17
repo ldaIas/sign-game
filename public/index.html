@@ -7,6 +7,12 @@
   <meta name="description" content="Guess the zodiac sign from a birthday. A new puzzle every day, plus classic and timed modes.">
   <meta name="theme-color" content="#0b0d1a">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Zodle">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -53,11 +59,18 @@
 
     <button id="next" hidden>Next birthday →</button>
     <button id="start" hidden>Start 60 seconds</button>
+
+    <aside id="install" hidden>
+      <span id="install-text"></span>
+      <button id="install-btn" hidden>Install</button>
+      <button id="install-close" aria-label="Dismiss">×</button>
+    </aside>
   </main>
 
   <script src="signs.js"></script>
   <script src="sky.js"></script>
   <script src="daily.js"></script>
   <script src="game.js"></script>
+  <script src="install.js"></script>
 </body>
 </html>
