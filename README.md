@@ -4,6 +4,7 @@ A small browser quiz: you're shown a birthday and have to name its sun sign.
 
 - **Classic** — 3 guesses per birthday. Get it right and you earn a bonus question: name the sign's element (1 guess).
 - **Timed** — 60 seconds, 1 point per correct sign, one guess per birthday.
+- **Daily** — one birthday a day, the same for everyone (picked from the player's local date). Answer five questions in order: sign, symbol, gender, element, opposite sign. Each question appears only once the previous one is answered. You get 5 misses across the whole puzzle; run out and every answer is revealed. Wrong sign guesses get an "N signs ahead/behind" hint. Progress and the day streak (consecutive days solved) are kept in `localStorage`.
 
 There's no build step. The site lives in `public/`: open `public/index.html` in a browser.
 

@@ -29,6 +29,17 @@ const ELEMENTS = {
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July",
   "August", "September", "October", "November", "December"];
 
+// Fire and Air signs are traditionally masculine; Earth and Water feminine.
+const GENDERS = {
+  Masculine: { glyph: "♂", elements: ["Fire", "Air"] },
+  Feminine:  { glyph: "♀", elements: ["Earth", "Water"] },
+};
+
+for (const sign of SIGNS) {
+  sign.gender = Object.keys(GENDERS).find(g => GENDERS[g].elements.includes(sign.element));
+  sign.opposite = WHEEL_ORDER[(WHEEL_ORDER.indexOf(sign.name) + 6) % 12];
+}
+
 function signFor(month, day) {
   const key = month * 100 + day;
   return SIGNS.find(s => {

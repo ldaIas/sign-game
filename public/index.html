@@ -16,18 +16,22 @@
       <nav id="modes">
         <button data-mode="classic" class="active">Classic</button>
         <button data-mode="timed">Timed · 60s</button>
+        <button data-mode="daily">Daily</button>
       </nav>
     </header>
 
     <section id="stats">
-      <div><span class="label">Score</span><span id="score">0</span></div>
+      <div data-only="classic timed"><span class="label">Score</span><span id="score">0</span></div>
       <div data-only="classic"><span class="label">Streak</span><span id="streak">0</span></div>
       <div data-only="timed" hidden><span class="label">Time</span><span id="time">60</span></div>
       <div data-only="timed" hidden><span class="label">Best</span><span id="best">0</span></div>
+      <div data-only="daily" hidden><span class="label">Misses left</span><span id="misses">5</span></div>
+      <div data-only="daily" hidden><span class="label">Day streak</span><span id="day-streak">0</span></div>
     </section>
     <div id="timebar" data-only="timed" hidden><div id="timebar-fill"></div></div>
 
     <section id="card">
+      <p id="daily-tag" class="label" data-only="daily" hidden></p>
       <p class="label">Born on</p>
       <p id="birthday"></p>
       <div id="reveal" hidden>
@@ -37,16 +41,22 @@
       </div>
     </section>
 
+    <ol id="board" data-only="daily" hidden></ol>
+
     <p id="prompt"></p>
 
     <section id="signs" class="grid"></section>
     <section id="elements" class="grid" hidden></section>
+    <section id="choices" class="grid" data-only="daily" hidden></section>
+    <p id="countdown" data-only="daily" hidden></p>
+    <div id="tally" data-only="daily" aria-label="Your guesses" hidden></div>
 
     <button id="next" hidden>Next birthday →</button>
     <button id="start" hidden>Start 60 seconds</button>
   </main>
 
   <script src="signs.js"></script>
+  <script src="daily.js"></script>
   <script src="game.js"></script>
 </body>
 </html>
