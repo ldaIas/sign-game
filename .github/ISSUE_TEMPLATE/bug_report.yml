@@ -1,0 +1,52 @@
+name: Bug report
+description: Something in Zodle is broken or behaves wrongly.
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report this. Please don't include personal information; we don't need any.
+        Got a sign, date or element that looks wrong? Use the **Wrong zodiac data** form instead.
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Mode
+      description: Which game mode were you playing?
+      options:
+        - Daily
+        - Classic
+        - Timed
+        - Not mode-specific (layout, install, footer…)
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device and browser
+      description: For example "iPhone 15, Safari 18" or "Windows 11, Firefox 133". Say if you installed Zodle as an app.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open Daily
+        2. Guess …
+        3. …
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour
+      description: Screenshots help a lot. You can paste them here.
+    validations:
+      required: true

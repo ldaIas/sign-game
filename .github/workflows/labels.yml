@@ -1,0 +1,33 @@
+name: Sync labels
+
+on:
+  push:
+    branches: [main]
+    paths: [".github/labels.yml"]
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github/labels.yml
+          sparse-checkout-cone-mode: false
+      # Creates missing labels and updates colour/description of existing ones.
+      # Labels that aren't in the file are never deleted.
+      - name: Create or update labels
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          yq -o=json '.' .github/labels.yml | jq -c '.[]' | while read -r label; do
+            name=$(jq -r '.name' <<<"$label")
+            color=$(jq -r '.color' <<<"$label")
+            description=$(jq -r '.description // ""' <<<"$label")
+            echo "Syncing label: $name"
+            gh label create "$name" --color "$color" --description "$description" --force
+          done

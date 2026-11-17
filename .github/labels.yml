@@ -1,0 +1,29 @@
+# Repository labels, synced by .github/workflows/labels.yml on push to main.
+# Labels not listed here are left alone.
+- name: bug
+  color: d73a4a
+  description: Something isn't working
+- name: accessibility
+  color: 7057ff
+  description: Keyboard, screen reader, contrast, motion or other access problems
+- name: enhancement
+  color: a2eeef
+  description: New feature or idea
+- name: question
+  color: d876e3
+  description: Further information is requested
+- name: zodiac-data
+  color: f3d27a
+  description: Wrong sign, date range, symbol, element, gender or opposite
+- name: duplicate
+  color: cfd3d7
+  description: This issue or pull request already exists
+- name: wontfix
+  color: ffffff
+  description: This will not be worked on
+- name: good first issue
+  color: 7057ff
+  description: Good for newcomers
+- name: needs-triage
+  color: fbca04
+  description: New and not yet reviewed

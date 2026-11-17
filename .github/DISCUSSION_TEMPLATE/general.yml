@@ -1,0 +1,11 @@
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Chat about anything Zodle: strategies, favourite modes, zodiac trivia. For bugs or a specific feature request, please use an [issue form](https://github.com/ldaIas/sign-game/issues/new/choose) instead.
+  - type: textarea
+    id: topic
+    attributes:
+      label: What's on your mind?
+    validations:
+      required: true

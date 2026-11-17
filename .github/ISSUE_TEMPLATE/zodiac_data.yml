@@ -1,0 +1,42 @@
+name: Wrong zodiac data
+description: A birthday shows the wrong sign, or a symbol, element, gender, opposite or date range looks wrong.
+title: "[Zodiac data]: "
+labels: ["zodiac-data", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Zodle uses the tropical (Western) zodiac with fixed date ranges, e.g. Aries is Mar 21 – Apr 19.
+        Real sign changes shift by a day in some years, so dates right on a cusp can differ from other sources.
+  - type: input
+    id: date
+    attributes:
+      label: Birthday shown
+      description: The date on the card.
+      placeholder: e.g. March 20, 1987
+    validations:
+      required: true
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Mode
+      options:
+        - Daily
+        - Classic
+        - Timed
+    validations:
+      required: true
+  - type: input
+    id: shown
+    attributes:
+      label: Sign or answer shown
+      placeholder: e.g. Pisces
+    validations:
+      required: true
+  - type: textarea
+    id: wrong
+    attributes:
+      label: What's wrong?
+      description: What you expected instead, and a source if you have one.
+    validations:
+      required: true
