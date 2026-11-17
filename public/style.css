@@ -154,6 +154,48 @@ h1 {
 
 [hidden] { display: none !important; }
 
+/* Daily challenge */
+#board {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+#board li {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr auto;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  text-align: left;
+}
+#board li.fresh { animation: fade-up 0.3s ease-out both; }
+#board li.current { border-color: var(--accent); }
+#board li.revealed .a { color: var(--bad); }
+#board .q { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); }
+#board .a { font-weight: 600; }
+#board .a .glyph { font-size: 1.3rem; line-height: 1; }
+#board .mark { font-size: 0.8rem; color: var(--muted); }
+#board .mark.good { color: var(--good); }
+#board .mark.bad { color: var(--bad); }
+
+#choices button { position: relative; }
+#choices button.wrong { animation: none; }
+#choices button.wrong.fresh { animation: shake 0.3s; }
+#choices[data-count="2"] { grid-template-columns: repeat(2, 1fr); }
+#choices .tag {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.7rem;
+  color: var(--bad);
+}
+
+#countdown { color: var(--muted); font-size: 0.9rem; margin-top: 8px; }
+
 #next, #start {
   margin-top: 20px;
   background: var(--accent);
@@ -208,5 +250,5 @@ main { position: relative; }
 
 @media (max-width: 420px) {
   .grid { grid-template-columns: repeat(3, 1fr); }
-  #elements { grid-template-columns: repeat(2, 1fr); }
+  #elements, #choices[data-count="4"] { grid-template-columns: repeat(2, 1fr); }
 }

@@ -8,7 +8,7 @@ const $ = id => document.getElementById(id);
 const $$ = sel => document.querySelectorAll(sel);
 
 const state = {
-  mode: "classic", // "classic" | "timed"
+  mode: "classic", // "classic" | "timed" | "daily"
   sign: null,
   guessesLeft: SIGN_GUESSES,
   phase: "sign", // "idle" | "sign" | "element" | "done"
@@ -56,9 +56,12 @@ function setMode(mode) {
   state.score = 0;
   state.streak = 0;
   for (const btn of $$("#modes button")) btn.classList.toggle("active", btn.dataset.mode === mode);
-  for (const el of $$("[data-only]")) el.hidden = el.dataset.only !== mode;
+  for (const el of $$("[data-only]")) el.hidden = !el.dataset.only.split(" ").includes(mode);
+  stopDaily();
 
-  if (mode === "timed") {
+  if (mode === "daily") {
+    startDaily();
+  } else if (mode === "timed") {
     showTimedIntro();
   } else {
     newRound();
