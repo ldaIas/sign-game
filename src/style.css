@@ -127,6 +127,8 @@ h1 {
 .grid button.wrong:disabled { opacity: 1; background: color-mix(in srgb, var(--bad) 8%, var(--panel)); }
 .grid button.wrong { border-color: var(--bad); color: var(--bad); animation: shake 0.3s; }
 .grid button.right { border-color: var(--good); color: var(--good); opacity: 1; }
+/* Signs that still fit the letters typed so far (Timed shortcut). */
+.grid button.typed { border-color: var(--accent); color: var(--accent); }
 
 #modes {
   display: inline-flex;
@@ -205,6 +207,37 @@ h1 {
   font-size: 0.7rem;
   color: var(--bad);
 }
+
+/* Timed: birthdays missed in the last run. */
+#missed { margin-top: 8px; text-align: left; }
+#missed h2 {
+  margin: 0 0 8px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  text-align: center;
+}
+#missed-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+#missed-list li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0 8px;
+  padding: 8px 12px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+#missed-list .sign { font-weight: 600; }
+#missed-list .glyph { color: var(--accent); }
+#missed-list .guess { grid-column: 1 / -1; color: var(--bad); font-size: 0.8rem; }
 
 #countdown { color: var(--muted); font-size: 0.9rem; margin-top: 8px; }
 

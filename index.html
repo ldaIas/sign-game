@@ -61,7 +61,7 @@
       </nav>
       <p class="mode-desc" data-only="daily">Today’s challenge: name this birthday’s sun sign, then its symbol, gender, element, opposite sign, modality and ruling planet. Your misses are shared across every question.</p>
       <p class="mode-desc" data-only="classic" hidden>3 guesses to name each birthday's sign. Get it right, then name its element in one try for a bonus point.</p>
-      <p class="mode-desc" data-only="timed" hidden>Name as many signs as you can in 60 seconds. One guess per birthday, one point per right answer.</p>
+      <p class="mode-desc" data-only="timed" hidden>Name as many signs as you can in 60 seconds. One guess per birthday, one point per right answer. On a keyboard, type the first letters of a sign to answer.</p>
     </header>
 
     <section id="stats" aria-label="Stats">
@@ -94,6 +94,10 @@
     <section id="signs" class="grid" aria-label="Signs"></section>
     <section id="elements" class="grid" aria-label="Elements" hidden></section>
     <section id="choices" class="grid" data-only="daily" aria-label="Answers" hidden></section>
+    <section id="missed" data-only="timed" aria-labelledby="missed-title" hidden>
+      <h2 id="missed-title"></h2>
+      <ul id="missed-list"></ul>
+    </section>
     <p id="countdown" data-only="daily" hidden></p>
     <div id="tally" data-only="daily" role="group" aria-label="Your guesses" hidden></div>
 
@@ -123,7 +127,7 @@
         <summary>Accessibility</summary>
         <div class="footer-panel">
           <h2>Accessibility</h2>
-          <p>We aim to make Zodle playable with a keyboard (Tab, Enter and Space) and with a screen reader, with readable colour contrast and less motion when your device asks for it. If something gets in your way, please let us know with the feedback link.</p>
+          <p>We aim to make Zodle playable with a keyboard (Tab, Enter and Space; in Timed mode you can also type a sign’s first letters) and with a screen reader, with readable colour contrast and less motion when your device asks for it. If something gets in your way, please let us know with the feedback link.</p>
         </div>
       </details>
       <span aria-hidden="true">·</span>
