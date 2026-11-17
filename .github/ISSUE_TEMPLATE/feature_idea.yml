@@ -1,8 +1,12 @@
 name: Feature or idea
-description: Suggest a new mode, question, setting or improvement.
+description: Propose a worked-out new mode, question, setting or improvement.
 title: "[Idea]: "
 labels: ["enhancement", "needs-triage"]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Still a rough idea? Start it in [Ideas](https://github.com/ldaIas/sign-game/discussions/categories/ideas) and open this form once it has taken shape.
   - type: textarea
     id: idea
     attributes:
@@ -25,3 +29,9 @@ body:
         - Timed
         - A new mode
         - Not mode-specific
+  - type: input
+    id: discussion
+    attributes:
+      label: Related discussion
+      description: Optional. Link to the Ideas discussion this came from, if there is one.
+      placeholder: https://github.com/ldaIas/sign-game/discussions/...
