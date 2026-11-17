@@ -16,18 +16,18 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: lts/*
           cache: npm
       - run: npm ci
       - run: npm test
       # wrangler deploy runs `npm run build` first (the "build" section of wrangler.jsonc).
-      - uses: cloudflare/wrangler-action@v3
+      - uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          # The action's default Wrangler (3.90.0) predates wrangler.jsonc support and fails with "Missing entry-point".
+          # Pinned so deploys and PR previews build with the same Wrangler.
           wranglerVersion: "4.164.0"
           command: deploy
