@@ -10,12 +10,19 @@
   <main>
     <header>
       <h1>Sign Game</h1>
+      <nav id="modes">
+        <button data-mode="classic" class="active">Classic</button>
+        <button data-mode="timed">Timed · 60s</button>
+      </nav>
     </header>
 
     <section id="stats">
       <div><span class="label">Score</span><span id="score">0</span></div>
-      <div><span class="label">Streak</span><span id="streak">0</span></div>
+      <div data-only="classic"><span class="label">Streak</span><span id="streak">0</span></div>
+      <div data-only="timed" hidden><span class="label">Time</span><span id="time">60</span></div>
+      <div data-only="timed" hidden><span class="label">Best</span><span id="best">0</span></div>
     </section>
+    <div id="timebar" data-only="timed" hidden><div id="timebar-fill"></div></div>
 
     <section id="card">
       <p class="label">Born on</p>
@@ -33,6 +40,7 @@
     <section id="elements" class="grid" hidden></section>
 
     <button id="next" hidden>Next birthday →</button>
+    <button id="start" hidden>Start 60 seconds</button>
   </main>
 
   <script src="signs.js"></script>

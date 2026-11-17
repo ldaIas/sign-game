@@ -104,7 +104,45 @@ h1 {
 .grid button.wrong { border-color: var(--bad); color: var(--bad); }
 .grid button.right { border-color: var(--good); color: var(--good); opacity: 1; }
 
-#next {
+#modes {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  margin-bottom: 20px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+#modes button {
+  background: none;
+  border: 0;
+  border-radius: 999px;
+  color: var(--muted);
+  padding: 6px 16px;
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+#modes button.active { background: var(--line); color: var(--text); }
+
+#timebar {
+  height: 4px;
+  margin: -4px 0 16px;
+  background: var(--panel);
+  border-radius: 2px;
+  overflow: hidden;
+}
+#timebar-fill {
+  height: 100%;
+  width: 100%;
+  background: var(--accent);
+  transition: width 1s linear;
+}
+#timebar-fill.low { background: var(--bad); }
+
+[hidden] { display: none !important; }
+
+#next, #start {
   margin-top: 20px;
   background: var(--accent);
   color: var(--bg);
