@@ -1,0 +1,13 @@
+{
+  // Static site served by Cloudflare Workers (static assets, no Worker script).
+  "name": "sign-game",
+  "compatibility_date": "2026-11-17",
+  "assets": {
+    "directory": "./public"
+  },
+  // Your subdomain. The domain must already be a zone on your Cloudflare account;
+  // Cloudflare creates the DNS record and certificate on deploy.
+  "routes": [
+    { "pattern": "signs.example.com", "custom_domain": true }
+  ]
+}
