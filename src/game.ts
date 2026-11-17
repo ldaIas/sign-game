@@ -1,34 +1,38 @@
+// Mode switch, plus the Classic and Timed modes.
+
+import { startDaily, stopDaily } from "./daily";
+import {
+  ELEMENTS, MONTHS, TEXT_STYLE, WHEEL_ORDER,
+  formatRange, randomBirthday, signByName, signFor, type Sign,
+} from "./signs";
+import { constellation } from "./sky";
+import { loadItem, saveItem } from "./storage";
+import { $, $$, announce, setPrompt } from "./ui";
+
+type Mode = "daily" | "classic" | "timed";
+
 const SIGN_GUESSES = 3;
 const TIMED_SECONDS = 60;
 const BEST_KEY = "sign-game:timed-best";
-// U+FE0E asks for the text form of the zodiac glyphs instead of colour emoji.
-const TEXT_STYLE = "︎";
-
-const $ = id => document.getElementById(id);
-const $$ = sel => document.querySelectorAll(sel);
 
 const state = {
-  mode: "daily", // "classic" | "timed" | "daily"
-  sign: null,
+  mode: "daily" as Mode,
+  sign: null as Sign | null,
   guessesLeft: SIGN_GUESSES,
-  phase: "sign", // "idle" | "sign" | "element" | "done"
+  phase: "sign" as "idle" | "sign" | "element" | "done",
   score: 0,
   streak: 0,
   timeLeft: TIMED_SECONDS,
-  timer: null,
-  best: loadBest(),
-  refocus: null, // timed mode: index of the sign button to refocus on the next birthday
+  timer: null as ReturnType<typeof setInterval> | null,
+  best: Number(loadItem(BEST_KEY)) || 0,
+  refocus: null as number | null, // timed mode: index of the sign button to refocus on the next birthday
 };
 
-function loadBest() {
-  try { return Number(localStorage.getItem(BEST_KEY)) || 0; } catch { return 0; }
+function currentSign(): Sign {
+  return state.sign!;
 }
 
-function saveBest(n) {
-  try { localStorage.setItem(BEST_KEY, String(n)); } catch { /* private mode */ }
-}
-
-function buildSignButtons() {
+function buildSignButtons(): void {
   $("signs").innerHTML = "";
   for (const name of WHEEL_ORDER) {
     const sign = signByName(name);
@@ -41,7 +45,7 @@ function buildSignButtons() {
   }
 }
 
-function buildElementButtons() {
+function buildElementButtons(): void {
   $("elements").innerHTML = "";
   for (const [name, el] of Object.entries(ELEMENTS)) {
     const btn = document.createElement("button");
@@ -53,7 +57,7 @@ function buildElementButtons() {
   }
 }
 
-function setMode(mode) {
+function setMode(mode: Mode): void {
   stopTimer();
   state.mode = mode;
   state.score = 0;
@@ -62,7 +66,7 @@ function setMode(mode) {
     btn.classList.toggle("active", btn.dataset.mode === mode);
     btn.setAttribute("aria-pressed", String(btn.dataset.mode === mode));
   }
-  for (const el of $$("[data-only]")) el.hidden = !el.dataset.only.split(" ").includes(mode);
+  for (const el of $$<HTMLElement>("[data-only]")) el.hidden = !el.dataset.only!.split(" ").includes(mode);
   stopDaily();
 
   if (mode === "daily") {
@@ -75,13 +79,13 @@ function setMode(mode) {
   updateStats();
 }
 
-function newRound() {
+function newRound(): void {
   const b = randomBirthday();
   state.sign = signFor(b.month, b.day);
   state.guessesLeft = state.mode === "timed" ? 1 : SIGN_GUESSES;
   state.phase = "sign";
   // "Next" and "Start" hide themselves here; keep keyboard focus in the game.
-  const buttonGone = [$("next"), $("start")].includes(document.activeElement);
+  const buttonGone = [$("next"), $("start")].includes(document.activeElement as HTMLElement);
 
   $("birthday").textContent = `${MONTHS[b.month - 1]} ${b.day}, ${b.year}`;
   $("reveal").hidden = true;
@@ -104,47 +108,33 @@ function newRound() {
   }
 }
 
-function guessesText() {
+function guessesText(): string {
   if (state.mode === "timed") return "Which sign?";
   const n = state.guessesLeft;
   return `Which sign? ${n} guess${n === 1 ? "" : "es"} left`;
 }
 
-// `spoken` is what screen readers hear (defaults to the visible text). Classic
-// and Timed append the score so score changes are announced too.
-function setPrompt(text, tone = "", spoken = text) {
-  $("prompt").textContent = text;
-  $("prompt").className = tone;
-  announce(spoken);
-}
-
-let announceToggle = false;
-function announce(text) {
-  // Alternate a trailing no-break space so a repeated message is still announced.
-  announceToggle = !announceToggle;
-  $("announcer").textContent = text + (announceToggle ? "\u00a0" : "");
-}
-
-function scoreText() {
+function scoreText(): string {
   return ` Score ${state.score}.`;
 }
 
 // After a button is disabled, move focus to a sensible neighbour instead of losing it.
-function focusFirstEnabled(container) {
-  const btn = container.querySelector("button:not(:disabled)");
+function focusFirstEnabled(container: HTMLElement): void {
+  const btn = container.querySelector<HTMLButtonElement>("button:not(:disabled)");
   if (btn) btn.focus();
 }
 
-function onSignGuess(btn) {
+function onSignGuess(btn: HTMLButtonElement): void {
   if (state.phase !== "sign") return;
   if (state.mode === "timed") return onTimedGuess(btn);
+  const sign = currentSign();
   btn.disabled = true;
 
-  if (btn.dataset.name === state.sign.name) {
+  if (btn.dataset.name === sign.name) {
     btn.classList.add("right");
     state.score += 1;
     state.streak += 1;
-    Sky.constellation(state.sign.name);
+    constellation(sign.name);
     revealSign();
     startElementBonus();
     return;
@@ -162,46 +152,48 @@ function onSignGuess(btn) {
   state.streak = 0;
   markCorrectSign();
   revealSign();
-  finishRound(`Out of guesses — it was ${state.sign.name}.`, "bad", `Wrong. Out of guesses — it was ${state.sign.name}.`);
+  finishRound(`Out of guesses — it was ${sign.name}.`, "bad", `Wrong. Out of guesses — it was ${sign.name}.`);
 }
 
-function markCorrectSign() {
-  $("signs").querySelector(`[data-name="${state.sign.name}"]`).classList.add("right");
+function markCorrectSign(): void {
+  $("signs").querySelector(`[data-name="${currentSign().name}"]`)!.classList.add("right");
 }
 
-function disableSigns() {
+function disableSigns(): void {
   for (const btn of $$("#signs button")) btn.disabled = true;
 }
 
-function startElementBonus() {
+function startElementBonus(): void {
+  const sign = currentSign();
   state.phase = "element";
   disableSigns();
   $("elements").hidden = false;
-  setPrompt(`${state.sign.name}! Bonus: which element? (1 guess)`, "good",
-    `Correct, ${state.sign.name}!${scoreText()} Bonus: which element? One guess.`);
+  setPrompt(`${sign.name}! Bonus: which element? (1 guess)`, "good",
+    `Correct, ${sign.name}!${scoreText()} Bonus: which element? One guess.`);
   updateStats();
   focusFirstEnabled($("elements"));
 }
 
-function onElementGuess(btn) {
+function onElementGuess(btn: HTMLButtonElement): void {
   if (state.phase !== "element") return;
   for (const b of $$("#elements button")) b.disabled = true;
 
-  const correct = state.sign.element;
+  const sign = currentSign();
+  const correct = sign.element;
   const article = /^[AEIOU]/.test(correct) ? "an" : "a";
-  $("elements").querySelector(`[data-name="${correct}"]`).classList.add("right");
+  $("elements").querySelector(`[data-name="${correct}"]`)!.classList.add("right");
   if (btn.dataset.name === correct) {
     state.score += 1;
-    finishRound(`Yes — ${state.sign.name} is ${article} ${correct} sign. +1 bonus`, "good",
-      `Correct — ${state.sign.name} is ${article} ${correct} sign. Plus 1 bonus.`);
+    finishRound(`Yes — ${sign.name} is ${article} ${correct} sign. +1 bonus`, "good",
+      `Correct — ${sign.name} is ${article} ${correct} sign. Plus 1 bonus.`);
   } else {
     btn.classList.add("wrong");
-    finishRound(`Close — ${state.sign.name} is ${article} ${correct} sign.`, "bad",
-      `Wrong — ${state.sign.name} is ${article} ${correct} sign.`);
+    finishRound(`Close — ${sign.name} is ${article} ${correct} sign.`, "bad",
+      `Wrong — ${sign.name} is ${article} ${correct} sign.`);
   }
 }
 
-function finishRound(message, tone, spoken = message) {
+function finishRound(message: string, tone: string, spoken = message): void {
   state.phase = "done";
   disableSigns();
   revealElement();
@@ -212,20 +204,21 @@ function finishRound(message, tone, spoken = message) {
 }
 
 // Timed mode: one guess per birthday, and the next one appears automatically.
-function onTimedGuess(btn) {
+function onTimedGuess(btn: HTMLButtonElement): void {
+  const sign = currentSign();
   state.phase = "done";
   if (btn === document.activeElement) state.refocus = [...$$("#signs button")].indexOf(btn);
   disableSigns();
-  const right = btn.dataset.name === state.sign.name;
+  const right = btn.dataset.name === sign.name;
   if (right) {
     state.score += 1;
     btn.classList.add("right");
-    Sky.constellation(state.sign.name);
-    setPrompt(`${state.sign.name}! +1`, "good", `Correct, ${state.sign.name}!${scoreText()}`);
+    constellation(sign.name);
+    setPrompt(`${sign.name}! +1`, "good", `Correct, ${sign.name}!${scoreText()}`);
   } else {
     btn.classList.add("wrong");
     markCorrectSign();
-    setPrompt(`It was ${state.sign.name}.`, "bad", `Wrong, it was ${state.sign.name}.${scoreText()}`);
+    setPrompt(`It was ${sign.name}.`, "bad", `Wrong, it was ${sign.name}.${scoreText()}`);
   }
   revealSign();
   revealElement();
@@ -234,7 +227,7 @@ function onTimedGuess(btn) {
   setTimeout(() => { if (state.timer) newRound(); else state.refocus = null; }, right ? 450 : 1000);
 }
 
-function showTimedIntro() {
+function showTimedIntro(): void {
   state.phase = "idle";
   state.timeLeft = TIMED_SECONDS;
   $("birthday").textContent = "Ready?";
@@ -248,7 +241,7 @@ function showTimedIntro() {
   renderTime();
 }
 
-function startTimed() {
+function startTimed(): void {
   state.score = 0;
   state.timeLeft = TIMED_SECONDS;
   updateStats();
@@ -257,26 +250,26 @@ function startTimed() {
   newRound();
 }
 
-function tick() {
+function tick(): void {
   state.timeLeft -= 1;
   renderTime();
   if (state.timeLeft === 30 || state.timeLeft === 10) announce(`${state.timeLeft} seconds left.`);
   if (state.timeLeft <= 0) endTimed();
 }
 
-function stopTimer() {
-  clearInterval(state.timer);
+function stopTimer(): void {
+  if (state.timer !== null) clearInterval(state.timer);
   state.timer = null;
 }
 
-function endTimed() {
+function endTimed(): void {
   stopTimer();
   state.phase = "idle";
   disableSigns();
   const newBest = state.score > state.best;
   if (newBest) {
     state.best = state.score;
-    saveBest(state.best);
+    saveItem(BEST_KEY, String(state.best));
   }
   $("birthday").textContent = `Time's up! ${state.score} point${state.score === 1 ? "" : "s"}`;
   $("reveal").hidden = true;
@@ -288,15 +281,15 @@ function endTimed() {
   updateStats();
 }
 
-function renderTime() {
-  $("time").textContent = state.timeLeft;
+function renderTime(): void {
+  $("time").textContent = String(state.timeLeft);
   const fill = $("timebar-fill");
   fill.style.width = `${(state.timeLeft / TIMED_SECONDS) * 100}%`;
   fill.classList.toggle("low", state.timeLeft <= 10);
 }
 
-function revealSign() {
-  const s = state.sign;
+function revealSign(): void {
+  const s = currentSign();
   $("reveal-glyph").textContent = s.glyph + TEXT_STYLE;
   $("reveal-glyph").style.removeProperty("--glow");
   $("reveal-name").textContent = s.name;
@@ -305,24 +298,26 @@ function revealSign() {
   $("reveal").hidden = false;
 }
 
-function revealElement() {
-  const s = state.sign;
+function revealElement(): void {
+  const s = currentSign();
   $("reveal-glyph").style.setProperty("--glow", ELEMENTS[s.element].color);
   $("reveal-range").textContent = `${formatRange(s)} · ${s.element}`;
 }
 
-function updateStats() {
-  $("score").textContent = state.score;
-  $("streak").textContent = state.streak;
-  $("best").textContent = state.best;
+function updateStats(): void {
+  $("score").textContent = String(state.score);
+  $("streak").textContent = String(state.streak);
+  $("best").textContent = String(state.best);
 }
 
-$("next").addEventListener("click", newRound);
-$("start").addEventListener("click", startTimed);
-for (const btn of $$("#modes button")) {
-  btn.addEventListener("click", () => setMode(btn.dataset.mode));
-}
+export function initGame(): void {
+  $("next").addEventListener("click", newRound);
+  $("start").addEventListener("click", startTimed);
+  for (const btn of $$("#modes button")) {
+    btn.addEventListener("click", () => setMode(btn.dataset.mode as Mode));
+  }
 
-buildSignButtons();
-buildElementButtons();
-setMode("daily");
+  buildSignButtons();
+  buildElementButtons();
+  setMode("daily");
+}

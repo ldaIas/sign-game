@@ -1,35 +1,45 @@
 // "Add to home screen" support: registers the service worker and shows an
 // install button (Chromium browsers) or a how-to hint (iOS, Firefox for Android).
-(() => {
-  const DISMISS_KEY = "sign-game:install-dismissed";
 
-  if ("serviceWorker" in navigator) {
+import { loadItem, saveItem } from "./storage";
+
+const DISMISS_KEY = "sign-game:install-dismissed";
+
+// Chromium-only; not in the DOM typings.
+interface BeforeInstallPromptEvent extends Event {
+  prompt(): Promise<void>;
+  userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
+}
+
+export function initInstall(): void {
+  // The dev server has no service worker (sw.js is built by vite-plugin-pwa).
+  if (import.meta.env.PROD && "serviceWorker" in navigator) {
     window.addEventListener("load", () => {
       navigator.serviceWorker.register("sw.js").catch(() => { /* not fatal */ });
     });
   }
 
-  const box = document.getElementById("install");
-  const text = document.getElementById("install-text");
-  const btn = document.getElementById("install-btn");
-  const close = document.getElementById("install-close");
+  const box = document.getElementById("install")!;
+  const text = document.getElementById("install-text")!;
+  const btn = document.getElementById("install-btn")!;
+  const close = document.getElementById("install-close")!;
 
-  const standalone = matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
-  let dismissed = false;
-  try { dismissed = localStorage.getItem(DISMISS_KEY) === "1"; } catch { /* private mode */ }
+  const standalone = matchMedia("(display-mode: standalone)").matches
+    || (navigator as Navigator & { standalone?: boolean }).standalone === true;
+  const dismissed = loadItem(DISMISS_KEY) === "1";
   if (standalone || dismissed) return;
 
   const hide = () => { box.hidden = true; };
   close.addEventListener("click", () => {
     hide();
-    try { localStorage.setItem(DISMISS_KEY, "1"); } catch { /* private mode */ }
+    saveItem(DISMISS_KEY, "1");
   });
 
   // Chromium (Android Chrome, desktop Chrome/Edge): a real install button.
-  let deferred = null;
+  let deferred: BeforeInstallPromptEvent | null = null;
   window.addEventListener("beforeinstallprompt", event => {
     event.preventDefault();
-    deferred = event;
+    deferred = event as BeforeInstallPromptEvent;
     text.textContent = "Play Zodle like an app.";
     btn.hidden = false;
     box.hidden = false;
@@ -59,4 +69,4 @@
       '<b>More</b> → <b>Add app to Home screen</b>.';
     box.hidden = false;
   }
-})();
+}

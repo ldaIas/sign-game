@@ -2,9 +2,14 @@
   // Static site served by Cloudflare Workers (static assets, no Worker script).
   "name": "sign-game",
   "compatibility_date": "2026-11-17",
+  // Vite builds the site into ./dist; wrangler dev and wrangler deploy run this first.
+  "build": { "command": "npm run build" },
   "assets": {
-    "directory": "./public"
+    "directory": "./dist"
   },
+  // Lets `wrangler versions upload --preview-alias` give each PR its own workers.dev URL
+  // (.github/workflows/preview.yml).
+  "preview_urls": true,
   // Your subdomain. The domain must already be a zone on your Cloudflare account;
   // Cloudflare creates the DNS record and certificate on deploy.
   "routes": [

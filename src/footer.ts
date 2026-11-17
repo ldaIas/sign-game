@@ -2,8 +2,9 @@
 // work and are crawlable without this file; this just makes them behave like
 // small popovers: one open at a time, Escape or a click elsewhere closes them,
 // and a link to #privacy or #accessibility opens the matching one.
-(() => {
-  const pops = [...document.querySelectorAll("details.footer-pop")];
+
+export function initFooter(): void {
+  const pops = [...document.querySelectorAll<HTMLDetailsElement>("details.footer-pop")];
 
   for (const d of pops) {
     d.addEventListener("toggle", () => {
@@ -16,17 +17,17 @@
     const open = pops.find(d => d.open);
     if (!open) return;
     open.open = false;
-    open.querySelector("summary").focus();
+    open.querySelector("summary")!.focus();
   });
 
   document.addEventListener("click", event => {
-    for (const d of pops) if (d.open && !d.contains(event.target)) d.open = false;
+    for (const d of pops) if (d.open && !d.contains(event.target as Node)) d.open = false;
   });
 
   const openFromHash = () => {
     const d = pops.find(p => `#${p.id}` === location.hash);
-    if (d) { d.open = true; d.querySelector("summary").focus(); }
+    if (d) { d.open = true; d.querySelector("summary")!.focus(); }
   };
   window.addEventListener("hashchange", openFromHash);
   openFromHash();
-})();
+}
