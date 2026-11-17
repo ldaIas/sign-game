@@ -38,7 +38,7 @@ export interface Question {
   hint: (guess: string, s: Sign) => Hint | null;
 }
 
-export const LAUNCH_QUESTIONS: Question[] = [
+export const QUESTIONS: Question[] = [
   {
     label: "Sign",
     ask: "Which sign?",
@@ -96,9 +96,6 @@ export const LAUNCH_QUESTIONS: Question[] = [
     show: name => name,
     hint: (guess, s) => distanceHint(guess, s.opposite),
   },
-];
-
-export const EXTRA_QUESTIONS: Question[] = [
   {
     label: "Modality",
     ask: "Cardinal, fixed or mutable?",
@@ -127,14 +124,7 @@ export interface DailyRules {
   misses: number;
 }
 
-// Puzzles already played keep the rules they launched with, so saved games replay the same.
-export const LAUNCH_RULES: DailyRules = { questions: LAUNCH_QUESTIONS, misses: 5 };
-export const EXTENDED_RULES: DailyRules = { questions: [...LAUNCH_QUESTIONS, ...EXTRA_QUESTIONS], misses: 6 };
-export const EXTENDED_FROM = "2026-11-18";
-
-export function rulesFor(date: string): DailyRules {
-  return date >= EXTENDED_FROM ? EXTENDED_RULES : LAUNCH_RULES;
-}
+export const DAILY_RULES: DailyRules = { questions: QUESTIONS, misses: 6 };
 
 export type Guess = [question: number, value: string];
 export type DailyStatus = "playing" | "won" | "lost";
@@ -160,7 +150,7 @@ export interface SavedDaily {
 }
 
 /** A fresh, unplayed puzzle for `date` ("YYYY-MM-DD"). */
-export function createDaily(date: string, rules = rulesFor(date)): DailyState {
+export function createDaily(date: string, rules = DAILY_RULES): DailyState {
   const rand = seededRandom(`sign-game ${date}`);
   const birthday = birthdayFrom(rand);
   const sign = signFor(birthday.month, birthday.day);
@@ -296,7 +286,7 @@ export interface DailyStats {
 export function dailyStats(history = loadJSON<DailyHistory>(DAILY_HISTORY_KEY) || {}): DailyStats {
   const results = Object.values(history);
   // A win always has at least one miss to spare, so 0 to misses - 1.
-  const byMisses = Array<number>(EXTENDED_RULES.misses).fill(0);
+  const byMisses = Array<number>(DAILY_RULES.misses).fill(0);
   let won = 0;
   for (const r of results) {
     if (!r.won) continue;
