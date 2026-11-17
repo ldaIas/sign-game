@@ -57,7 +57,8 @@ const QUESTIONS = [
     label: "Opposite",
     ask: "Which sign sits opposite it on the wheel?",
     answer: s => s.opposite,
-    options: () => WHEEL_ORDER.map(name => ({
+    // Shuffled too, or you could just count six buttons along from the sign.
+    options: (s, rand) => shuffle(WHEEL_ORDER, rand).map(name => ({
       value: name,
       html: `<span class="glyph">${signByName(name).glyph}${TEXT_STYLE}</span>${name}`,
     })),
