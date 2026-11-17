@@ -13,7 +13,7 @@ Sign boundaries use the common tropical-zodiac dates; birthdays that fall on a c
 
 The site is served as static assets on Cloudflare Workers. `wrangler.jsonc` holds the config.
 
-1. Set your subdomain in `wrangler.jsonc` under `routes` (replace `signs.example.com`). Its parent domain has to be on your Cloudflare account.
+1. The subdomain is set in `wrangler.jsonc` under `routes` (`signs.idalas.com`). Its parent domain, `idalas.com`, has to be on your Cloudflare account.
 2. Run:
 
    ```sh

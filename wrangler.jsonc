@@ -8,6 +8,6 @@
   // Your subdomain. The domain must already be a zone on your Cloudflare account;
   // Cloudflare creates the DNS record and certificate on deploy.
   "routes": [
-    { "pattern": "signs.example.com", "custom_domain": true }
+    { "pattern": "signs.idalas.com", "custom_domain": true }
   ]
 }
