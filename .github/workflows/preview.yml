@@ -63,7 +63,7 @@ jobs:
         run: |
           url=$(printf '%s\n' "$OUTPUT" | grep -oE "https://pr-${PR}-[a-z0-9.-]+\.workers\.dev" | head -n1)
           if [ -z "$url" ]; then
-            echo "::error::No preview alias URL in the wrangler output"
+            echo "::error::No preview URL in the wrangler output. Check that Preview URLs are enabled for the sign-game Worker (Cloudflare dashboard: Settings, Domains & Routes)."
             exit 1
           fi
           marker="<!-- zodle-preview -->"
