@@ -49,6 +49,11 @@
   <main>
     <header>
       <h1>Zodle</h1>
+      <button id="stats-open" type="button" aria-haspopup="dialog" aria-label="Your stats">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="currentColor">
+          <rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="7" width="4" height="14" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/>
+        </svg>
+      </button>
       <aside id="about" aria-labelledby="about-title">
         <h2 id="about-title" class="visually-hidden">About Zodle</h2>
         <p><b>Zodle</b> is a free zodiac sign quiz: guess the star sign from a birthday, then test what else you know about it. A quick star sign game to play daily, at your own pace, or against the clock.</p>
@@ -60,7 +65,7 @@
         <button type="button" data-mode="timed" aria-pressed="false">Timed · 60s</button>
       </nav>
       <p class="mode-desc" data-only="daily">Today’s challenge: name this birthday’s sun sign, then its symbol, gender, element, opposite sign, modality and ruling planet. Your misses are shared across every question.</p>
-      <p class="mode-desc" data-only="classic" hidden>3 guesses to name each birthday's sign. Get it right, then name its element in one try for a bonus point.</p>
+      <p class="mode-desc" data-only="classic" hidden>3 guesses to name each birthday's sign, with a hint after each miss. Birthdays near a sign change are marked tricky and score 2. Get it right, then name its element in one try for a bonus point.</p>
       <p class="mode-desc" data-only="timed" hidden>Name as many signs as you can in 60 seconds. One guess per birthday, one point per right answer. On a keyboard, type the first letters of a sign to answer.</p>
     </header>
 
@@ -78,6 +83,7 @@
       <p id="daily-tag" class="label" data-only="daily" hidden></p>
       <p class="label">Born on</p>
       <p id="birthday"></p>
+      <p id="tricky" hidden>Tricky · near a sign change · 2 points</p>
       <div id="reveal" hidden>
         <div id="reveal-glyph" aria-hidden="true"></div>
         <div id="reveal-name"></div>
@@ -111,6 +117,26 @@
       <button id="install-close" type="button" aria-label="Dismiss the install tip">×</button>
     </aside>
   </main>
+
+  <dialog id="stats-dialog" aria-labelledby="stats-title">
+    <h2 id="stats-title">Your stats</h2>
+    <button id="stats-close" type="button" aria-label="Close stats">×</button>
+    <section aria-labelledby="stats-daily">
+      <h3 id="stats-daily">Daily</h3>
+      <div id="daily-tiles" class="tiles"></div>
+      <h4>Misses in solved puzzles</h4>
+      <ol id="miss-chart" aria-label="Daily games by misses"></ol>
+      <p id="miss-chart-empty">Finish a Daily to start your chart.</p>
+    </section>
+    <section aria-labelledby="stats-classic">
+      <h3 id="stats-classic">Classic</h3>
+      <div id="classic-tiles" class="tiles"></div>
+    </section>
+    <section aria-labelledby="stats-timed">
+      <h3 id="stats-timed">Timed</h3>
+      <div id="timed-tiles" class="tiles"></div>
+    </section>
+  </dialog>
 
   <footer id="site-footer">
     <p>For entertainment only. Signs follow the Western (tropical) zodiac. Provided as-is, without warranty.</p>

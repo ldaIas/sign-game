@@ -115,6 +115,12 @@ export function formatRange(sign: Sign): string {
   return `${fmt(sign.start)} – ${fmt(sign.end)}`;
 }
 
+/** Where `answer` sits from `guess`, the short way round the Aries-first wheel. */
+export function wheelDirection(guess: string, answer: string): "earlier" | "later" | "across" {
+  const diff = (WHEEL_ORDER.indexOf(answer) - WHEEL_ORDER.indexOf(guess) + 12) % 12;
+  return diff === 6 ? "across" : diff < 6 ? "later" : "earlier";
+}
+
 /**
  * True on the first two or last two days of a sign, where people most often
  * mix up the sign (and the exact change shifts a day between years).
