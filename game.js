@@ -144,13 +144,14 @@ function onElementGuess(btn) {
   for (const b of $$("#elements button")) b.disabled = true;
 
   const correct = state.sign.element;
+  const article = /^[AEIOU]/.test(correct) ? "an" : "a";
   $("elements").querySelector(`[data-name="${correct}"]`).classList.add("right");
   if (btn.dataset.name === correct) {
     state.score += 1;
-    finishRound(`Yes — ${state.sign.name} is a ${correct} sign. +1 bonus`, "good");
+    finishRound(`Yes — ${state.sign.name} is ${article} ${correct} sign. +1 bonus`, "good");
   } else {
     btn.classList.add("wrong");
-    finishRound(`Close — ${state.sign.name} is a ${correct} sign.`, "bad");
+    finishRound(`Close — ${state.sign.name} is ${article} ${correct} sign.`, "bad");
   }
 }
 
@@ -246,6 +247,7 @@ function renderTime() {
 function revealSign() {
   const s = state.sign;
   $("reveal-glyph").textContent = s.glyph + TEXT_STYLE;
+  $("reveal-glyph").style.setProperty("--glow", ELEMENTS[s.element].color);
   $("reveal-name").textContent = s.name;
   // The element stays hidden until the bonus question is answered.
   $("reveal-range").textContent = formatRange(s);
