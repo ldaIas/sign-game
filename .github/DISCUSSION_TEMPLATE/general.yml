@@ -2,7 +2,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Chat about anything Zodle: strategies, favourite modes, zodiac trivia. For bugs or a specific feature request, please use an [issue form](https://github.com/ldaIas/sign-game/issues/new/choose) instead.
+        Chat about anything Zodle: strategies, favourite modes, zodiac trivia. Rough ideas go in [Ideas](https://github.com/ldaIas/sign-game/discussions/categories/ideas). For bugs or a worked-out feature request, please use an [issue form](https://github.com/ldaIas/sign-game/issues/new/choose) instead.
   - type: textarea
     id: topic
     attributes:

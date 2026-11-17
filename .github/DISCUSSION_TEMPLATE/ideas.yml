@@ -1,0 +1,11 @@
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Rough ideas and what-ifs are welcome here, even half-formed ones. Once an idea takes shape, it becomes a [feature request](https://github.com/ldaIas/sign-game/issues/new?template=feature_idea.yml) that links back here.
+  - type: textarea
+    id: idea
+    attributes:
+      label: What's the idea?
+    validations:
+      required: true

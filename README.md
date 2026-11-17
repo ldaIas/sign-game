@@ -22,8 +22,8 @@ No cookies, analytics or accounts; scores and streaks stay in your own browser's
 
 ## Feedback and contributing
 
-- Found a bug, an accessibility problem or wrong zodiac data, or have an idea? Use the [issue forms](https://github.com/ldaIas/sign-game/issues/new/choose).
-- For general chat, use [Discussions](https://github.com/ldaIas/sign-game/discussions).
+- Found a bug, an accessibility problem or wrong zodiac data, or have a worked-out feature request? Use the [issue forms](https://github.com/ldaIas/sign-game/issues/new/choose).
+- Have a rough idea? Start it in [Ideas](https://github.com/ldaIas/sign-game/discussions/categories/ideas). For general chat, use [Discussions](https://github.com/ldaIas/sign-game/discussions).
 - Security problems: see [SECURITY.md](SECURITY.md).
 - How the code is laid out, running it locally and deploying: see [CONTRIBUTING.md](CONTRIBUTING.md).
 

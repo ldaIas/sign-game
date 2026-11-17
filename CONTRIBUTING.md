@@ -65,7 +65,7 @@ The game must stay playable by keyboard alone. Focus moves to the next sensible 
 
 ### Issues, discussions and labels
 
-`.github/ISSUE_TEMPLATE/` has issue forms for bugs, accessibility problems, ideas and wrong zodiac data, and each one applies its labels. `.github/DISCUSSION_TEMPLATE/general.yml` is the form for the General discussion category. The labels themselves are defined in `.github/labels.yml`. `.github/workflows/labels.yml` creates or updates them when that file changes on `main` (or when run by hand) and never deletes other labels.
+`.github/ISSUE_TEMPLATE/` has issue forms for bugs, accessibility problems, ideas and wrong zodiac data, and each one applies its labels. `.github/DISCUSSION_TEMPLATE/` has forms for the General and Ideas discussion categories; a rough idea starts in Ideas and becomes a feature request issue that links back to it. The labels themselves are defined in `.github/labels.yml`. `.github/workflows/labels.yml` creates or updates them when that file changes on `main` (or when run by hand) and never deletes other labels.
 
 ## Deploying to Cloudflare
 
