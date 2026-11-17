@@ -214,6 +214,18 @@ function renderDaily(lastGuess) {
     $("board").appendChild(li);
   }
 
+  // Tally: one box per guess made, ✓ or ✗, newest one pops in.
+  $("tally").innerHTML = "";
+  daily.guesses.forEach(([q, value], i) => {
+    const right = value === QUESTIONS[q].answer(daily.sign);
+    const box = document.createElement("span");
+    box.className = right ? "right" : "wrong";
+    if (lastGuess !== undefined && i === daily.guesses.length - 1) box.classList.add("fresh");
+    box.textContent = right ? "✓" : "✗";
+    box.title = `${QUESTIONS[q].label}: ${right ? "correct" : "miss"}`;
+    $("tally").appendChild(box);
+  });
+
   // Answer grid for the current question.
   const grid = $("choices");
   grid.innerHTML = "";

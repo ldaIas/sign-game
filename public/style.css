@@ -196,6 +196,27 @@ h1 {
 
 #countdown { color: var(--muted); font-size: 0.9rem; margin-top: 8px; }
 
+#tally {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 20px;
+}
+#tally span {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  border: 1px solid;
+  font-weight: 700;
+}
+#tally .right { color: var(--good); border-color: var(--good); background: color-mix(in srgb, var(--good) 15%, transparent); }
+#tally .wrong { color: var(--bad); border-color: var(--bad); background: color-mix(in srgb, var(--bad) 15%, transparent); }
+#tally .fresh { animation: pop 0.25s ease-out both; }
+@keyframes pop { from { transform: scale(0.4); opacity: 0; } to { transform: none; opacity: 1; } }
+
 #next, #start {
   margin-top: 20px;
   background: var(--accent);
