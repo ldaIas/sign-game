@@ -8,6 +8,8 @@ A small browser quiz: you're shown a birthday and have to name its sun sign.
 
 Behind the game is a twinkling starfield (`public/sky.js`). Stars near the mouse brighten when it's outside the play area, and a correct sign in any mode briefly pulls nearby stars into that sign's constellation.
 
+Zodle can be installed as an app (PWA). `public/manifest.webmanifest` describes it and `public/sw.js` is a network-first service worker, so a new deploy is used whenever there's a connection and the last copy still opens offline. `public/install.js` shows an **Install** button in Chrome and Edge, and a short "Share → Add to Home Screen" hint on iPhone and iPad, since iOS has no install prompt. The hint stays hidden once it's dismissed or the app is running installed. To change the icon, edit `favicon.svg` and regenerate the PNGs (`icon-192.png`, `icon-512.png`, `icon-maskable.png`, `apple-touch-icon.png`).
+
 There's no build step. The site lives in `public/`: open `public/index.html` in a browser.
 
 Sign boundaries use the common tropical-zodiac dates; birthdays that fall on a cusp follow those fixed dates.
