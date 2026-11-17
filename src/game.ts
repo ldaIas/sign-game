@@ -5,6 +5,7 @@ import {
   ELEMENTS, MONTHS, TEXT_STYLE, WHEEL_ORDER,
   formatRange, randomBirthday, signByName, signFor, type Sign,
 } from "./signs";
+import { hideShare } from "./share";
 import { constellation } from "./sky";
 import { loadItem, saveItem } from "./storage";
 import { $, $$, announce, setPrompt } from "./ui";
@@ -68,6 +69,7 @@ function setMode(mode: Mode): void {
   }
   for (const el of $$<HTMLElement>("[data-only]")) el.hidden = !el.dataset.only!.split(" ").includes(mode);
   stopDaily();
+  hideShare();
 
   if (mode === "daily") {
     startDaily();

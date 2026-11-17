@@ -1,11 +1,13 @@
 // tests/fixtures/baseline.json was recorded from the original classic-script
 // implementation. The daily puzzle for a date must never change, so these
-// compare against it exactly.
+// compare against it exactly. Questions added later are appended after the
+// launch five, so the fixture still pins those for every date.
 
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
-  DAILY_STREAK_KEY, QUESTIONS,
-  applyGuess, createDaily, currentStreak, distanceHint, recordStreak, replayGuesses, shiftDate,
+  DAILY_HISTORY_KEY, DAILY_KEY, DAILY_STREAK_KEY, EXTENDED_FROM, LAUNCH_QUESTIONS, LAUNCH_RULES,
+  applyGuess, createDaily, currentStreak, dailyShareText, dailyStats, distanceHint, recordResult,
+  recordStreak, replayGuesses, rulesFor, shiftDate,
   type Guess,
 } from "../src/puzzle";
 import baseline from "./fixtures/baseline.json";
@@ -16,21 +18,42 @@ describe("daily puzzle", () => {
     expect(daily.number).toBe(expected.number);
     expect(daily.birthday).toEqual(expected.birthday);
     expect(daily.sign.name).toBe(expected.sign);
-    expect(QUESTIONS.map(q => q.answer(daily.sign))).toEqual(expected.answers);
+    expect(LAUNCH_QUESTIONS.map(q => q.answer(daily.sign))).toEqual(expected.answers);
     // Options in order, including the per-day shuffles and their markup.
-    expect(daily.options).toEqual(expected.options);
+    expect(daily.options.slice(0, LAUNCH_QUESTIONS.length)).toEqual(expected.options);
+  });
+
+  it("keeps the launch questions and misses before the extended puzzles", () => {
+    const launch = createDaily(shiftDate(EXTENDED_FROM, -1));
+    expect(launch.questions.map(q => q.label)).toEqual(["Sign", "Symbol", "Gender", "Element", "Opposite"]);
+    expect(launch.missesLeft).toBe(5);
+    const extended = createDaily(EXTENDED_FROM);
+    expect(extended.questions.map(q => q.label)).toEqual(["Sign", "Symbol", "Gender", "Element", "Opposite", "Modality", "Ruler"]);
+    expect(extended.missesLeft).toBe(6);
+  });
+
+  it("asks modality and ruling planet with hints", () => {
+    const daily = createDaily("2026-11-18");
+    const [modality, ruler] = daily.questions.slice(5);
+    expect(daily.options[5].map(o => o.value)).toEqual(["Cardinal", "Fixed", "Mutable"]);
+    expect(daily.options[6]).toHaveLength(10);
+    expect(modality.hint("Fixed", daily.sign)).toEqual({ text: "Fixed signs are Taurus, Leo, Scorpio and Aquarius." });
+    expect(ruler.hint("Venus", daily.sign)).toEqual({ text: "Venus rules Taurus and Libra." });
+    expect(ruler.hint("Mars", daily.sign)).toEqual({ text: "Mars rules Aries, and Scorpio in traditional astrology." });
+    expect(ruler.hint("Uranus", daily.sign)).toEqual({ text: "Uranus rules Aquarius." });
   });
 });
 
 describe("applying and replaying guesses", () => {
+  // The recorded replays are for the five launch questions, whatever the date.
   it.each(baseline.replays)("$kind on $date", expected => {
-    const played = createDaily(expected.date);
+    const played = createDaily(expected.date, LAUNCH_RULES);
     const hints = expected.guesses.map(([, value]) => applyGuess(played, value as string));
     expect(played.guesses).toEqual(expected.guesses);
     expect(hints).toEqual(expected.hints);
     expect(final(played)).toEqual(expected.final);
 
-    const replayed = createDaily(expected.date);
+    const replayed = createDaily(expected.date, LAUNCH_RULES);
     replayGuesses(replayed, { date: expected.date, guesses: expected.guesses as Guess[] });
     expect(final(replayed)).toEqual(expected.final);
     expect(replayed.guesses).toEqual(expected.guesses);
@@ -61,7 +84,7 @@ describe("applying and replaying guesses", () => {
 
   it("stops replaying once the game is over", () => {
     const { guesses, final: end } = baseline.replays[0];
-    const daily = createDaily("2026-11-17");
+    const daily = createDaily("2026-11-17", LAUNCH_RULES);
     replayGuesses(daily, { date: "2026-11-17", guesses: [...guesses, [5, "extra"]] as Guess[] });
     expect(final(daily)).toEqual(end);
   });
@@ -87,6 +110,13 @@ describe("day streak", () => {
     expect(view.map(date => currentStreak(date))).toEqual(current);
   });
 
+  it("doesn't count the same day's win twice", () => {
+    recordStreak("2026-11-17", true);
+    recordStreak("2026-11-18", true);
+    recordStreak("2026-11-18", true);
+    expect(currentStreak("2026-11-18")).toBe(2);
+  });
+
   it("is 0 with nothing saved", () => {
     expect(currentStreak("2026-11-17")).toBe(0);
   });
@@ -99,6 +129,53 @@ describe("day streak", () => {
 
   it.each(baseline.misc.shiftDate)("shiftDate(%s, %i) is %s", (key, days, expected) => {
     expect(shiftDate(key as string, days as number)).toBe(expected);
+  });
+});
+
+describe("history and sharing", () => {
+  let store: Map<string, string>;
+  beforeEach(() => {
+    store = new Map();
+    vi.stubGlobal("localStorage", {
+      getItem: (k: string) => store.get(k) ?? null,
+      setItem: (k: string, v: string) => { store.set(k, String(v)); },
+    });
+  });
+  afterEach(() => { vi.unstubAllGlobals(); });
+
+  function play(date: string, misses: number, win: boolean) {
+    const daily = createDaily(date);
+    const wrong = (q: number) => daily.options[q]
+      .find(o => o.value !== daily.questions[q].answer(daily.sign) && !daily.results[q].misses.includes(o.value))!.value;
+    for (let i = 0; i < misses; i++) applyGuess(daily, wrong(daily.question));
+    while (win && daily.status === "playing") applyGuess(daily, daily.questions[daily.question].answer(daily.sign));
+    return daily;
+  }
+
+  it("counts games played and wins by misses", () => {
+    for (const [date, misses, win] of [["2026-11-18", 0, true], ["2026-11-19", 2, true], ["2026-11-20", 6, false], ["2026-11-21", 2, true]] as const) {
+      const daily = play(date, misses, win);
+      recordResult(daily);
+      recordResult(daily);
+    }
+    expect(dailyStats()).toEqual({ played: 4, won: 3, lost: 1, byMisses: [1, 0, 2, 0, 0, 0] });
+  });
+
+  it("skips unfinished games", () => {
+    recordResult(createDaily("2026-11-18"));
+    expect(store.has(DAILY_HISTORY_KEY)).toBe(false);
+    expect(store.has(DAILY_KEY)).toBe(false);
+  });
+
+  it("shares one mark per guess and the streak", () => {
+    const daily = play("2026-11-17", 1, true);
+    expect(dailyShareText(daily, 3)).toBe("Zodle #1 ✗✓✓✓✓✓ 🔥3");
+    expect(dailyShareText(play("2026-11-18", 6, false), 0)).toBe("Zodle #2 ✗✗✗✗✗✗");
+  });
+
+  it("uses the extended rules from their start date", () => {
+    expect(rulesFor(EXTENDED_FROM).misses).toBe(6);
+    expect(rulesFor("2026-11-17")).toBe(LAUNCH_RULES);
   });
 });
 
