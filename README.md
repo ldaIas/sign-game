@@ -32,6 +32,11 @@ To preview locally with the same headers: `npx wrangler dev`.
 
 `public/_headers` sets security headers (including a CSP) and makes browsers revalidate on each load, so a new deploy shows up right away.
 
-### Deploying on every push (optional)
+### Deploying on every push to `main`
 
-In the Cloudflare dashboard, go to **Workers & Pages → Create → Import a repository**, then pick this repo. Leave the build command empty and keep the deploy command as `npx wrangler deploy`.
+`.github/workflows/deploy.yml` runs `wrangler deploy` on every push to `main` (and can be run by hand from the Actions tab). It needs two repository secrets, set under **Settings → Secrets and variables → Actions**:
+
+- `CLOUDFLARE_API_TOKEN`: create one at **My Profile → API Tokens** from the **Edit Cloudflare Workers** template, scoped to your account and the `idalas.com` zone.
+- `CLOUDFLARE_ACCOUNT_ID`: shown on the Workers & Pages overview page.
+
+Don't also connect the repo through Cloudflare's own Git integration (Workers Builds), or each push will deploy twice.
