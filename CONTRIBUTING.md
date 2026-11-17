@@ -2,6 +2,10 @@
 
 Bug reports, ideas and pull requests are welcome. Please open an [issue](https://github.com/ldaIas/sign-game/issues/new/choose) before a large change so we can agree on it first, and fill in the pull request checklist when you open a PR.
 
+## License for contributions
+
+By submitting a contribution, you agree that it is licensed under the [PolyForm Noncommercial License 1.0.0](LICENSE), like the rest of the project, and that Sam Sovereign may also use, change, distribute and license it under any other terms, including commercial ones. You confirm that you have the right to grant this.
+
 ## Running it locally
 
 There's no build step. The site lives in `public/`: open `public/index.html` in a browser, or run `npx wrangler dev` to preview it with the same headers as production.

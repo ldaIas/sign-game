@@ -26,3 +26,7 @@ No cookies, analytics or accounts; scores and streaks stay in your own browser's
 - For general chat, use [Discussions](https://github.com/ldaIas/sign-game/discussions).
 - Security problems: see [SECURITY.md](SECURITY.md).
 - How the code is laid out, running it locally and deploying: see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## License
+
+Zodle is licensed under the [PolyForm Noncommercial License 1.0.0](LICENSE). In plain terms: you can play it, study it, and run or adapt your own copy, but not to make money. No charging to play, no ads, and no selling user data. This summary is only a guide; the [LICENSE](LICENSE) file is what counts.
