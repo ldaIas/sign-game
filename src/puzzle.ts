@@ -4,16 +4,17 @@
 // The puzzle for a date must never change once it's live: everyone gets the same
 // one, and saved guesses are replayed against it. So the seed string, the order of
 // rand() calls and the shuffle below are fixed (tests/puzzle.test.ts pins them).
+// New questions are appended and must not call rand(), so earlier options stay put.
 
 import {
-  ELEMENTS, GENDERS, SIGNS, TEXT_STYLE, WHEEL_ORDER,
+  ELEMENTS, GENDERS, MODALITIES, PLANETS, SIGNS, TEXT_STYLE, TRADITIONAL_RULERS, WHEEL_ORDER,
   signByName, signFor, type Birthday, type ElementName, type Sign,
 } from "./signs";
 import { loadJSON, saveJSON } from "./storage";
 
-export const DAILY_MISSES = 5;
 export const DAILY_KEY = "sign-game:daily";
 export const DAILY_STREAK_KEY = "sign-game:daily-streak";
+export const DAILY_HISTORY_KEY = "sign-game:daily-history";
 // Puzzle #1 is the launch day; the number counts up from there.
 export const DAILY_EPOCH: [number, number, number] = [2026, 11, 17];
 
@@ -95,13 +96,43 @@ export const QUESTIONS: Question[] = [
     show: name => name,
     hint: (guess, s) => distanceHint(guess, s.opposite),
   },
+  {
+    label: "Modality",
+    ask: "Cardinal, fixed or mutable?",
+    answer: s => s.modality,
+    options: () => MODALITIES.map(name => ({ value: name, html: name })),
+    show: name => name,
+    hint: guess => ({
+      text: `${guess} signs are ${listSigns(WHEEL_ORDER.filter(n => signByName(n).modality === guess))}.`,
+    }),
+  },
+  {
+    label: "Ruler",
+    ask: "Which planet rules it?",
+    answer: s => s.ruler,
+    options: () => Object.entries(PLANETS).map(([name, p]) => ({
+      value: name,
+      html: `<span class="glyph" aria-hidden="true">${p.glyph}${TEXT_STYLE}</span>${name}`,
+    })),
+    show: name => name,
+    hint: guess => ({ text: rulerHint(guess) }),
+  },
 ];
+
+export interface DailyRules {
+  questions: Question[];
+  misses: number;
+}
+
+export const DAILY_RULES: DailyRules = { questions: QUESTIONS, misses: 6 };
 
 export type Guess = [question: number, value: string];
 export type DailyStatus = "playing" | "won" | "lost";
 
 export interface DailyState {
   date: string;       // "YYYY-MM-DD", the player's local date
+  questions: Question[];
+  maxMisses: number;
   number: number;
   birthday: Birthday;
   sign: Sign;
@@ -119,20 +150,23 @@ export interface SavedDaily {
 }
 
 /** A fresh, unplayed puzzle for `date` ("YYYY-MM-DD"). */
-export function createDaily(date: string): DailyState {
+export function createDaily(date: string, rules = DAILY_RULES): DailyState {
   const rand = seededRandom(`sign-game ${date}`);
   const birthday = birthdayFrom(rand);
   const sign = signFor(birthday.month, birthday.day);
+  const { questions } = rules;
   return {
     date,
+    questions,
+    maxMisses: rules.misses,
     number: daysBetween(DAILY_EPOCH, date.split("-").map(Number)) + 1,
     birthday,
     sign,
-    options: QUESTIONS.map(q => q.options(sign, rand)),
+    options: questions.map(q => q.options(sign, rand)),
     guesses: [],
     question: 0,
-    missesLeft: DAILY_MISSES,
-    results: QUESTIONS.map(() => ({ misses: [], revealed: false })),
+    missesLeft: rules.misses,
+    results: questions.map(() => ({ misses: [], revealed: false })),
     status: "playing",
   };
 }
@@ -153,7 +187,7 @@ export function replayGuesses(daily: DailyState, saved: SavedDaily | null): void
 /** Records a guess for the current question and advances the state. Returns the hint for a miss, if any. */
 export function applyGuess(daily: DailyState, value: string): Hint | null {
   const q = daily.question;
-  const correct = QUESTIONS[q].answer(daily.sign);
+  const correct = daily.questions[q].answer(daily.sign);
   daily.guesses.push([q, value]);
 
   if (value === correct) {
@@ -174,18 +208,18 @@ export function applyGuess(daily: DailyState, value: string): Hint | null {
     advance(daily);
     return null;
   }
-  return QUESTIONS[q].hint(value, daily.sign);
+  return daily.questions[q].hint(value, daily.sign);
 }
 
 function advance(daily: DailyState): void {
   daily.question += 1;
-  if (daily.question === QUESTIONS.length) finish(daily, "won");
+  if (daily.question === daily.questions.length) finish(daily, "won");
 }
 
 function finish(daily: DailyState, status: DailyStatus): void {
   daily.status = status;
   if (status === "lost") {
-    for (let i = daily.question; i < QUESTIONS.length; i++) daily.results[i].revealed = true;
+    for (let i = daily.question; i < daily.questions.length; i++) daily.results[i].revealed = true;
   }
 }
 
@@ -201,6 +235,8 @@ export interface StreakRecord {
 export function recordStreak(date: string, won: boolean): void {
   const rec = loadJSON<StreakRecord>(DAILY_STREAK_KEY) || { streak: 0, best: 0, lastWin: null };
   if (won) {
+    // Reopening a solved puzzle mustn't count it twice.
+    if (rec.lastWin === date) return;
     rec.streak = rec.lastWin === shiftDate(date, -1) ? rec.streak + 1 : 1;
     rec.lastWin = date;
     rec.best = Math.max(rec.best || 0, rec.streak);
@@ -218,6 +254,55 @@ export function currentStreak(date: string): number {
   return alive ? rec.streak : 0;
 }
 
+export function bestStreak(): number {
+  return loadJSON<StreakRecord>(DAILY_STREAK_KEY)?.best || 0;
+}
+
+// --- History and sharing ---------------------------------------------------
+
+export interface DailyResult {
+  won: boolean;
+  misses: number;
+}
+
+export type DailyHistory = Record<string, DailyResult>;
+
+/** Saves a finished puzzle's result. Safe to call again for the same date. */
+export function recordResult(daily: DailyState): void {
+  if (daily.status === "playing") return;
+  const history = loadJSON<DailyHistory>(DAILY_HISTORY_KEY) || {};
+  history[daily.date] = { won: daily.status === "won", misses: daily.maxMisses - daily.missesLeft };
+  saveJSON(DAILY_HISTORY_KEY, history);
+}
+
+export interface DailyStats {
+  played: number;
+  won: number;
+  /** wins by miss count: index n is wins with n misses. */
+  byMisses: number[];
+  lost: number;
+}
+
+export function dailyStats(history = loadJSON<DailyHistory>(DAILY_HISTORY_KEY) || {}): DailyStats {
+  const results = Object.values(history);
+  // A win always has at least one miss to spare, so 0 to misses - 1.
+  const byMisses = Array<number>(DAILY_RULES.misses).fill(0);
+  let won = 0;
+  for (const r of results) {
+    if (!r.won) continue;
+    won += 1;
+    byMisses[r.misses] = (byMisses[r.misses] || 0) + 1;
+  }
+  return { played: results.length, won, byMisses, lost: results.length - won };
+}
+
+/** "Zodle #1 ✓✗✓✓✓✓ 🔥1": one mark per guess, plus the day streak once solved. */
+export function dailyShareText(daily: DailyState, streak: number): string {
+  const marks = daily.guesses.map(([q, value]) => value === daily.questions[q].answer(daily.sign) ? "✓" : "✗").join("");
+  const tail = daily.status === "won" && streak > 0 ? ` 🔥${streak}` : "";
+  return `Zodle #${daily.number} ${marks}${tail}`;
+}
+
 // --- Helpers --------------------------------------------------------------
 
 // "Aries is 2 signs behind": the guess comes earlier in the wheel than the answer.
@@ -229,7 +314,15 @@ export function distanceHint(guess: string, answer: string): Hint {
   return { tag: `${n} ${dir}`, text: `${guess} is ${n} sign${n === 1 ? "" : "s"} ${dir}.` };
 }
 
+function rulerHint(planet: string): string {
+  const ruled = WHEEL_ORDER.filter(n => signByName(n).ruler === planet);
+  const old = WHEEL_ORDER.filter(n => TRADITIONAL_RULERS[n] === planet);
+  const text = ruled.length ? `${planet} rules ${listSigns(ruled)}` : `${planet} rules no sign`;
+  return old.length ? `${text}, and ${listSigns(old)} in traditional astrology.` : `${text}.`;
+}
+
 function listSigns(names: string[]): string {
+  if (names.length === 1) return names[0];
   return `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
 }
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { SIGNS, formatRange, signFor } from "../src/signs";
+import { SIGNS, formatRange, isNearCusp, signByName, signFor, wheelDirection } from "../src/signs";
 import baseline from "./fixtures/baseline.json";
 
 describe("signFor", () => {
@@ -21,5 +21,35 @@ describe("sign data", () => {
     expect(formatRange(sign)).toBe(s.range);
     expect(sign.gender).toBe(s.gender);
     expect(sign.opposite).toBe(s.opposite);
+  });
+});
+
+describe("modality and ruler", () => {
+  it.each([
+    ["Aries", "Cardinal", "Mars"], ["Taurus", "Fixed", "Venus"], ["Gemini", "Mutable", "Mercury"],
+    ["Cancer", "Cardinal", "Moon"], ["Leo", "Fixed", "Sun"], ["Virgo", "Mutable", "Mercury"],
+    ["Libra", "Cardinal", "Venus"], ["Scorpio", "Fixed", "Pluto"], ["Sagittarius", "Mutable", "Jupiter"],
+    ["Capricorn", "Cardinal", "Saturn"], ["Aquarius", "Fixed", "Uranus"], ["Pisces", "Mutable", "Neptune"],
+  ])("%s is %s, ruled by %s", (name, modality, ruler) => {
+    expect(signByName(name).modality).toBe(modality);
+    expect(signByName(name).ruler).toBe(ruler);
+  });
+});
+
+describe("isNearCusp", () => {
+  it.each([
+    [3, 19, true], [3, 20, true], [3, 21, true], [3, 22, true], [3, 23, false], [3, 18, false],
+    [12, 31, false], [1, 1, false], [12, 22, true], [1, 19, true], [1, 20, true], [2, 29, false], [4, 5, false],
+  ])("%i/%i is %s", (month, day, near) => {
+    expect(isNearCusp(month, day)).toBe(near);
+  });
+});
+
+describe("wheelDirection", () => {
+  it.each([
+    ["Aries", "Taurus", "later"], ["Pisces", "Aries", "later"], ["Leo", "Cancer", "earlier"],
+    ["Aries", "Capricorn", "earlier"], ["Aries", "Libra", "across"], ["Aries", "Virgo", "later"],
+  ])("%s → %s is %s", (guess, answer, dir) => {
+    expect(wheelDirection(guess, answer)).toBe(dir);
   });
 });

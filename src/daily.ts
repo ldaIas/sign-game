@@ -2,10 +2,12 @@
 // with a shared pool of misses. Progress and the day streak live in localStorage.
 
 import {
-  DAILY_KEY, DAILY_MISSES, QUESTIONS,
-  applyGuess, createDaily, currentStreak, localDateKey, recordStreak, replayGuesses, timeUntilMidnight,
+  DAILY_KEY,
+  applyGuess, createDaily, currentStreak, dailyShareText, localDateKey, recordResult, recordStreak,
+  replayGuesses, timeUntilMidnight,
   type DailyState, type SavedDaily,
 } from "./puzzle";
+import { showShare } from "./share";
 import { ELEMENTS, MONTHS, TEXT_STYLE, formatRange } from "./signs";
 import { constellation } from "./sky";
 import { loadJSON, saveJSON } from "./storage";
@@ -26,6 +28,7 @@ export function startDaily(): void {
   $("elements").hidden = true;
   $("next").hidden = true;
   $("start").hidden = true;
+  $("share").hidden = true;
 
   renderDaily();
   if (daily.status !== "playing") showDailyEnd(false);
@@ -40,7 +43,7 @@ function onDailyGuess(value: string): void {
   if (daily.status !== "playing") return;
   const q = daily.question;
   const hint = applyGuess(daily, value);
-  if (QUESTIONS[q].label === "Sign" && value === daily.sign.name) constellation(daily.sign.name);
+  if (daily.questions[q].label === "Sign" && value === daily.sign.name) constellation(daily.sign.name);
   saveJSON(DAILY_KEY, { date: daily.date, guesses: daily.guesses } satisfies SavedDaily);
   // The answer grid is rebuilt below, which drops keyboard focus; restore it after.
   const hadFocus = $("choices").contains(document.activeElement);
@@ -58,8 +61,8 @@ function onDailyGuess(value: string): void {
   const left = ` ${daily.missesLeft} miss${daily.missesLeft === 1 ? "" : "es"} left.`;
   if (daily.question !== q) {
     const r = daily.results[q];
-    const answer = QUESTIONS[q].answer(daily.sign);
-    const next = QUESTIONS[daily.question].ask;
+    const answer = daily.questions[q].answer(daily.sign);
+    const next = daily.questions[daily.question].ask;
     if (r.revealed) setPrompt(`Not quite — it's ${answer}. ${next}`, "bad", `Wrong. It's ${answer}.${left} ${next}`);
     else setPrompt(`Yes! ${next}`, "good", `Correct!${r.misses.length ? left : ""} ${next}`);
   } else if (hint) {
@@ -81,11 +84,11 @@ function renderDaily(lastGuess?: string): void {
   $("day-streak").textContent = String(currentStreak(daily.date));
 
   // Board: answered questions, plus the current one. Everything once the game ends.
-  const shown = daily.status === "playing" ? daily.question + 1 : QUESTIONS.length;
+  const shown = daily.status === "playing" ? daily.question + 1 : daily.questions.length;
   const before = lastGuess === undefined ? 0 : $("board").children.length;
   $("board").innerHTML = "";
   for (let i = 0; i < shown; i++) {
-    const q = QUESTIONS[i];
+    const q = daily.questions[i];
     const r = daily.results[i];
     const li = document.createElement("li");
     const current = i === daily.question && daily.status === "playing";
@@ -105,11 +108,11 @@ function renderDaily(lastGuess?: string): void {
   // Tally: one box per guess made, ✓ or ✗, newest one pops in.
   $("tally").innerHTML = "";
   daily.guesses.forEach(([q, value], i) => {
-    const right = value === QUESTIONS[q].answer(daily.sign);
+    const right = value === daily.questions[q].answer(daily.sign);
     const box = document.createElement("span");
     box.className = right ? "right" : "wrong";
     if (lastGuess !== undefined && i === daily.guesses.length - 1) box.classList.add("fresh");
-    box.title = `${QUESTIONS[q].label}: ${right ? "correct" : "miss"}`;
+    box.title = `${daily.questions[q].label}: ${right ? "correct" : "miss"}`;
     box.innerHTML = `<span aria-hidden="true">${right ? "✓" : "✗"}</span><span class="visually-hidden">${box.title}</span>`;
     $("tally").appendChild(box);
   });
@@ -132,7 +135,7 @@ function renderDaily(lastGuess?: string): void {
         btn.disabled = true;
         btn.classList.add("wrong");
         if (opt.value === lastGuess) btn.classList.add("fresh");
-        const hint = QUESTIONS[q].hint(opt.value, daily.sign);
+        const hint = daily.questions[q].hint(opt.value, daily.sign);
         if (hint && hint.tag) btn.insertAdjacentHTML("beforeend", `<span class="tag">${hint.tag}</span>`);
       }
       btn.addEventListener("click", () => onDailyGuess(opt.value));
@@ -140,7 +143,8 @@ function renderDaily(lastGuess?: string): void {
     }
     if (lastGuess === undefined) {
       const b = daily.birthday;
-      setPrompt(QUESTIONS[q].ask, "", `Daily #${daily.number}. Born on ${MONTHS[b.month - 1]} ${b.day}, ${b.year}. ${QUESTIONS[q].ask}`);
+      const ask = daily.questions[q].ask;
+      setPrompt(ask, "", `Daily #${daily.number}. Born on ${MONTHS[b.month - 1]} ${b.day}, ${b.year}. ${ask}`);
     }
   }
 }
@@ -153,7 +157,9 @@ function showDailyEnd(justFinished: boolean): void {
   $("reveal-range").textContent = `${formatRange(s)} · ${s.element}`;
   $("reveal").hidden = false;
 
-  const missed = DAILY_MISSES - daily.missesLeft;
+  // Older saves finished before results were kept; recording again is harmless.
+  recordResult(daily);
+  const missed = daily.maxMisses - daily.missesLeft;
   if (daily.status === "won") {
     const how = missed === 0 ? "a perfect run!" : `with ${missed} miss${missed === 1 ? "" : "es"}.`;
     const text = `${justFinished ? "Solved" : "You solved today's"} — ${how}`;
@@ -171,4 +177,5 @@ function showDailyEnd(justFinished: boolean): void {
     else tick();
   }, 30000);
   $("countdown").hidden = false;
+  showShare(dailyShareText(daily, currentStreak(daily.date)));
 }

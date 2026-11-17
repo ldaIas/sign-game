@@ -3,17 +3,20 @@
 import { startDaily, stopDaily } from "./daily";
 import {
   ELEMENTS, MONTHS, TEXT_STYLE, WHEEL_ORDER,
-  formatRange, randomBirthday, signByName, signFor, type Sign,
+  formatRange, isNearCusp, randomBirthday, signByName, signFor, wheelDirection, type Sign,
 } from "./signs";
+import { hideShare, showShare } from "./share";
 import { constellation } from "./sky";
-import { loadItem, saveItem } from "./storage";
+import { recordClassic, saveTimedBest, timedBest } from "./stats";
 import { $, $$, announce, setPrompt } from "./ui";
 
 type Mode = "daily" | "classic" | "timed";
 
 const SIGN_GUESSES = 3;
 const TIMED_SECONDS = 60;
-const BEST_KEY = "sign-game:timed-best";
+// Classic points for the sign; birthdays near a sign change are worth more.
+const SIGN_POINTS = 1;
+const TRICKY_POINTS = 2;
 
 const state = {
   mode: "daily" as Mode,
@@ -24,8 +27,14 @@ const state = {
   streak: 0,
   timeLeft: TIMED_SECONDS,
   timer: null as ReturnType<typeof setInterval> | null,
-  best: Number(loadItem(BEST_KEY)) || 0,
+  best: timedBest(),
+  tricky: false,
   refocus: null as number | null, // timed mode: index of the sign button to refocus on the next birthday
+  birthday: "",
+  timedMarks: [] as boolean[],
+  timedMisses: [] as { birthday: string; sign: string; guess: string }[],
+  typed: "",
+  typedReset: null as ReturnType<typeof setTimeout> | null,
 };
 
 function currentSign(): Sign {
@@ -68,6 +77,9 @@ function setMode(mode: Mode): void {
   }
   for (const el of $$<HTMLElement>("[data-only]")) el.hidden = !el.dataset.only!.split(" ").includes(mode);
   stopDaily();
+  hideShare();
+  $("missed").hidden = true;
+  $("tricky").hidden = true;
 
   if (mode === "daily") {
     startDaily();
@@ -87,7 +99,10 @@ function newRound(): void {
   // "Next" and "Start" hide themselves here; keep keyboard focus in the game.
   const buttonGone = [$("next"), $("start")].includes(document.activeElement as HTMLElement);
 
-  $("birthday").textContent = `${MONTHS[b.month - 1]} ${b.day}, ${b.year}`;
+  state.birthday = `${MONTHS[b.month - 1]} ${b.day}, ${b.year}`;
+  state.tricky = state.mode === "classic" && isNearCusp(b.month, b.day);
+  $("birthday").textContent = state.birthday;
+  $("tricky").hidden = !state.tricky;
   $("reveal").hidden = true;
   $("elements").hidden = true;
   $("signs").hidden = false;
@@ -96,8 +111,11 @@ function newRound(): void {
   for (const btn of $$(".grid button")) {
     btn.disabled = false;
     btn.classList.remove("wrong", "right");
+    btn.querySelector(".tag")?.remove();
   }
-  setPrompt(guessesText(), "", `Born on ${$("birthday").textContent}. ${guessesText()}`);
+  clearTyped();
+  const tricky = state.tricky ? ` Tricky: it's near a sign change, worth ${TRICKY_POINTS} points.` : "";
+  setPrompt(guessesText(), "", `Born on ${state.birthday}.${tricky} ${guessesText()}`);
   // Timed mode disables the grid between birthdays, which drops keyboard focus;
   // put it back on the same button so keyboard players can keep going.
   if (state.refocus != null) {
@@ -132,7 +150,7 @@ function onSignGuess(btn: HTMLButtonElement): void {
 
   if (btn.dataset.name === sign.name) {
     btn.classList.add("right");
-    state.score += 1;
+    state.score += state.tricky ? TRICKY_POINTS : SIGN_POINTS;
     state.streak += 1;
     constellation(sign.name);
     revealSign();
@@ -144,7 +162,12 @@ function onSignGuess(btn: HTMLButtonElement): void {
   btn.classList.add("wrong");
   state.guessesLeft -= 1;
   if (state.guessesLeft > 0) {
-    setPrompt(`Not ${btn.dataset.name}. ${guessesText()}`, "bad", `Wrong: not ${btn.dataset.name}. ${guessesText()}`);
+    const guess = signByName(btn.dataset.name!);
+    const dir = wheelDirection(guess.name, sign.name);
+    btn.insertAdjacentHTML("beforeend", `<span class="tag">${dir}</span>`);
+    const where = dir === "across" ? "straight across the wheel" : `${dir} on the wheel`;
+    const hint = `Not ${guess.name} (${formatRange(guess)}) — it's ${where}.`;
+    setPrompt(`${hint} ${guessesText()}`, "bad", `Wrong. ${hint} ${guessesText()}`);
     if (hadFocus) focusFirstEnabled($("signs"));
     return;
   }
@@ -168,8 +191,9 @@ function startElementBonus(): void {
   state.phase = "element";
   disableSigns();
   $("elements").hidden = false;
-  setPrompt(`${sign.name}! Bonus: which element? (1 guess)`, "good",
-    `Correct, ${sign.name}!${scoreText()} Bonus: which element? One guess.`);
+  const points = state.tricky ? ` +${TRICKY_POINTS} for a tricky one.` : "";
+  setPrompt(`${sign.name}!${points} Bonus: which element? (1 guess)`, "good",
+    `Correct, ${sign.name}!${points}${scoreText()} Bonus: which element? One guess.`);
   updateStats();
   focusFirstEnabled($("elements"));
 }
@@ -210,6 +234,8 @@ function onTimedGuess(btn: HTMLButtonElement): void {
   if (btn === document.activeElement) state.refocus = [...$$("#signs button")].indexOf(btn);
   disableSigns();
   const right = btn.dataset.name === sign.name;
+  state.timedMarks.push(right);
+  if (!right) state.timedMisses.push({ birthday: state.birthday, sign: sign.name, guess: btn.dataset.name! });
   if (right) {
     state.score += 1;
     btn.classList.add("right");
@@ -237,12 +263,17 @@ function showTimedIntro(): void {
   $("next").hidden = true;
   $("start").hidden = false;
   $("start").textContent = "Start 60 seconds";
+  $("missed").hidden = true;
   setPrompt("Name as many signs as you can in 60 seconds. One guess each.");
   renderTime();
 }
 
 function startTimed(): void {
   state.score = 0;
+  state.timedMarks = [];
+  state.timedMisses = [];
+  $("missed").hidden = true;
+  hideShare();
   state.timeLeft = TIMED_SECONDS;
   updateStats();
   renderTime();
@@ -269,7 +300,7 @@ function endTimed(): void {
   const newBest = state.score > state.best;
   if (newBest) {
     state.best = state.score;
-    saveItem(BEST_KEY, String(state.best));
+    saveTimedBest(state.best);
   }
   $("birthday").textContent = `Time's up! ${state.score} point${state.score === 1 ? "" : "s"}`;
   $("reveal").hidden = true;
@@ -278,7 +309,57 @@ function endTimed(): void {
   $("start").textContent = "Play again";
   $("start").hidden = false;
   $("start").focus();
+  renderMissed();
+  const marks = state.timedMarks.map(r => r ? "✓" : "✗").join("");
+  showShare(`Zodle Timed · ${state.score} in ${TIMED_SECONDS}s ${marks}`.trimEnd());
   updateStats();
+}
+
+function renderMissed(): void {
+  const list = $("missed-list");
+  list.innerHTML = "";
+  for (const m of state.timedMisses) {
+    const li = document.createElement("li");
+    const glyph = `<span class="glyph" aria-hidden="true">${signByName(m.sign).glyph}${TEXT_STYLE}</span>`;
+    li.innerHTML = `<span class="when"></span><span class="sign">${glyph} ${m.sign}</span><span class="guess"></span>`;
+    li.querySelector(".when")!.textContent = m.birthday;
+    li.querySelector(".guess")!.textContent = `you said ${m.guess}`;
+    list.appendChild(li);
+  }
+  $("missed-title").textContent = state.timedMisses.length ? `Missed (${state.timedMisses.length})` : "No misses!";
+  $("missed").hidden = state.timedMarks.length === 0;
+}
+
+// Timed keyboard shortcut: type a sign's first letters ("ar" Aries, "aq" Aquarius).
+// It answers as soon as the letters fit only one sign.
+function onTypedKey(e: KeyboardEvent): void {
+  if (state.mode !== "timed" || state.phase !== "sign") return;
+  if (e.ctrlKey || e.metaKey || e.altKey || !/^[a-z]$/i.test(e.key)) return;
+  if (e.target instanceof Element && e.target.closest("input, textarea, select, [contenteditable], dialog")) return;
+  e.preventDefault();
+
+  const fits = (prefix: string) => WHEEL_ORDER.filter(n => n.toLowerCase().startsWith(prefix));
+  const key = e.key.toLowerCase();
+  // Letters that fit nothing start a new sign rather than ending the game on a typo.
+  const typed = fits(state.typed + key).length ? state.typed + key : key;
+  const matches = fits(typed);
+  if (state.typedReset !== null) clearTimeout(state.typedReset);
+
+  if (matches.length === 1) {
+    clearTyped();
+    $("signs").querySelector<HTMLButtonElement>(`[data-name="${matches[0]}"]`)!.click();
+    return;
+  }
+  state.typed = matches.length ? typed : "";
+  for (const btn of $$("#signs button")) btn.classList.toggle("typed", matches.includes(btn.dataset.name!));
+  state.typedReset = setTimeout(clearTyped, 1200);
+}
+
+function clearTyped(): void {
+  if (state.typedReset !== null) clearTimeout(state.typedReset);
+  state.typedReset = null;
+  state.typed = "";
+  for (const btn of $$("#signs button")) btn.classList.remove("typed");
 }
 
 function renderTime(): void {
@@ -305,6 +386,7 @@ function revealElement(): void {
 }
 
 function updateStats(): void {
+  if (state.mode === "classic") recordClassic(state.score, state.streak);
   $("score").textContent = String(state.score);
   $("streak").textContent = String(state.streak);
   $("best").textContent = String(state.best);
@@ -313,6 +395,7 @@ function updateStats(): void {
 export function initGame(): void {
   $("next").addEventListener("click", newRound);
   $("start").addEventListener("click", startTimed);
+  document.addEventListener("keydown", onTypedKey);
   for (const btn of $$("#modes button")) {
     btn.addEventListener("click", () => setMode(btn.dataset.mode as Mode));
   }

@@ -31,7 +31,7 @@ Check changes under `npx wrangler dev` before opening a PR: it's the only local 
 
 ### Game and zodiac data
 
-`src/signs.ts` holds the sign data, `src/game.ts` runs the mode switch and the Classic and Timed modes, and `src/daily.ts` the Daily screen. The Daily rules live in `src/puzzle.ts`, which has no DOM code so it can be unit-tested. Daily progress and the streak are kept in `localStorage` (`src/storage.ts`). Sign boundaries use the common Western (tropical) zodiac dates; birthdays on a cusp follow those fixed dates.
+`src/signs.ts` holds the sign data, `src/game.ts` runs the mode switch and the Classic and Timed modes, and `src/daily.ts` the Daily screen. The Daily rules live in `src/puzzle.ts`, which has no DOM code so it can be unit-tested. Daily progress, the streak and finished-Daily history are kept in `localStorage` (`src/storage.ts`); `src/stats.ts` keeps the Classic and Timed bests and draws the Stats dialog, and `src/share.ts` runs the "Copy result" button. Sign boundaries use the common Western (tropical) zodiac dates; birthdays on a cusp follow those fixed dates.
 
 Each day's puzzle is generated from a seed made from the date, so everyone gets the same one and saved guesses can be replayed after a reload. Never change the seed string, the order of the `rand()` calls or the shuffle in `src/puzzle.ts`: that would change the live puzzle and break players' saved progress. `tests/puzzle.test.ts` checks the output for a set of dates against `tests/fixtures/baseline.json`.
 
