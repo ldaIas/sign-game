@@ -105,8 +105,8 @@ const Sky = (() => {
       const y = Math.random() * height;
       return {
         homeX: x, homeY: y, x, y, tx: x, ty: y,
-        size: Math.random() < 0.12 ? 1.4 : 0.6 + Math.random() * 0.6,
-        base: 0.18 + Math.random() * 0.35,
+        size: Math.random() < 0.12 ? 1.7 : 0.8 + Math.random() * 0.6,
+        base: 0.38 + Math.random() * 0.4,
         phase: Math.random() * Math.PI * 2,
         speed: 0.4 + Math.random() * 1.2,
         tint: TINTS[Math.random() < 0.7 ? 0 : 1 + (Math.random() < 0.5 ? 1 : 0)],
@@ -185,6 +185,8 @@ const Sky = (() => {
       label: behindCard ? null : name, // the card already shows the name
       labelX: cx,
       labelY: cy + (spanY * scale) / 2 + 28,
+      // The card covers most of a figure drawn behind it, so draw that one bolder.
+      bold: !!behindCard,
       until: performance.now() + FORM_MS + 500,
     };
     kick();
@@ -229,8 +231,8 @@ const Sky = (() => {
     const still = reducedMotion.matches;
 
     if (figure && figureFade > 0.01) {
-      ctx.strokeStyle = `rgba(243,210,122,${0.32 * figureFade})`;
-      ctx.lineWidth = 1;
+      ctx.strokeStyle = `rgba(243,210,122,${(figure.bold ? 0.95 : 0.45) * figureFade})`;
+      ctx.lineWidth = figure.bold ? 2.5 : 1.25;
       ctx.beginPath();
       for (const [a, b] of figure.lines) {
         ctx.moveTo(figure.stars[a].x, figure.stars[a].y);
@@ -245,17 +247,18 @@ const Sky = (() => {
       }
     }
 
+    const boldLit = figure && figure.bold;
     for (const s of stars) {
       const twinkle = still ? 1 : 0.65 + 0.35 * Math.sin(t * s.speed * (1 + s.glow * 3) + s.phase);
       const alpha = Math.min(1, s.base * twinkle + s.glow * 0.75 + s.lit * 0.6);
-      const r = s.size * (1 + s.glow * 0.9 + s.lit * 0.8);
+      const r = s.size * (1 + s.glow * 0.9 + s.lit * (boldLit ? 1.8 : 0.8));
       ctx.fillStyle = `rgba(${s.lit > 0.3 ? "255,233,176" : s.tint},${alpha})`;
       ctx.beginPath();
       ctx.arc(s.x, s.y, r, 0, Math.PI * 2);
       ctx.fill();
       if (s.glow > 0.15 || s.lit > 0.15) {
         const halo = Math.max(s.glow, s.lit);
-        ctx.fillStyle = `rgba(${s.tint},${0.12 * halo})`;
+        ctx.fillStyle = `rgba(${s.tint},${(boldLit && s.lit > 0.15 ? 0.3 : 0.12) * halo})`;
         ctx.beginPath();
         ctx.arc(s.x, s.y, r * 4, 0, Math.PI * 2);
         ctx.fill();
