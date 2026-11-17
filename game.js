@@ -180,6 +180,7 @@ function onTimedGuess(btn) {
     setPrompt(`It was ${state.sign.name}.`, "bad");
   }
   revealSign();
+  revealElement();
   updateStats();
   // A miss lingers a little longer so the right answer can sink in.
   setTimeout(() => { if (state.timer) newRound(); }, right ? 450 : 1000);
@@ -247,15 +248,16 @@ function renderTime() {
 function revealSign() {
   const s = state.sign;
   $("reveal-glyph").textContent = s.glyph + TEXT_STYLE;
-  $("reveal-glyph").style.setProperty("--glow", ELEMENTS[s.element].color);
+  $("reveal-glyph").style.removeProperty("--glow");
   $("reveal-name").textContent = s.name;
-  // The element stays hidden until the bonus question is answered.
+  // The element, including its glow colour, stays hidden until the bonus question is answered.
   $("reveal-range").textContent = formatRange(s);
   $("reveal").hidden = false;
 }
 
 function revealElement() {
   const s = state.sign;
+  $("reveal-glyph").style.setProperty("--glow", ELEMENTS[s.element].color);
   $("reveal-range").textContent = `${formatRange(s)} · ${s.element}`;
 }
 
