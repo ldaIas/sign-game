@@ -1,15 +1,41 @@
-// The "More" tab: practice minigames. Symbols matches sign names to glyphs by
-// drawing lines; Gender, Modality and Element sort all twelve signs in one go.
+// The "More" tab: practice minigames. Symbols and Rulers match sign names to
+// glyphs or planets by drawing lines; Gender, Modality and Element sort all
+// twelve signs in one go.
 
 import { shuffle } from "./puzzle";
 import {
-  ELEMENTS, GENDERS, MODALITIES, TEXT_STYLE, WHEEL_ORDER, signByName, type Sign,
+  ELEMENTS, GENDERS, MODALITIES, PLANETS, TEXT_STYLE, WHEEL_ORDER, signByName, type Sign,
 } from "./signs";
 import { constellation } from "./sky";
 import { loadItem, saveItem } from "./storage";
 import { $, $$, announce } from "./ui";
 
-type GameId = "symbols" | "gender" | "modality" | "element";
+type GameId = "symbols" | "rulers" | "gender" | "modality" | "element";
+type MatchId = "symbols" | "rulers";
+
+interface MatchGame {
+  intro: string;
+  /** One target per sign, in wheel order; `value` is what answer() must return. */
+  targets: () => { value: string; html: string; big?: boolean }[];
+  answer: (s: Sign) => string;
+}
+
+const MATCH_GAMES: Record<MatchId, MatchGame> = {
+  symbols: {
+    intro: "Draw a line from each name to its symbol, or tap one then the other. Every line is checked at once.",
+    targets: () => WHEEL_ORDER.map(name => ({ value: name, html: signByName(name).glyph + TEXT_STYLE, big: true })),
+    answer: s => s.name,
+  },
+  rulers: {
+    intro: "Draw a line from each sign to its ruling planet, or tap one then the other. Mercury and Venus each rule two signs.",
+    // Mercury and Venus rule two signs each, so they appear twice and either copy is right.
+    targets: () => WHEEL_ORDER.map(name => {
+      const planet = signByName(name).ruler;
+      return { value: planet, html: `<span class="glyph" aria-hidden="true">${PLANETS[planet].glyph}${TEXT_STYLE}</span>${planet}` };
+    }),
+    answer: s => s.ruler,
+  },
+};
 
 interface SortGame {
   label: string;
@@ -18,7 +44,7 @@ interface SortGame {
   answer: (s: Sign) => string;
 }
 
-const SORT_GAMES: Record<Exclude<GameId, "symbols">, SortGame> = {
+const SORT_GAMES: Record<Exclude<GameId, MatchId>, SortGame> = {
   gender: {
     label: "gender",
     intro: "Mark each sign masculine or feminine, then submit. One try per round.",
@@ -58,7 +84,7 @@ export function initMore(): void {
   }
   $("more-again").addEventListener("click", () => {
     showGame();
-    $("more-body").querySelector<HTMLElement>("button, input")?.focus();
+    $("more").querySelector<HTMLElement>(".match-item, #sort input")?.focus();
   });
   $("more-submit").addEventListener("click", submitSort);
   initMatch();
@@ -76,7 +102,7 @@ function showGame(): void {
   $("more-again").hidden = true;
   $("more-result").textContent = "";
   $("more-result").className = "";
-  if (game === "symbols") startMatch();
+  if (game === "symbols" || game === "rulers") startMatch(MATCH_GAMES[game]);
   else startSort(SORT_GAMES[game]);
 }
 
@@ -88,11 +114,13 @@ function percent(right: number, total: number): string {
   return total ? `${Math.round((right / total) * 100)}%` : "—";
 }
 
-// ---- Symbols: draw a line from each name to its glyph ----
+// ---- Symbols and Rulers: draw a line from each name to its match ----
 
 const match = {
+  game: MATCH_GAMES.symbols,
   guesses: 0,
-  matched: new Set<string>(),
+  // Sign name → the target it was matched to.
+  matched: new Map<string, HTMLElement>(),
   selected: null as HTMLButtonElement | null,
   drag: null as { from: HTMLButtonElement; x: number; y: number; moved: boolean } | null,
   ignoreClick: false,
@@ -139,39 +167,41 @@ function initMatch(): void {
   new ResizeObserver(redrawLines).observe(board);
 }
 
-function startMatch(): void {
+function startMatch(g: MatchGame): void {
+  match.game = g;
   match.guesses = 0;
   match.matched.clear();
   match.selected = null;
   $("match").hidden = false;
   $("sort").hidden = true;
   $("more-submit").hidden = true;
-  $("more-intro").textContent = "Draw a line from each name to its symbol, or tap one then the other. Every line is checked at once.";
-  const names = shuffle(WHEEL_ORDER, Math.random);
-  const glyphs = shuffle(WHEEL_ORDER, Math.random);
+  $("more-intro").textContent = g.intro;
   $("match-names").innerHTML = "";
   $("match-glyphs").innerHTML = "";
-  for (const name of names) $("match-names").appendChild(matchItem(name, "name", name));
-  for (const name of glyphs) {
-    const glyph = signByName(name).glyph + TEXT_STYLE;
-    $("match-glyphs").appendChild(matchItem(name, "glyph", glyph));
+  for (const name of shuffle(WHEEL_ORDER, Math.random)) {
+    const btn = matchItem(name, "name");
+    btn.textContent = name;
+    $("match-names").appendChild(btn);
+  }
+  for (const t of shuffle(g.targets(), Math.random)) {
+    const btn = matchItem(t.value, t.big ? "target big" : "target");
+    btn.innerHTML = t.html;
+    $("match-glyphs").appendChild(btn);
   }
   $("match-lines").innerHTML = "";
   renderMatchScore();
 }
 
-function matchItem(name: string, kind: "name" | "glyph", text: string): HTMLButtonElement {
+function matchItem(value: string, kind: string): HTMLButtonElement {
   const btn = document.createElement("button");
   btn.type = "button";
   btn.className = `match-item ${kind}`;
-  btn.dataset.name = name;
-  btn.textContent = text;
-  if (kind === "glyph") btn.setAttribute("aria-label", `Symbol ${text}`);
+  btn.dataset.value = value;
   return btn;
 }
 
-function side(item: HTMLElement): "name" | "glyph" {
-  return item.classList.contains("name") ? "name" : "glyph";
+function side(item: HTMLElement): "name" | "target" {
+  return item.classList.contains("name") ? "name" : "target";
 }
 
 function onItemTap(item: HTMLButtonElement): void {
@@ -188,30 +218,30 @@ function select(item: HTMLButtonElement | null): void {
 
 function attempt(a: HTMLButtonElement, b: HTMLButtonElement): void {
   select(null);
-  const [nameItem, glyphItem] = side(a) === "name" ? [a, b] : [b, a];
-  const name = nameItem.dataset.name!;
+  const [nameItem, target] = side(a) === "name" ? [a, b] : [b, a];
+  const name = nameItem.dataset.value!;
   match.guesses += 1;
-  if (name === glyphItem.dataset.name) {
-    match.matched.add(name);
-    for (const item of [nameItem, glyphItem]) {
+  if (match.game.answer(signByName(name)) === target.dataset.value) {
+    match.matched.set(name, target);
+    for (const item of [nameItem, target]) {
       item.disabled = true;
       item.classList.add("right");
     }
-    drawLine(`match-line-${name}`, anchor(nameItem), anchor(glyphItem), "right");
+    drawLine(`match-line-${name}`, anchor(nameItem), anchor(target), "right");
     constellation(name);
     const left = WHEEL_ORDER.length - match.matched.size;
     announce(left ? `Right, ${name}. ${left} left.` : `Right, ${name}. All matched.`);
     // Disabling the button drops its focus; keep keyboard players in the game.
     if (left) $("match").querySelector<HTMLButtonElement>(".match-item:not(:disabled)")?.focus();
   } else {
-    const line = drawLine("", anchor(nameItem), anchor(glyphItem), "wrong");
+    const line = drawLine("", anchor(nameItem), anchor(target), "wrong");
     setTimeout(() => line.remove(), 700);
-    for (const item of [nameItem, glyphItem]) {
+    for (const item of [nameItem, target]) {
       item.classList.remove("wrong");
       void item.offsetWidth; // restart the shake
       item.classList.add("wrong");
     }
-    announce(`No, that symbol isn’t ${name}.`);
+    announce(`No, that isn’t ${name}’s.`);
   }
   renderMatchScore();
   if (match.matched.size === WHEEL_ORDER.length) finishMatch();
@@ -257,10 +287,9 @@ function drawLine(id: string, from: { x: number; y: number }, to: { x: number; y
 }
 
 function redrawLines(): void {
-  for (const name of match.matched) {
-    const nameItem = $("match-names").querySelector<HTMLElement>(`[data-name="${name}"]`);
-    const glyphItem = $("match-glyphs").querySelector<HTMLElement>(`[data-name="${name}"]`);
-    if (nameItem && glyphItem) drawLine(`match-line-${name}`, anchor(nameItem), anchor(glyphItem), "right");
+  for (const [name, target] of match.matched) {
+    const nameItem = $("match-names").querySelector<HTMLElement>(`[data-value="${name}"]`);
+    if (nameItem) drawLine(`match-line-${name}`, anchor(nameItem), anchor(target), "right");
   }
 }
 

@@ -68,7 +68,7 @@
       <p class="mode-desc" data-only="daily">Today’s challenge: name this birthday’s sun sign, then its symbol, gender, element, opposite sign, modality and ruling planet. Your misses are shared across every question.</p>
       <p class="mode-desc" data-only="classic" hidden>3 guesses to name each birthday's sign, with a hint after each miss. Birthdays near a sign change are marked tricky and score 2. Get it right, then name its element in one try for a bonus point.</p>
       <p class="mode-desc" data-only="timed" hidden>Name as many signs as you can in 60 seconds. One guess per birthday, one point per right answer. On a keyboard, type the first letters of a sign to answer.</p>
-      <p class="mode-desc" data-only="more" hidden>Practice games: match each sign to its symbol, or sort all twelve signs by gender, modality or element.</p>
+      <p class="mode-desc" data-only="more" hidden>Practice games: match each sign to its symbol or ruling planet, or sort all twelve signs by gender, modality or element.</p>
     </header>
 
     <section id="stats" aria-label="Stats" data-only="daily classic timed">
@@ -112,6 +112,7 @@
     <section id="more" data-only="more" aria-label="More games" hidden>
       <nav id="more-games" aria-label="Game">
         <button type="button" data-game="symbols" aria-pressed="true" class="active">Symbols</button>
+        <button type="button" data-game="rulers" aria-pressed="false">Rulers</button>
         <button type="button" data-game="gender" aria-pressed="false">Gender</button>
         <button type="button" data-game="modality" aria-pressed="false">Modality</button>
         <button type="button" data-game="element" aria-pressed="false">Element</button>
@@ -121,7 +122,7 @@
       <div id="match" hidden>
         <svg id="match-lines" aria-hidden="true"></svg>
         <div id="match-names" class="match-col" role="group" aria-label="Sign names"></div>
-        <div id="match-glyphs" class="match-col" role="group" aria-label="Symbols"></div>
+        <div id="match-glyphs" class="match-col" role="group" aria-label="Matches"></div>
       </div>
       <ol id="sort" hidden></ol>
       <p id="more-result"></p>

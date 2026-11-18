@@ -638,7 +638,9 @@ main { position: relative; }
   -webkit-user-select: none;
   transition: border-color 0.15s;
 }
-.match-item.glyph { font-size: 1.4rem; line-height: 1; }
+.match-item.big { font-size: 1.4rem; line-height: 1; }
+.match-item .glyph { margin-right: 6px; color: var(--accent); }
+.match-item.right .glyph { color: inherit; }
 .match-item:hover:not(:disabled), .match-item.selected { border-color: var(--accent); }
 .match-item.selected { color: var(--accent); }
 .match-item.wrong { animation: shake 0.3s; }
@@ -713,6 +715,6 @@ main { position: relative; }
 
 @media (max-width: 420px) {
   #modes button { padding: 6px 11px; }
-  #more-games { gap: 4px; }
-  #more-games button { padding: 5px 10px; font-size: 0.8rem; }
+  #more-games { gap: 3px; }
+  #more-games button { padding: 5px 8px; font-size: 0.78rem; }
 }
