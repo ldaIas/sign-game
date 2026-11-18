@@ -63,13 +63,15 @@
         <button type="button" data-mode="daily" class="active" aria-pressed="true">Daily</button>
         <button type="button" data-mode="classic" aria-pressed="false">Classic</button>
         <button type="button" data-mode="timed" aria-pressed="false">Timed · 60s</button>
+        <button type="button" data-mode="more" aria-pressed="false">More</button>
       </nav>
       <p class="mode-desc" data-only="daily">Today’s challenge: name this birthday’s sun sign, then its symbol, gender, element, opposite sign, modality and ruling planet. Your misses are shared across every question.</p>
       <p class="mode-desc" data-only="classic" hidden>3 guesses to name each birthday's sign, with a hint after each miss. Birthdays near a sign change are marked tricky and score 2. Get it right, then name its element in one try for a bonus point.</p>
       <p class="mode-desc" data-only="timed" hidden>Name as many signs as you can in 60 seconds. One guess per birthday, one point per right answer. On a keyboard, type the first letters of a sign to answer.</p>
+      <p class="mode-desc" data-only="more" hidden>Practice games: match each sign to its symbol or ruling planet, or sort all twelve signs by gender, modality or element.</p>
     </header>
 
-    <section id="stats" aria-label="Stats">
+    <section id="stats" aria-label="Stats" data-only="daily classic timed">
       <div data-only="classic timed"><span class="label">Score</span><span id="score">0</span></div>
       <div data-only="classic"><span class="label">Streak</span><span id="streak">0</span></div>
       <div data-only="timed" hidden><span class="label">Time</span><span id="time">60</span></div>
@@ -79,7 +81,7 @@
     </section>
     <div id="timebar" data-only="timed" aria-hidden="true" hidden><div id="timebar-fill"></div></div>
 
-    <section id="card" aria-label="Birthday">
+    <section id="card" aria-label="Birthday" data-only="daily classic timed">
       <p id="daily-tag" class="label" data-only="daily" hidden></p>
       <p class="label">Born on</p>
       <p id="birthday"></p>
@@ -93,7 +95,7 @@
 
     <ol id="board" data-only="daily" aria-label="Today’s answers" tabindex="-1" hidden></ol>
 
-    <p id="prompt"></p>
+    <p id="prompt" data-only="daily classic timed"></p>
     <!-- Screen-reader announcements (right/wrong, score, time); filled by announce() in src/ui.ts. -->
     <p id="announcer" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true"></p>
 
@@ -106,6 +108,27 @@
     </section>
     <p id="countdown" data-only="daily" hidden></p>
     <div id="tally" data-only="daily" role="group" aria-label="Your guesses" hidden></div>
+
+    <section id="more" data-only="more" aria-label="More games" hidden>
+      <nav id="more-games" aria-label="Game">
+        <button type="button" data-game="symbols" aria-pressed="true" class="active">Symbols</button>
+        <button type="button" data-game="rulers" aria-pressed="false">Rulers</button>
+        <button type="button" data-game="gender" aria-pressed="false">Gender</button>
+        <button type="button" data-game="modality" aria-pressed="false">Modality</button>
+        <button type="button" data-game="element" aria-pressed="false">Element</button>
+      </nav>
+      <p id="more-intro"></p>
+      <p id="more-score"></p>
+      <div id="match" hidden>
+        <svg id="match-lines" aria-hidden="true"></svg>
+        <div id="match-names" class="match-col" role="group" aria-label="Sign names"></div>
+        <div id="match-glyphs" class="match-col" role="group" aria-label="Matches"></div>
+      </div>
+      <ol id="sort" hidden></ol>
+      <p id="more-result"></p>
+      <button id="more-submit" type="button" hidden>Submit</button>
+      <button id="more-again" type="button" hidden>Play again</button>
+    </section>
 
     <button id="next" type="button" hidden>Next birthday →</button>
     <button id="start" type="button" hidden>Start 60 seconds</button>
@@ -145,7 +168,7 @@
         <summary>Privacy</summary>
         <div class="footer-panel">
           <h2>Privacy</h2>
-          <p>Zodle doesn’t use cookies or analytics and doesn’t collect personal data. Your scores, daily progress, streaks and game stats, and whether you’ve hidden the About card or install tip, are saved only in your own browser’s local storage; clearing site data removes them. The site is hosted on Cloudflare, which processes standard request logs to serve and protect the site.</p>
+          <p>Zodle doesn’t use cookies or analytics and doesn’t collect personal data. Your scores, daily progress, streaks and game stats, whether you’ve hidden the About card or install tip, and which More game you last played, are saved only in your own browser’s local storage; clearing site data removes them. The site is hosted on Cloudflare, which processes standard request logs to serve and protect the site.</p>
         </div>
       </details>
       <span aria-hidden="true">·</span>

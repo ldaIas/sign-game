@@ -7,6 +7,7 @@ A small browser quiz: you're shown a birthday and have to name its sun sign. Pla
 - **Daily** — one birthday a day, the same for everyone (picked from the player's local date). Answer five questions in order: sign, symbol, gender, element, opposite sign. Each question appears only once the previous one is answered. You get 5 misses across the whole puzzle; run out and every answer is revealed. Wrong sign guesses get an "N signs ahead/behind" hint. Progress and the day streak (consecutive days solved) are kept in your browser. This is the mode the page opens in.
 - **Classic** — 3 guesses per birthday. Get it right and you earn a bonus question: name the sign's element (1 guess).
 - **Timed** — 60 seconds, 1 point per correct sign, one guess per birthday.
+- **More** — practice games: draw lines matching each sign name to its symbol or ruling planet, or sort all twelve signs by gender, modality or element in one try.
 
 Signs follow the Western (tropical) zodiac, using its common fixed dates; birthdays that fall on a cusp follow those dates.
 
