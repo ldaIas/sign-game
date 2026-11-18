@@ -5,12 +5,13 @@ import {
   ELEMENTS, MONTHS, TEXT_STYLE, WHEEL_ORDER,
   formatRange, isNearCusp, randomBirthday, signByName, signFor, wheelDirection, type Sign,
 } from "./signs";
+import { startMore } from "./more";
 import { hideShare, showShare } from "./share";
 import { constellation } from "./sky";
 import { recordClassic, saveTimedBest, timedBest } from "./stats";
 import { $, $$, announce, setPrompt } from "./ui";
 
-type Mode = "daily" | "classic" | "timed";
+type Mode = "daily" | "classic" | "timed" | "more";
 
 const SIGN_GUESSES = 3;
 const TIMED_SECONDS = 60;
@@ -81,7 +82,10 @@ function setMode(mode: Mode): void {
   $("missed").hidden = true;
   $("tricky").hidden = true;
 
-  if (mode === "daily") {
+  if (mode === "more") {
+    for (const id of ["signs", "elements", "next", "start"]) $(id).hidden = true;
+    startMore();
+  } else if (mode === "daily") {
     startDaily();
   } else if (mode === "timed") {
     showTimedIntro();
